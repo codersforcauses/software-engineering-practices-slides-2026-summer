@@ -273,7 +273,7 @@ console.log('Is admin?', user4.role.admin)
 								data: TData,	
 							}
 
-							function getUsers&lt;T&gt;(url: string): Promise&lt;UserType&lt;T&gt;&gt; {
+							function getUsers&lt;T&gt;(url: string): Promise&lt;UserType&gt; {
 								return fetch(url).then(res => res.json());
 							}
 						</code></pre>
