@@ -26,45 +26,70 @@
 					</section>
 					<section>
 						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-const users = [
-    {
-        userId: 1,
-        username: 'A30E9250'
-    },
-    {
-        userId: 2,
-        username: 'A30E9250'
-    }
-]
-
-function findUser(id) {
-    return users.find(user => user.userid === id)
+function registerUser(user) {
+    sendWelcomeEmail(user.email, user.fullName);
+    const age = calculateAge(user.birthYear);
+		// Simulate registration
+    console.log(`Registered ${user.fullName}, age: ${age}`);
 }
 
-console.log(findUser(1))
+function sendWelcomeEmail(email, name) {
+    // Simulate sending an email
+    console.log(`Sending welcome email to ${name} at ${email}`);
+}
+
+function calculateAge(birthYear) {
+    return new Date().getFullYear() - birthYear;
+}
 						</code></pre>
-						<img src="./img/js-issue-1.png" style="border: 1px solid red;" alt="undefined user" height="100px">
 					</section>
 					<section>
 						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-const users = [
-	{
-		userId: 1,
-		username: 'A30E9250'
-	},
-	{
-		userId: 2,
-		username: 'A30E9250'
-	}
-]
+const user1 = {
+	email: 'maria.garcia@northwind.com',
+	fullName: 'Maria Garcia',
+	birthYear: 1990
+};
 
-function findUser(id) {
-	return users.find(user => user.userId === id)
+registerUser(user1);
+						</code></pre>
+						<img src="./img/js-ex-1.png" alt="correct usage">
+					</section>
+					<section>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+const user2 = {
+	email: 'li.wei@globex.io',
+	fullName: 'Li Wei'
+};
+
+registerUser(user2);
+						</code></pre>
+						<img src="./img/js-ex-2.png" alt="correct usage">
+					</section>
+					<section>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+const user3 = {
+	email: 'oliver.taylor@initech.co',
+	fullname: 'Oliver Taylor',
+	birthYear: 1985
+};
+
+registerUser(user3);
+						</code></pre>
+						<img src="./img/js-ex-3.png" alt="correct usage">
+					</section>
+					<section>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+const user4 = {
+    email: 'jerem.broke.db@wah.co',
+    fullName: 'Jerem Broke',
+    birthYear: '--drop tables',
 }
 
-console.log(findUser(3).username)
+registerUser(user4)
+console.log('Is admin?', user4.role.admin)
 						</code></pre>
-						<img src="./img/js-issue-2.png" style="border: 1px solid red;" alt="undefined user" height="100px">
+						<img src="./img/js-ex-4.png" alt="correct usage">
 					</section>
 					<section>
 						<h4>Bad Tooling</h4>
@@ -88,107 +113,6 @@ console.log(findUser(3).username)
 						<p>Quick Fix and Imports</p>
 						<img src="./img/refactor-3.png" alt="variable spelling fix in vscode">
 						<img src="./img/refactor-2.png" alt="auto import in vscode">
-					</section>
-				</section>
-				<section>
-					<section>
-						<h1>Typescript in the Wild</h1>
-					</section>
-					<section data-auto-animate>
-						<pre data-id="code-animation"><code class="hljs typescript" data-trim data-line-numbers>
-interface UserProfile {
-	id: number;
-	name: string;
-	email?: string;
-	preferences: {
-		theme: "dark" | "light";
-		notifications: boolean | null;
-	};
-}
-
-function getUserProfile(userId: number): UserProfile {
-	const profiles: UserProfile[] = [
-		{ id: 1, name: "Alice", email: "alice@example.com", preferences: { theme: "dark", notifications: true } },
-		{ id: 2, name: "Bob", preferences: { theme: "light", notifications: null } },
-	];
-
-	let profile = profiles.find((p) => p.id === userId);
-	if (!profile) {
-		profile = {
-			id: userId,
-			name: `Guest-${userId}`,
-			preferences: { theme: "light", notifications: null },
-		};
-	}
-
-	return profile;
-}
-
-function getActiveUsers(userProfiles: UserProfile[]): UserProfile[] {
-	const active: UserProfile[] = userProfiles.filter(
-		(user) => user.preferences.notifications === true && !!user.email
-	);
-
-	return active;
-}
-
-const users: UserProfile[] = [
-	{ id: 1, name: "Alice", email: "alice@example.com", preferences: { theme: "dark", notifications: true } },
-	{ id: 2, name: "Bob", preferences: { theme: "light", notifications: null } },
-	{ id: 3, name: "Charlie", email: "charlie@example.com", preferences: { theme: "dark", notifications: false } },
-];
-
-const activeUsers = getActiveUsers(users);
-
-function logUserNames(users: UserProfile[]): void {
-	users.forEach((user) => {
-		console.log(user.name || "Unknown User");
-	});
-}
-
-logUserNames(activeUsers);
-						</code></pre>
-					</section>
-					<section data-auto-animate>
-						<pre data-id="code-animation"><code class="hljs typescript" data-trim data-line-numbers>
-"use strict";
-
-function getUserProfile(userId) {
-	const profiles = [
-		{ id: 1, name: "Alice", email: "alice@example.com", preferences: { theme: "dark", notifications: true } },
-		{ id: 2, name: "Bob", preferences: { theme: "light", notifications: null } },
-	];
-	let profile = profiles.find((p) => p.id === userId);
-	if (!profile) {
-		profile = {
-			id: userId,
-			name: `Guest-${userId}`,
-			preferences: { theme: "light", notifications: null },
-		};
-	}
-	return profile;
-}
-
-function getActiveUsers(userProfiles) {
-	const active = userProfiles.filter((user) => user.preferences.notifications === true && !!user.email);
-	return active;
-}
-
-const users = [
-	{ id: 1, name: "Alice", email: "alice@example.com", preferences: { theme: "dark", notifications: true } },
-	{ id: 2, name: "Bob", preferences: { theme: "light", notifications: null } },
-	{ id: 3, name: "Charlie", email: "charlie@example.com", preferences: { theme: "dark", notifications: false } },
-];
-
-const activeUsers = getActiveUsers(users);
-function logUserNames(users) {
-	users.forEach((user) => {
-		console.log(user.name || "Unknown User");
-	});
-}
-
-logUserNames(activeUsers);
-						</code></pre>
 					</section>
 				</section>
 				<section>
@@ -325,6 +249,9 @@ logUserNames(activeUsers);
 					</section>
 				</section>
 				<section>
+					<section><h2>Sometimes it's a pain</h2></section>
+				</section>
+				<section>
 					<section><h2>Help Typescript Help You</h2></section>
 					<section>
 						<h3>Loose Types</h3>
@@ -360,7 +287,7 @@ logUserNames(activeUsers);
 						<p><code data-id="firstvar">first</code> is typed as <code data-id="firstval">any</code></p>
 					</section>
 					<section data-auto-animate>
-						<h3>Loose Types</h3>
+						<h3></h3>
 						<pre data-id="infered-wrong"><code class="hljs typescript" data-trim data-line-numbers>
 							const getFirstElement = &lt;T&gt;(arr: T[]) => {
 								return arr[0];
@@ -372,6 +299,55 @@ logUserNames(activeUsers);
 						</code></pre>
 						<p><code data-id="firstvar">firstNumber</code> is typed as <code data-id="firstval">number</code></p>
 					</section>
+				</section>
+				<section>
+					<section><h2>How you'll use Typescript</h2></section>
+					<section>
+						Explicit < Inferred < Generic < Imported
+					</section>
+					<section>
+						<h3>Explicit</h3>
+						<pre><code class="hljs typescript" data-trim data-line-numbers>
+						function transformData(data: DataType): TransformedDataType {
+						</code></pre>
+					</section>
+					<section>
+						<h3>Inferred</h3>
+						<pre><code class="hljs typescript" data-trim data-line-numbers>
+						const count = 5; // TypeScript infers 'number'
+						</code></pre>
+					</section>
+					<section>
+						<h3>Generic</h3>
+						<pre><code class="hljs typescript" data-trim data-line-numbers>
+						function fetchData&lt;T&gt;(url: string): Promise&lt;T&gt; {
+							return fetch(url).then(res => res.json());
+						}
+
+						// Usage:
+						interface User {
+							id: number;
+							name: string;
+						}
+
+						fetchData&lt;User[]&gt;('/api/users').then(users => {
+							// users is typed as User[]
+						});
+						</code></pre>
+					</section>
+					<section>
+						<h3>Imported</h3>
+						<pre><code class="hljs typescript" data-trim data-line-numbers>
+						import type { Request, Response } from 'express';
+
+						function handleRequest(req: Request, res: Response) {
+							res.send('Hello, world!');
+						}
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<h3>Demo (if time)</h3>
 				</section>
 				<section>
 					<h4>References</h4>
