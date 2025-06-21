@@ -1,31 +1,40 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Working With Typescript - CFC</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/cfc.css">
+	<title>Working With Typescript - CFC</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/cfc.css">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;700&display=swap" rel="stylesheet">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/cfc.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/cfc.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;700&display=swap"
+		rel="stylesheet">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<img src="./img/qr-code.png" alt="slides QR code">
+			</section>
+			<section>
 				<section>
-					<section><h1>Some Problems With Javascript</h1></section>
-					<section>
-						<h4>Runtime Bugs</h4>
-					</section>
-					<section>
-						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+					<h1>Some Problems With Javascript</h1>
+				</section>
+				<section>
+					<h4>Runtime Bugs</h4>
+				</section>
+				<section>
+					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
 function registerUser(user) {
     sendWelcomeEmail(user.email, user.fullName);
     const age = calculateAge(user.birthYear);
@@ -42,9 +51,9 @@ function calculateAge(birthYear) {
     return new Date().getFullYear() - birthYear;
 }
 						</code></pre>
-					</section>
-					<section>
-						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+				</section>
+				<section>
+					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
 const user1 = {
 	email: 'maria.garcia@northwind.com',
 	fullName: 'Maria Garcia',
@@ -53,10 +62,10 @@ const user1 = {
 
 registerUser(user1);
 						</code></pre>
-						<img src="./img/js-ex-1.png" alt="correct usage">
-					</section>
-					<section>
-						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+					<img src="./img/js-ex-1.png" alt="correct usage">
+				</section>
+				<section>
+					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
 const user2 = {
 	email: 'li.wei@globex.io',
 	fullName: 'Li Wei'
@@ -64,10 +73,10 @@ const user2 = {
 
 registerUser(user2);
 						</code></pre>
-						<img src="./img/js-ex-2.png" alt="correct usage">
-					</section>
-					<section>
-						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+					<img src="./img/js-ex-2.png" alt="correct usage">
+				</section>
+				<section>
+					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
 const user3 = {
 	email: 'oliver.taylor@initech.co',
 	fullname: 'Oliver Taylor',
@@ -76,10 +85,10 @@ const user3 = {
 
 registerUser(user3);
 						</code></pre>
-						<img src="./img/js-ex-3.png" alt="correct usage">
-					</section>
-					<section>
-						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+					<img src="./img/js-ex-3.png" alt="correct usage">
+				</section>
+				<section>
+					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
 const user4 = {
     email: 'jerem.broke.db@wah.co',
     fullName: 'Jerem Broke',
@@ -89,129 +98,143 @@ const user4 = {
 registerUser(user4)
 console.log('Is admin?', user4.role.admin)
 						</code></pre>
-						<img src="./img/js-ex-4.png" alt="correct usage">
-					</section>
-					<section>
-						<h4>Bad Tooling</h4>
-					</section>
+					<img src="./img/js-ex-4.png" alt="correct usage">
 				</section>
 				<section>
-					<section><h1>Static Types, The Missing Piece</h1></section>
-					<section>
-						<p>Autocomplete</p>
-						<img src="./img/autocomplete-1.png" alt="image showing autocomplete box">
-					</section>
-					<section>
-						<p>Runtime Error Warnings</p>
-						<img src="./img/runtime-warning-1.png" alt="typescript error showing undefined warning">
-					</section>
-					<section>
-						<p>Refactoring</p>
-						<img src="./img/refactor-1.png" alt="rename variable box in vscode">
-					</section>
-					<section>
-						<p>Quick Fix and Imports</p>
-						<img src="./img/refactor-3.png" alt="variable spelling fix in vscode">
-						<img src="./img/refactor-2.png" alt="auto import in vscode">
-					</section>
+					<h4>Bad Tooling</h4>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Static Types, The Missing Piece</h1>
 				</section>
 				<section>
-					<section><h1>Core Typescript Concepts</h1></section>
-					<section><h2>Basic Types</h2></section>
-					<section>
-						<p><code>string</code></p>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>let name: string = "Alice";</code></pre>
-					</section>
-					<section>
-						<p><code>number</code></p>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>let age: number = 30;</code></pre>
-					</section>
-					<section>
-						<p><code>boolean</code></p>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>let isActive: boolean = true;</code></pre>
-					</section>
-					<section>
-						<p><code>array</code> and <code>tuple</code></p>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+					<p>Autocomplete</p>
+					<img src="./img/autocomplete-1.png" alt="image showing autocomplete box">
+				</section>
+				<section>
+					<p>Runtime Error Warnings</p>
+					<img src="./img/runtime-warning-1.png" alt="typescript error showing undefined warning">
+				</section>
+				<section>
+					<p>Refactoring</p>
+					<img src="./img/refactor-1.png" alt="rename variable box in vscode">
+				</section>
+				<section>
+					<p>Quick Fix and Imports</p>
+					<img src="./img/refactor-3.png" alt="variable spelling fix in vscode">
+					<img src="./img/refactor-2.png" alt="auto import in vscode">
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1>Core Typescript Concepts</h1>
+				</section>
+				<section>
+					<h2>Basic Types</h2>
+				</section>
+				<section>
+					<p><code>string</code></p>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>let name: string = "Alice";</code></pre>
+				</section>
+				<section>
+					<p><code>number</code></p>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>let age: number = 30;</code></pre>
+				</section>
+				<section>
+					<p><code>boolean</code></p>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>let isActive: boolean = true;</code></pre>
+				</section>
+				<section>
+					<p><code>array</code> and <code>tuple</code></p>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							let items: number[] = [1, 2, 3];
 							let items2: Array&lt;number&gt; = [1, 2, 3];
 							let tuple: [string, number] = ["Alice", 30];
-						</code></pre>					
-					</section>
-					<section>
-						<p><code>object</code></p>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>let person: { name: string; age: number; } = { name: "Alice", age: 30 };</code></pre>
-					</section>
-					<section>
-						<p><code>null</code> and <code>undefined</code></p>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+						</code></pre>
+				</section>
+				<section>
+					<p><code>object</code></p>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>let person: { name: string; age: number; } = { name: "Alice", age: 30 };</code></pre>
+				</section>
+				<section>
+					<p><code>null</code> and <code>undefined</code></p>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							let value: null = null;
 							let value: undefined;
 						</code></pre>
-					</section>
-					<section>
-						<p><code>any</code></p>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>let data: any = "text"; data = 42; data = true;</code></pre>
-					</section>
-					<section>
-						<p><code>enum</code></p>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+				</section>
+				<section>
+					<p><code>any</code></p>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>let data: any = "text"; data = 42; data = true;</code></pre>
+				</section>
+				<section>
+					<p><code>enum</code></p>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							enum Status {
 								Active,
 								Inactive
 							};
 							let s: Status = Status.Active;
 						</code></pre>
-					</section>
-					<section>
-						<p><code>void</code></p>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+				</section>
+				<section>
+					<p><code>void</code></p>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							function log(message: string): void {
 								console.log(message);
 							}
 						</code></pre>
-					</section>
-					<section>
-						<p><code>never</code></p>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+				</section>
+				<section>
+					<p><code>never</code></p>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							function error(msg: string): never {
 								throw new Error(msg);
 							}
 						</code></pre>
-					</section>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Type aliases</h3>
 				</section>
 				<section>
-					<section><h3>Type aliases</h3></section>
-					<section>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							type ID = number | string;
 							let productId: ID = "123-abc";
 						</code></pre>
-					</section>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Type Inference</h3>
 				</section>
 				<section>
-					<section><h3>Type Inference</h3></section>
-					<section>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							let selectedUser = null;
 							selectedUser = { name: 'Bob', }
 						</code></pre>
-					</section>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Functions</h3>
 				</section>
 				<section>
-					<section><h3>Functions</h3></section>
-					<section>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							function add(a: number, b: number): number {
 								return a + b;
 							}
 						</code></pre>
-					</section>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Objects and Interfaces</h3>
 				</section>
 				<section>
-					<section><h3>Objects and Interfaces</h3></section>
-					<section>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							type Name = {
 								first: string,
 								last: string,
@@ -225,48 +248,56 @@ console.log('Is admin?', user4.role.admin)
 							
 							let user: User = { id: 1, name: "Alice", isActive: true };
 						</code></pre>
-					</section>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Arrays and Inline Objects</h3>
 				</section>
 				<section>
-					<section><h3>Arrays and Inline Objects</h3></section>
-					<section>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							type StringArray = string[];
 							type NumberArray = Array&lt;number&gt;;
 							type ObjectWithNameArray = Array<{ name: string }>;
 						</code></pre>
-					</section>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Generics</h3>
 				</section>
 				<section>
-					<section><h3>Generics</h3></section>
-					<section>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							type Response<TData> = {
 								status: number,
 								data: TData,	
 							}
 						</code></pre>
-					</section>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Sometimes it's a pain</h2>
+				</section>
+				<section>Finding bugs in the IDE > Finding bugs in prod</section>
+			</section>
+			<section>
+				<section>
+					<h2>Help Typescript Help You</h2>
 				</section>
 				<section>
-					<section><h2>Sometimes it's a pain</h2></section>
-					<section>Finding bugs in the IDE > Finding bugs in prod</section>
-				</section>
-				<section>
-					<section><h2>Help Typescript Help You</h2></section>
-					<section>
-						<h3>Loose Types</h3>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+					<h3>Loose Types</h3>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							type file = any;
 							// vs 
 							type file = string
 							// vs
 							type file = `${string}.png`
 						</code></pre>
-					</section>
-					<section>
-						<h3>Loose Types</h3>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+				</section>
+				<section>
+					<h3>Loose Types</h3>
+					<pre><code class="hljs typescript" data-trim data-line-numbers>
 							interface User {
 								name: string;
 								age: number;
@@ -275,21 +306,21 @@ console.log('Is admin?', user4.role.admin)
 						
 							const user = { name: "Bob", age: 54 } as User;
 						</code></pre>
-					</section>
-					<section data-auto-animate>
-						<h3>Loose Types</h3>
-						<pre data-id="infered-wrong"><code class="hljs typescript" data-trim data-line-numbers>
+				</section>
+				<section data-auto-animate>
+					<h3>Loose Types</h3>
+					<pre data-id="infered-wrong"><code class="hljs typescript" data-trim data-line-numbers>
 							const getFirstElement = (arr: any[]) => {
 								return arr[0];
 							};
 							  
 							const first = getFirstElement([1, 2, 3]);
 						</code></pre>
-						<p><code data-id="firstvar">first</code> is typed as <code data-id="firstval">any</code></p>
-					</section>
-					<section data-auto-animate>
-						<h3></h3>
-						<pre data-id="infered-wrong"><code class="hljs typescript" data-trim data-line-numbers>
+					<p><code data-id="firstvar">first</code> is typed as <code data-id="firstval">any</code></p>
+				</section>
+				<section data-auto-animate>
+					<h3></h3>
+					<pre data-id="infered-wrong"><code class="hljs typescript" data-trim data-line-numbers>
 							const getFirstElement = &lt;T&gt;(arr: T[]) => {
 								return arr[0];
 							};
@@ -298,29 +329,30 @@ console.log('Is admin?', user4.role.admin)
 							
 							const firstString = getFirstElement(["a", "b", "c"]);
 						</code></pre>
-						<p><code data-id="firstvar">firstNumber</code> is typed as <code data-id="firstval">number</code></p>
-					</section>
+					<p><code data-id="firstvar">firstNumber</code> is typed as <code data-id="firstval">number</code></p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>How you'll use Typescript</h2>
 				</section>
 				<section>
-					<section><h2>How you'll use Typescript</h2></section>
-					<section>
-						Explicit < Inferred < Generic < Imported
-					</section>
-					<section>
-						<h3>Explicit</h3>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+					Explicit < Inferred < Generic < Imported </section>
+						<section>
+							<h3>Explicit</h3>
+							<pre><code class="hljs typescript" data-trim data-line-numbers>
 						function transformData(data: DataType): TransformedDataType {
 						</code></pre>
-					</section>
-					<section>
-						<h3>Inferred</h3>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+						</section>
+						<section>
+							<h3>Inferred</h3>
+							<pre><code class="hljs typescript" data-trim data-line-numbers>
 						const count = 5; // TypeScript infers 'number'
 						</code></pre>
-					</section>
-					<section>
-						<h3>Generic</h3>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+						</section>
+						<section>
+							<h3>Generic</h3>
+							<pre><code class="hljs typescript" data-trim data-line-numbers>
 						function fetchData&lt;T&gt;(url: string): Promise&lt;T&gt; {
 							return fetch(url).then(res => res.json());
 						}
@@ -335,17 +367,17 @@ console.log('Is admin?', user4.role.admin)
 							// users is typed as User[]
 						});
 						</code></pre>
-					</section>
-					<section>
-						<h3>Imported</h3>
-						<pre><code class="hljs typescript" data-trim data-line-numbers>
+						</section>
+						<section>
+							<h3>Imported</h3>
+							<pre><code class="hljs typescript" data-trim data-line-numbers>
 						import type { Request, Response } from 'express';
 
 						function handleRequest(req: Request, res: Response) {
 							res.send('Hello, world!');
 						}
 						</code></pre>
-					</section>
+						</section>
 				</section>
 				<section>
 					<h3>Demo (if time)</h3>
@@ -358,22 +390,23 @@ console.log('Is admin?', user4.role.admin)
 						<li><a href="https://www.typescriptlang.org/cheatsheets/">Typescript Cheatsheet</a></li>
 					</ul>
 				</section>
-			</div>
 		</div>
+	</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			Reveal.initialize({
-				hash: true,
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
-				controls: true,
-				controlsTutorial: false,
-				progress: false,
-				transition: 'fade',
-			});
-		</script>
-	</body>
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		Reveal.initialize({
+			hash: true,
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			controls: true,
+			controlsTutorial: false,
+			progress: false,
+			transition: 'fade',
+		});
+	</script>
+</body>
+
 </html>
