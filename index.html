@@ -268,9 +268,13 @@ console.log('Is admin?', user4.role.admin)
 				</section>
 				<section>
 					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							type Response<TData> = {
+							type Response&lt;TData&gt; = {
 								status: number,
 								data: TData,	
+							}
+
+							function getUsers&lt;T&gt;(url: string): Promise&lt;UserType&lt;T&gt;&gt; {
+								return fetch(url).then(res => res.json());
 							}
 						</code></pre>
 				</section>
