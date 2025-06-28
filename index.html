@@ -163,6 +163,23 @@ let name: string;</code></pre>
 					<aside class="notes">These are the core primitive types used all the time.</aside>
 				</section>
 				<section>
+					<h3>Optional / Not null</h3>
+					<pre><code class="language-ts">
+interface User {
+	id: number;
+	name: string;
+	email?: string; // optional property
+}
+
+function getUserName(user: User): string {
+	// Non-null assertion operator (!)
+	return user.name!;
+}
+					</code></pre>
+					<aside class="notes">The <code>?</code> makes a property optional. The <code>!</code> non-null assertion tells TS you know the value isn't null or undefined.</aside>
+			</section>
+				</section>
+				<section>
 					<h3>Collections</h3>
 					<pre><code class="language-ts">let tags: string[];</code></pre>
 					<aside class="notes">Arrays are defined with element type + []. Very readable.</aside>
