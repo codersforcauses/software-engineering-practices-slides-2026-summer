@@ -106,293 +106,325 @@ console.log('Is admin?', user4.role.admin)
 			</section>
 			<section>
 				<section>
-					<h1>Static Types, The Missing Piece</h1>
+					<h3>Why TypeScript?</h3>
+					<ul>
+						<li>Superset of JavaScript</li>
+						<li>Adds static types</li>
+					</ul>
+					<aside class="notes">TS is still JavaScript underneath. It just adds a type layer that improves
+						safety and tooling.</aside>
 				</section>
 				<section>
-					<p>Autocomplete</p>
-					<img src="./img/autocomplete-1.png" alt="image showing autocomplete box">
-				</section>
-				<section>
-					<p>Runtime Error Warnings</p>
-					<img src="./img/runtime-warning-1.png" alt="typescript error showing undefined warning">
-				</section>
-				<section>
-					<p>Refactoring</p>
-					<img src="./img/refactor-1.png" alt="rename variable box in vscode">
-				</section>
-				<section>
-					<p>Quick Fix and Imports</p>
-					<img src="./img/refactor-3.png" alt="variable spelling fix in vscode">
-					<img src="./img/refactor-2.png" alt="auto import in vscode">
+					<h3>Why TypeScript?</h3>
+					<ul>
+						<li>Catches bugs early</li>
+						<li>Powers better editor tooling</li>
+						<li>Scales better for teams</li>
+					</ul>
+					<aside class="notes">It helps you move faster as your codebase grows.</aside>
 				</section>
 			</section>
+
+			<!-- Slide 3 -->
+			<section>
+				<h3>TS in the Ecosystem</h3>
+				<ul>
+					<li>Used in React, Angular, Next.js, Node</li>
+					<li>Integrated into most libraries: Redux, Axios, Prisma, etc.</li>
+					<li>Excellent VSCode integration</li>
+				</ul>
+				<aside class="notes">TS is standard now in modern frontend and full-stack projects. Almost all popular
+					libraries ship type definitions.</aside>
+			</section>
+
+			<!-- Slide 4 -->
+			<section>
+				<pre><code class="language-ts">let user: string = "Dog";
+user = 10; // ❌ Error</code></pre>
+				<aside class="notes">Static typing lets us catch issues early. Here, you can't assign a number to a
+					string variable.</aside>
+			</section>
+
+			<!-- Slide 5 -->
+			<section>
+				<h3>Type Inference</h3>
+				<pre><code class="language-ts">const age = 30; // Inferred as number</code></pre>
+				<aside class="notes">TS is smart enough to infer types. You don’t need to annotate everything manually.
+				</aside>
+			</section>
+
+			<!-- Slide 6 -->
 			<section>
 				<section>
-					<h1>Core Typescript Concepts</h1>
+					<h3>Primitives</h3>
+					<pre><code class="language-ts">let isOnline: boolean;
+let count: number;
+let name: string;</code></pre>
+					<aside class="notes">These are the core primitive types used all the time.</aside>
 				</section>
 				<section>
-					<h2>Basic Types</h2>
+					<h3>Collections</h3>
+					<pre><code class="language-ts">let tags: string[];</code></pre>
+					<aside class="notes">Arrays are defined with element type + []. Very readable.</aside>
 				</section>
 				<section>
-					<p><code>string</code></p>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>let name: string = "Alice";</code></pre>
+					<h3>Object Literals</h3>
+					<pre><code class="language-ts">let user: { id: number; name: string };</code></pre>
+					<aside class="notes">These are the bread and butter of TS typing. Arrays, objects, primitives.
+					</aside>
 				</section>
 				<section>
-					<p><code>number</code></p>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>let age: number = 30;</code></pre>
-				</section>
-				<section>
-					<p><code>boolean</code></p>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>let isActive: boolean = true;</code></pre>
-				</section>
-				<section>
-					<p><code>array</code> and <code>tuple</code></p>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							let items: number[] = [1, 2, 3];
-							let items2: Array&lt;number&gt; = [1, 2, 3];
-							let tuple: [string, number] = ["Alice", 30];
-						</code></pre>
-				</section>
-				<section>
-					<p><code>object</code></p>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>let person: { name: string; age: number; } = { name: "Alice", age: 30 };</code></pre>
-				</section>
-				<section>
-					<p><code>null</code> and <code>undefined</code></p>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							let value: null = null;
-							let value: undefined;
-						</code></pre>
-				</section>
-				<section>
-					<p><code>any</code></p>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>let data: any = "text"; data = 42; data = true;</code></pre>
-				</section>
-				<section>
-					<p><code>enum</code></p>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							enum Status {
-								Active,
-								Inactive
-							};
-							let s: Status = Status.Active;
-						</code></pre>
-				</section>
-				<section>
-					<p><code>void</code></p>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							function log(message: string): void {
-								console.log(message);
-							}
-						</code></pre>
-				</section>
-				<section>
-					<p><code>never</code></p>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							function error(msg: string): never {
-								throw new Error(msg);
-							}
-						</code></pre>
-				</section>
+				<h3>Interfaces</h3>
+				<pre><code class="language-ts">interface User {
+  id: number;
+  name: string;
+}</code></pre>
+				<aside class="notes">Interfaces define the shape of objects. Prefer them when modeling data structures
+					or contracts.</aside>
 			</section>
+			</section>
+
+			<!-- Slide 7 -->
+			<section>
+				<h3>Type Aliases &amp; Unions</h3>
+				<pre><code class="language-ts">type Status = "online" | "offline";
+type ID = number | string;</code></pre>
+				<aside class="notes">Type aliases let you name complex types. Union types are great for modeling
+					real-world states.</aside>
+			</section>
+
+			<!-- Slide 8 -->
+			
+
+			<!-- Slide 9 -->
 			<section>
 				<section>
-					<h3>Type aliases</h3>
+					<h3>Function Types</h3>
+					<pre><code class="language-ts">function greet(user: User): string {
+  return `Hello ${user.name}`;
+}</code></pre>
+					<aside class="notes">Functions can be typed for inputs and return values. Helps document and enforce
+						API usage.</aside>
 				</section>
 				<section>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							type ID = number | string;
-							let productId: ID = "123-abc";
-						</code></pre>
+					<p><strong>void</strong>: Function returns nothing</p>
+					<pre><code class="language-ts">function logClick(): void {
+  console.log("clicked");
+}</code></pre>
+					<p><strong>never</strong>: Function never returns</p>
+					<pre><code class="language-ts">function throwError(message: string): never {
+  throw new Error(message);
+}</code></pre>
+					<aside class="notes">Use void when a function performs side effects but doesn’t return. Use never
+						when a function always throws or never finishes. Helpful for exhaustiveness checking.</aside>
 				</section>
 			</section>
-			<section>
-				<section>
-					<h3>Type Inference</h3>
-				</section>
-				<section>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							let selectedUser = null;
-							selectedUser = { name: 'Bob', }
-						</code></pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h3>Functions</h3>
-				</section>
-				<section>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							function add(a: number, b: number): number {
-								return a + b;
-							}
-						</code></pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h3>Objects and Interfaces</h3>
-				</section>
-				<section>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							type Name = {
-								first: string,
-								last: string,
-							}
-							
-							interface User {
-								id: number;
-								name: string;
-								isActive: boolean;
-							}
-							
-							let user: User = { id: 1, name: "Alice", isActive: true };
-						</code></pre>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h3>Arrays and Inline Objects</h3>
-				</section>
-				<section>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							type StringArray = string[];
-							type NumberArray = Array&lt;number&gt;;
-							type ObjectWithNameArray = Array<{ name: string }>;
-						</code></pre>
-				</section>
-			</section>
+
+			<!-- Slide 10 -->
 			<section>
 				<section>
 					<h3>Generics</h3>
+					<pre><code class="language-ts">function wrap&lt;T&gt;(value: T): T[] {
+  return [value];
+}</code></pre>
+					<aside class="notes">Generics let you write reusable functions while preserving type information.
+					</aside>
 				</section>
 				<section>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							type Response&lt;TData&gt; = {
-								status: number,
-								data: TData,	
-							}
-
-							function getUsers&lt;T&gt;(url: string): Promise&lt;UserType&gt; {
-								return fetch(url).then(res => res.json());
-							}
-						</code></pre>
+					<h3>Generics</h3>
+					<pre><code class="language-ts">const [value, setValue] = useState&lt;number | null&gt;(null);</code></pre>
+					<aside class="notes">Many React hooks use generics under the hood. You can pass a type to customize
+						state, refs, etc.</aside>
 				</section>
 			</section>
+
+			<!-- Slide 12 -->
 			<section>
 				<section>
-					<h2>Sometimes it's a pain</h2>
-				</section>
-				<section>Finding bugs in the IDE <code>></code> Finding bugs in prod</section>
-			</section>
-			<section>
-				<section>
-					<h2>Help Typescript Help You</h2>
-				</section>
-				<section>
-					<h3>Loose Types</h3>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							type file = any;
-							// vs 
-							type file = string
-							// vs
-							type file = `${string}.png`
-						</code></pre>
-					<img src="./img/loose-ex-1.png" alt="Example of strong type">
+					<h3>Type Guards</h3>
+					<pre><code class="language-ts">function isString(val: unknown): val is string {
+  return typeof val === "string";
+}
+
+let data: unknown = "hi";
+
+if (isString(data)) {
+  // inside this block `data` is inferred as string
+  console.log(data.toUpperCase());
+}</code></pre>
+					<aside class="notes">Type guards help narrow types. This is a custom guard using typeof.</aside>
 				</section>
 				<section>
-					<h3>Loose Types</h3>
-					<pre><code class="hljs typescript" data-trim data-line-numbers>
-							interface User {
-								name: string;
-								age: number;
-								email: string;
-							}
-						
-							const user = { name: "Bob", age: 54 } as User;
-						</code></pre>
-				</section>
-				<section data-auto-animate>
-					<h3>Loose Types</h3>
-					<pre data-id="infered-wrong"><code class="hljs typescript" data-trim data-line-numbers>
-							const getFirstElement = (arr: any[]) => {
-								return arr[0];
-							};
-							  
-							const first = getFirstElement([1, 2, 3]);
-						</code></pre>
-					<p><code data-id="firstvar">first</code> is typed as <code data-id="firstval">any</code></p>
-				</section>
-				<section data-auto-animate>
-					<h3></h3>
-					<pre data-id="infered-wrong"><code class="hljs typescript" data-trim data-line-numbers>
-							const getFirstElement = &lt;T&gt;(arr: T[]) => {
-								return arr[0];
-							};
-							  
-							const firstNumber = getFirstElement([1, 2, 3]);
-							
-							const firstString = getFirstElement(["a", "b", "c"]);
-						</code></pre>
-					<p><code data-id="firstvar">firstNumber</code> is typed as <code data-id="firstval">number</code></p>
+					<h3>Type Guards</h3>
+					<pre><code class="language-ts">function hasId(obj: unknown): obj is { id: number } {
+  return typeof obj === 'object' && obj !== null && 'id' in obj;
+}</code></pre>
+					<aside class="notes">Use the in operator to check object structure. Essential for working with
+						untyped APIs.</aside>
 				</section>
 			</section>
+
+			<!-- Slide 13 -->
 			<section>
 				<section>
-					<h2>How you'll use Typescript</h2>
+					<h3>Common Frustrations</h3>
+					<ul>
+						<li>Confusing error messages</li>
+						<li>Complex generic types</li>
+						<li>Type mismatch despite "knowing it works"</li>
+					</ul>
+					<aside class="notes">These are common early frustrations. Real error messages can be opaque—learn to
+						search them, isolate the type conflict, and simplify.</aside>
 				</section>
 				<section>
-					Explicit < Inferred < Generic < Imported </section>
-						<section>
-							<h3>Explicit</h3>
-							<pre><code class="hljs typescript" data-trim data-line-numbers>
-						function transformData(data: DataType): TransformedDataType {
-						</code></pre>
-						</section>
-						<section>
-							<h3>Inferred</h3>
-							<pre><code class="hljs typescript" data-trim data-line-numbers>
-						const count = 5; // TypeScript infers 'number'
-						</code></pre>
-						</section>
-						<section>
-							<h3>Generic</h3>
-							<pre><code class="hljs typescript" data-trim data-line-numbers>
-						function fetchData&lt;T&gt;(url: string): Promise&lt;T&gt; {
-							return fetch(url).then(res => res.json());
-						}
-
-						// Usage:
-						interface User {
-							id: number;
-							name: string;
-						}
-
-						fetchData&lt;User[]&gt;('/api/users').then(users => {
-							// users is typed as User[]
-						});
-						</code></pre>
-						</section>
-						<section>
-							<h3>Imported</h3>
-							<pre><code class="hljs typescript" data-trim data-line-numbers>
-						import type { Request, Response } from 'express';
-
-						function handleRequest(req: Request, res: Response) {
-							res.send('Hello, world!');
-						}
-						</code></pre>
-						</section>
+					<pre><code class="language-ts">// Error: Type 'undefined' is not assignable to type 'string'.
+const [name, setName] = useState&lt;string&gt;();</code></pre>
 				</section>
 				<section>
-					<h3>Demo (if time)</h3>
+					<pre><code class="language-ts">// Error: Type '{ id: number; name: string; }' is not assignable to type 'UserProps'.
+&lt;MyComponent user={{ id: 1, name: 'Alice' }} /&gt;</code></pre>
 				</section>
 				<section>
-					<h4>References</h4>
-					<a href="https://www.typescriptlang.org/cheatsheets/"><img src="./img/ts-cheat.png" alt="Cheatsheet"></a>
-					<a href="https://www.totaltypescript.com/books/total-typescript-essentials"><img src="./img/total-ts.png"
-							alt="Total typescript"></a>
+					<pre><code class="language-ts">// Component definition
+interface User {
+  id: number;
+  name: string;
+  age: number;        // <- required
+}
+
+interface UserProps {
+  user: User;         // <- whole user object required
+}
+
+function MyComponent({ user, onSelect }: UserProps) {
+  return (
+    <div>
+      {user.name} — {user.age}
+    </div>
+  );
+}</code></pre>
 				</section>
+				<section>
+					<pre><code class="language-ts">// Error: Type 'Element | null' is not assignable to type 'HTMLElement'.
+const el = document.getElementById("root");
+el.style.display = "none";</code></pre>
+				</section>
+				<section>
+					<pre><code class="language-ts">
+const el = document.getElementById("root");
+el?.style.display = "none";</code></pre>
+				</section>
+			</section>
+
+			<!-- Slide 14 -->
+			<section>
+				<section>
+					<h3>Debugging Complex Types</h3>
+					<ul>
+						<li>Hover + go-to-definition in IDE</li>
+						<li>Pretty TS Errors Extension</li>
+						<li>Use intermediate type aliases</li>
+					</ul>
+					<aside class="notes">Isolate types using aliases. TS tooling can reveal a lot if you let it.</aside>
+				</section>
+				<section>
+					<pre><code class="language-ts">
+declare function sdkCall&lt;T, P = unknown&gt;(
+  endpoint: string,
+  params?: P
+): Promise&lt;ApiResponse&lt;T&gt;&gt;;
+
+// Your wrapper
+async function fetchUsers() {
+  return sdkCall&lt;User[]&gt;("/users?active=true");
+}
+
+// Pull out the resolved data in one line
+type UsersResp = Awaited&lt;ReturnType&lt;typeof fetchUsers&gt;&gt;; // UsersResp = ApiResponse&lt;User[]&gt;
+
+// Now you can safely do
+function handle(resp: UsersResp) {
+  resp.data.forEach(u =&gt; console.log(u.name));
+}</code></pre>
+				</section>
+			</section>
+			
+
+			<!-- Slide 15 -->
+			<section>
+				<h3>Best Practices</h3>
+				<ul>
+					<li>Use <code>strict</code> mode</li>
+					<li>Avoid <code>any</code>, prefer <code>unknown</code></li>
+					<li>Use inference first</li>
+					<li>Keep types close to usage</li>
+				</ul>
+				<aside class="notes">These practices will help avoid the worst TS pain. Let the compiler help you—not
+					fight you.</aside>
+			</section>
+
+			<!-- Slide 16 -->
+			<section>
+				<section>
+					<h3>Runtime + Type Safety</h3>
+					<pre><code class="language-ts">const schema = z.object({ name: z.string() });</code></pre>
+					<ul>
+						<li>Use <code>zod</code>, etc.</li>
+						<li>Runtime validation + inferred types</li>
+					</ul>
+					<aside class="notes">Static types don't exist at runtime. Use libraries like zod to validate inputs
+						while preserving types.</aside>
+				</section>
+				<section>
+					<h3>Runtime + Type Safety</h3>
+					<pre><code class="language-ts">const formSchema = z.object({ email: z.string().email() });
+
+function submit(data: unknown) {
+  const parsed = formSchema.safeParse(data);
+  if (!parsed.success) {
+    console.log(parsed.error);
+  }
+}</code></pre>
+					<aside class="notes">This gives you type inference, validation, and error handling all in one step.
+					</aside>
+				</section>
+			</section>
+
+			<!-- Slide 17 -->
+			<section>
+				<h3>Final Thoughts</h3>
+				<ul>
+					<li>TS adds safety without changing your runtime</li>
+					<li>It's a long-term productivity investment</li>
+					<li>Embrace types as contracts</li>
+				</ul>
+				<aside class="notes">It may feel like a tax at first. But it saves time and avoids bugs in real-world
+					codebases.</aside>
+			</section>
+
+			</section>
+			<section>
+				<h3>Demo (if time)</h3>
+			</section>
+			<section>
+				<h4>References</h4>
+				<div style="display: flex; gap: 2rem; align-items: center; justify-content: center; flex-wrap: wrap; position: relative;">
+					<div style="text-align: center;">
+						<a href="https://www.typescriptlang.org/cheatsheets/">
+							<img height="300px" src="./img/ts-cheat.png" alt="Cheatsheet">
+						</a>
+						<h6>Typescript Cheatsheet</h6>
+					</div>
+					<!-- Divider -->
+					<div style="width: 2px; height: 320px; background: #ccc; margin: 0 1rem; align-self: stretch;"></div>
+					<div style="text-align: center;">
+						<a href="https://www.totaltypescript.com/books/total-typescript-essentials">
+							<img height="300px" src="./img/total-ts.png" alt="Total typescript">
+						</a>
+						<h6>Total Typescript Course</h6>
+					</div>
+				</div>
+			</section>
 		</div>
 	</div>
 
