@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>Working With Typescript - CFC</title>
+	<title>Advanced Frontend - CFC</title>
 
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
@@ -24,423 +24,560 @@
 	<div class="reveal">
 		<div class="slides">
 			<section>
-				<img src="./img/qr-code.png" alt="slides QR code">
+				<h1>Advanced Frontend Development</h1>
 			</section>
+
+			<section>
+				<h2>Frontend Web Development is Hard</h2>
+			</section>
+
+			<!-- Complex Stack -->
 			<section>
 				<section>
-					<h1>Some Problems With Javascript</h1>
+					<h3>Complex Stack</h3>
 				</section>
-				<section>
-					<h4>Runtime Bugs</h4>
-				</section>
-				<section>
-					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-function registerUser(user) {
-    sendWelcomeEmail(user.email, user.fullName);
-    const age = calculateAge(user.birthYear);
-		// Simulate registration
-    console.log(`Registered ${user.fullName}, age: ${age}`);
-}
 
-function sendWelcomeEmail(email, name) {
-    // Simulate sending an email
-    console.log(`Sending welcome email to ${name} at ${email}`);
-}
+				<section>
+					<h4>Browser Technologies</h4>
+					<p>HTML, JavaScript, CSS</p>
+					<aside class="notes">
+						- HTML5: semantic elements, Web Components, Canvas, SVG
+						- JavaScript: ES6+, TypeScript, async/await, Promises, modules
+						- CSS: Flexbox, Grid, CSS Variables, animations, CSS-in-JS
+					</aside>
+				</section>
 
-function calculateAge(birthYear) {
-    return new Date().getFullYear() - birthYear;
-}
-						</code></pre>
-				</section>
 				<section>
-					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-const user1 = {
-	email: 'maria.garcia@northwind.com',
-	fullName: 'Maria Garcia',
-	birthYear: 1990
-};
+					<h4>Ecosystem</h4>
+					<p>JS frameworks, component libraries</p>
+					<aside class="notes">
+						- Frameworks: React, Vue, Angular, Svelte, Solid
+						- Meta-frameworks: Next.js, Remix, Gatsby, Astro
+						- Component Libraries: Material-UI, Chakra UI, shadcn/ui
+						- State Management: Redux, Zustand, TanStack Query, Context API
+					</aside>
+				</section>
 
-registerUser(user1);
-						</code></pre>
-					<img src="./img/js-ex-1.png" alt="correct usage">
-				</section>
 				<section>
-					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-const user2 = {
-	email: 'li.wei@globex.io',
-	fullName: 'Li Wei'
-};
+					<h4>Build Tools</h4>
+					<p>Compilers, bundlers, polyfills</p>
+					<aside class="notes">
+						- Bundlers: Webpack, Vite, Rollup, Parcel, esbuild, Turbopack
+						- Compilers: Babel, SWC, TypeScript compiler
+						- Polyfills: core-js, regenerator-runtime
+					</aside>
+				</section>
 
-registerUser(user2);
-						</code></pre>
-					<img src="./img/js-ex-2.png" alt="correct usage">
-				</section>
 				<section>
-					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-const user3 = {
-	email: 'oliver.taylor@initech.co',
-	fullname: 'Oliver Taylor',
-	birthYear: 1985
-};
-
-registerUser(user3);
-						</code></pre>
-					<img src="./img/js-ex-3.png" alt="correct usage">
-				</section>
-				<section>
-					<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-const user4 = {
-    email: 'jerem.broke.db@wah.co',
-    fullName: 'Jerem Broke',
-    birthYear: '--drop tables',
-}
-
-registerUser(user4)
-console.log('Is admin?', user4.role.admin)
-						</code></pre>
-					<img src="./img/js-ex-4.png" alt="correct usage">
-				</section>
-				<section>
-					<h4>Bad Tooling</h4>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h3>Why TypeScript?</h3>
-					<ul>
-						<li>Superset of JavaScript</li>
-						<li>Adds static types</li>
-					</ul>
-					<aside class="notes">TS is still JavaScript underneath. It just adds a type layer that improves
-						safety and tooling.</aside>
-				</section>
-				<section>
-					<h3>Why TypeScript?</h3>
-					<ul>
-						<li>Catches bugs early</li>
-						<li>Powers better editor tooling</li>
-						<li>Scales better for teams</li>
-					</ul>
-					<aside class="notes">It helps you move faster as your codebase grows.</aside>
+					<h4>Development Environment</h4>
+					<p>Package managers, linters, IDEs</p>
+					<aside class="notes">
+						- Package Managers: npm, yarn, pnpm, bun
+						- Linters: ESLint, Prettier, Stylelint
+						- Testing: Jest, Vitest, Testing Library, Playwright, Cypress
+						- DevTools: React DevTools, browser DevTools
+					</aside>
 				</section>
 			</section>
 
-			<!-- Slide 3 -->
+			<!-- Complex Apps -->
 			<section>
-				<h3>TS in the Ecosystem</h3>
-				<ul>
-					<li>Used in React, Angular, Next.js, Node</li>
-					<li>Integrated into most libraries: Redux, Axios, Prisma, etc.</li>
-					<li>Excellent VSCode integration</li>
-				</ul>
-				<aside class="notes">TS is standard now in modern frontend and full-stack projects. Almost all popular
-					libraries ship type definitions.</aside>
+				<section>
+					<h3>Webapps Are Complicated</h3>
+				</section>
+
+				<section>
+					<h4>We've Pushed Browsers Too Far</h4>
+					<p>Functionality once reserved for servers now lives in the frontend</p>
+					<aside class="notes">
+						- Client-side routing
+						- Data fetching/caching
+						- Form validation
+						- Authentication flows, real-time updates, offline support
+					</aside>
+				</section>
+
+				<section>
+					<h4>Reactive UI</h4>
+					<p>Responds to asynchronous, dynamic data</p>
+					<aside class="notes">
+						- Managing async state: loading, error, success
+						- Optimistic updates, race conditions, virtual scrolling
+						- Real-time data synchronization
+						- Examples: live dashboards, collaborative editors, real-time chat
+					</aside>
+				</section>
+
+				<section>
+					<h4>Complex Functionality</h4>
+					<p>Feature expectations are high</p>
+					<aside class="notes">
+						- Rich text and design tools (replacing desktop apps)
+						- Drag and drop, file uploads with progress
+						- Document viewing and generation, data visualization
+						- Keyboard shortcuts, accessibility, undo/redo
+						- Auto-save, i18n, dark mode, responsive design
+						- PWA capabilities
+					</aside>
+				</section>
 			</section>
 
-			<!-- Slide 4 -->
+			<!-- Performance & Compatibility -->
 			<section>
-				<pre><code class="language-ts">let user: string = "Dog";
-user = 10; // ❌ Error</code></pre>
-				<aside class="notes">Static typing lets us catch issues early. Here, you can't assign a number to a
-					string variable.</aside>
+				<section>
+					<h3>Performance & Compatibility</h3>
+				</section>
+
+				<section>
+					<h4>Any device</h4>
+					<p>Features work on everything</p>
+					<aside class="notes">
+						- Multiple browsers: Chrome, Firefox, Safari, Edge
+						- Mobile browsers: iOS Safari quirks, Android Chrome
+						- Polyfilling for older browsers
+						- Testing across devices and screen sizes
+					</aside>
+				</section>
+
+				<section>
+					<h4>Any connection</h4>
+					<p>Page and content loads quickly</p>
+					<aside class="notes">
+						- Code splitting, lazy loading, image optimization
+						- Core Web Vitals: LCP, FID, CLS
+						- SSR vs SSG, edge computing, CDNs, caching strategies
+						- Works on slow 3G and fast fiber
+						- Tools: Lighthouse, WebPageTest, bundle analyzers
+					</aside>
+				</section>
 			</section>
 
-			<!-- Slide 5 -->
+			<!-- Learning is Hard -->
 			<section>
-				<h3>Type Inference</h3>
-				<pre><code class="language-ts">const age = 30; // Inferred as number</code></pre>
-				<aside class="notes">TS is smart enough to infer types. You don’t need to annotate everything manually.
+				<h2>Learning Frontend Web Development is Hard</h2>
+			</section>
+
+			<!-- Missing Fundamentals -->
+			<section>
+				<section>
+					<h3>Missing Fundamentals</h3>
+				</section>
+
+				<section>
+					<h4>Starting Practical, Missing Core</h4>
+					<p>Jump into frameworks without understanding the basics</p>
+					<aside class="notes">
+						- Learn React before understanding JavaScript fundamentals
+						- Use CSS frameworks before understanding CSS layout
+						- Copy-paste solutions without understanding browser APIs
+						- Gaps between core browser tech and high-level frameworks
+					</aside>
+				</section>
+
+				<section>
+					<h4>Hard to Differentiate</h4>
+					<p>Understanding how different parts work together</p>
+					<aside class="notes">
+						- What's JavaScript vs what's React?
+						- What's CSS vs what's Tailwind?
+						- What's native browser vs what's a polyfill?
+						- Which layer is causing the bug?
+						- Debugging requires understanding the entire stack
+					</aside>
+				</section>
+			</section>
+
+			<!-- Convoluted History -->
+			<section>
+				<section>
+					<h3>Convoluted History</h3>
+				</section>
+
+				<section>
+					<h4>Sediment of Technologies</h4>
+					<p>Layers upon layers of solutions</p>
+					<aside class="notes">
+						- Problem → Library → Framework → New Problem → Repeat
+						- jQuery (DOM manipulation) → React (component model) → Next.js (SSR)
+						- CSS → Sass → CSS Modules → CSS-in-JS → Tailwind
+						- Callbacks → Promises → async/await → React Suspense
+						- Each layer solves problems created by the previous one
+					</aside>
+				</section>
+
+				<section>
+					<h4>Dependency Hell</h4>
+					<p>Every solution brings more dependencies</p>
+					<aside class="notes">
+						- node_modules is massive
+						- Transitive dependencies you never asked for
+						- Version conflicts and breaking changes
+						- Security vulnerabilities in nested dependencies
+						- "Left-pad" problem and supply chain risks
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<h3>You Have to Learn JavaScript</h3>
+				<aside class="notes">
+					- Weak typing, type coercion
+					- "this" binding confusion
+					- Prototypal inheritance
+					- Async programming models
+					- Different versions: ES5, ES6+, TypeScript
+					- Browser vs Node.js differences
 				</aside>
 			</section>
 
-			<!-- Slide 6 -->
+			<!-- The Stack -->
 			<section>
 				<section>
-					<h3>Primitives</h3>
-					<pre><code class="language-ts">let isOnline: boolean;
-let count: number;
-let name: string;</code></pre>
-					<aside class="notes">These are the core primitive types used all the time.</aside>
+					<h2>The Stack</h2>
 				</section>
 				<section>
-					<h3>Optional / Not null</h3>
-					<pre><code class="language-ts">
-interface User {
-	id: number;
-	name: string;
-	email?: string; // optional property
-}
-
-function getUserName(user: User): string {
-	// Non-null assertion operator (!)
-	return user.name!;
-}
-					</code></pre>
-					<aside class="notes">The <code>?</code> makes a property optional. The <code>!</code> non-null assertion tells TS you know the value isn't null or undefined.</aside>
-			</section>
-				</section>
-				<section>
-					<h3>Collections</h3>
-					<pre><code class="language-ts">let tags: string[];</code></pre>
-					<aside class="notes">Arrays are defined with element type + []. Very readable.</aside>
-				</section>
-				<section>
-					<h3>Object Literals</h3>
-					<pre><code class="language-ts">let user: { id: number; name: string };</code></pre>
-					<aside class="notes">These are the bread and butter of TS typing. Arrays, objects, primitives.
-					</aside>
-				</section>
-				<section>
-				<h3>Interfaces</h3>
-				<pre><code class="language-ts">interface User {
-  id: number;
-  name: string;
-}</code></pre>
-				<aside class="notes">Interfaces define the shape of objects. Prefer them when modeling data structures
-					or contracts.</aside>
-			</section>
-			</section>
-
-			<!-- Slide 7 -->
-			<section>
-				<h3>Type Aliases &amp; Unions</h3>
-				<pre><code class="language-ts">type Status = "online" | "offline";
-type ID = number | string;</code></pre>
-				<aside class="notes">Type aliases let you name complex types. Union types are great for modeling
-					real-world states.</aside>
-			</section>
-
-			<!-- Slide 8 -->
-			
-
-			<!-- Slide 9 -->
-			<section>
-				<section>
-					<h3>Function Types</h3>
-					<pre><code class="language-ts">function greet(user: User): string {
-  return `Hello ${user.name}`;
-}</code></pre>
-					<aside class="notes">Functions can be typed for inputs and return values. Helps document and enforce
-						API usage.</aside>
-				</section>
-				<section>
-					<p><strong>void</strong>: Function returns nothing</p>
-					<pre><code class="language-ts">function logClick(): void {
-  console.log("clicked");
-}</code></pre>
-					<p><strong>never</strong>: Function never returns</p>
-					<pre><code class="language-ts">function throwError(message: string): never {
-  throw new Error(message);
-}</code></pre>
-					<aside class="notes">Use void when a function performs side effects but doesn’t return. Use never
-						when a function always throws or never finishes. Helpful for exhaustiveness checking.</aside>
-				</section>
-			</section>
-
-			<!-- Slide 10 -->
-			<section>
-				<section>
-					<h3>Generics</h3>
-					<pre><code class="language-ts">function wrap&lt;T&gt;(value: T): T[] {
-  return [value];
-}</code></pre>
-					<aside class="notes">Generics let you write reusable functions while preserving type information.
-					</aside>
-				</section>
-				<section>
-					<h3>Generics</h3>
-					<pre><code class="language-ts">const [value, setValue] = useState&lt;number | null&gt;(null);</code></pre>
-					<aside class="notes">Many React hooks use generics under the hood. You can pass a type to customize
-						state, refs, etc.</aside>
-				</section>
-			</section>
-
-			<!-- Slide 12 -->
-			<section>
-				<section>
-					<h3>Type Guards</h3>
-					<pre><code class="language-ts">function isString(val: unknown): val is string {
-  return typeof val === "string";
-}
-
-let data: unknown = "hi";
-
-if (isString(data)) {
-  // inside this block `data` is inferred as string
-  console.log(data.toUpperCase());
-}</code></pre>
-					<aside class="notes">Type guards help narrow types. This is a custom guard using typeof.</aside>
-				</section>
-				<section>
-					<h3>Type Guards</h3>
-					<pre><code class="language-ts">function hasId(obj: unknown): obj is { id: number } {
-  return typeof obj === 'object' && obj !== null && 'id' in obj;
-}</code></pre>
-					<aside class="notes">Use the in operator to check object structure. Essential for working with
-						untyped APIs.</aside>
-				</section>
-			</section>
-
-			<!-- Slide 13 -->
-			<section>
-				<section>
-					<h3>Common Frustrations</h3>
-					<ul>
-						<li>Confusing error messages</li>
-						<li>Complex generic types</li>
-						<li>Type mismatch despite "knowing it works"</li>
-					</ul>
-					<aside class="notes">These are common early frustrations. Real error messages can be opaque—learn to
-						search them, isolate the type conflict, and simplify.</aside>
-				</section>
-				<section>
-					<pre><code class="language-ts">// Error: Type 'undefined' is not assignable to type 'string'.
-const [name, setName] = useState&lt;string&gt;();</code></pre>
-				</section>
-				<section>
-					<pre><code class="language-ts">// Error: Type '{ id: number; name: string; }' is not assignable to type 'UserProps'.
-&lt;MyComponent user={{ id: 1, name: 'Alice' }} /&gt;</code></pre>
-				</section>
-				<section>
-					<pre><code class="language-ts">// Component definition
-interface User {
-  id: number;
-  name: string;
-  age: number;        // <- required
-}
-
-interface UserProps {
-  user: User;         // <- whole user object required
-}
-
-function MyComponent({ user, onSelect }: UserProps) {
-  return (
-    <div>
-      {user.name} — {user.age}
-    </div>
-  );
-}</code></pre>
-				</section>
-				<section>
-					<pre><code class="language-ts">// Error: Type 'Element | null' is not assignable to type 'HTMLElement'.
-const el = document.getElementById("root");
-el.style.display = "none";</code></pre>
-				</section>
-				<section>
-					<pre><code class="language-ts">
-const el = document.getElementById("root");
-el?.style.display = "none";</code></pre>
-				</section>
-			</section>
-
-			<!-- Slide 14 -->
-			<section>
-				<section>
-					<h3>Debugging Complex Types</h3>
-					<ul>
-						<li>Hover + go-to-definition in IDE</li>
-						<li>Pretty TS Errors Extension</li>
-						<li>Use intermediate type aliases</li>
-					</ul>
-					<aside class="notes">Isolate types using aliases. TS tooling can reveal a lot if you let it.</aside>
-				</section>
-				<section>
-					<pre><code class="language-ts">
-declare function sdkCall&lt;T, P = unknown&gt;(
-  endpoint: string,
-  params?: P
-): Promise&lt;ApiResponse&lt;T&gt;&gt;;
-
-// Your wrapper
-async function fetchUsers() {
-  return sdkCall&lt;User[]&gt;("/users?active=true");
-}
-
-// Pull out the resolved data in one line
-type UsersResp = Awaited&lt;ReturnType&lt;typeof fetchUsers&gt;&gt;; // UsersResp = ApiResponse&lt;User[]&gt;
-
-// Now you can safely do
-function handle(resp: UsersResp) {
-  resp.data.forEach(u =&gt; console.log(u.name));
-}</code></pre>
-				</section>
-			</section>
-			
-
-			<!-- Slide 15 -->
-			<section>
-				<h3>Best Practices</h3>
-				<ul>
-					<li>Use <code>strict</code> mode</li>
-					<li>Avoid <code>any</code>, prefer <code>unknown</code></li>
-					<li>Use inference first</li>
-					<li>Keep types close to usage</li>
-				</ul>
-				<aside class="notes">These practices will help avoid the worst TS pain. Let the compiler help you—not
-					fight you.</aside>
-			</section>
-
-			<!-- Slide 16 -->
-			<section>
-				<section>
-					<h3>Runtime + Type Safety</h3>
-					<pre><code class="language-ts">const schema = z.object({ name: z.string() });</code></pre>
-					<ul>
-						<li>Use <code>zod</code>, etc.</li>
-						<li>Runtime validation + inferred types</li>
-					</ul>
-					<aside class="notes">Static types don't exist at runtime. Use libraries like zod to validate inputs
-						while preserving types.</aside>
-				</section>
-				<section>
-					<h3>Runtime + Type Safety</h3>
-					<pre><code class="language-ts">const formSchema = z.object({ email: z.string().email() });
-
-function submit(data: unknown) {
-  const parsed = formSchema.safeParse(data);
-  if (!parsed.success) {
-    console.log(parsed.error);
-  }
-}</code></pre>
-					<aside class="notes">This gives you type inference, validation, and error handling all in one step.
-					</aside>
-				</section>
-			</section>
-
-			<!-- Slide 17 -->
-			<section>
-				<h3>Final Thoughts</h3>
-				<ul>
-					<li>TS adds safety without changing your runtime</li>
-					<li>It's a long-term productivity investment</li>
-					<li>Embrace types as contracts</li>
-				</ul>
-				<aside class="notes">It may feel like a tax at first. But it saves time and avoids bugs in real-world
-					codebases.</aside>
-			</section>
-
-			</section>
-			<section>
-				<h3>Demo (if time)</h3>
-			</section>
-			<section>
-				<h4>References</h4>
-				<div style="display: flex; gap: 2rem; align-items: center; justify-content: center; flex-wrap: wrap; position: relative;">
-					<div style="text-align: center;">
-						<a href="https://www.typescriptlang.org/cheatsheets/">
-							<img height="300px" src="./img/ts-cheat.png" alt="Cheatsheet">
-						</a>
-						<h6>Typescript Cheatsheet</h6>
+					<div style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.6em; max-width: 800px; margin: 0 auto;">
+						<!-- Layer 1: Core Technologies -->
+						<div style="background: #1a1a2e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a085;">
+							<p style="margin: 0 0 0.5rem 0;">Core Technologies</p>
+							<div style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around;">
+								<span>Browser</span>
+								<span>HTML</span>
+								<span>CSS</span>
+								<span>JavaScript</span>
+							</div>
+						</div>
+	
+						<!-- Layer 2: Translation Layer -->
+						<div style="background: #1a1a2e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2980b9;">
+							<p style="margin: 0 0 0.5rem 0;">Translation & Compilation</p>
+							<div style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around; flex-wrap: wrap;">
+								<span>Compilers (TypeScript)</span>
+								<span>Bundlers (Webpack/Vite)</span>
+								<span>Polyfills</span>
+							</div>
+						</div>
+	
+						<!-- Layer 3: Framework Layer -->
+						<div style="background: #1a1a2e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #8e44ad;">
+							<p style="margin: 0 0 0.5rem 0;">Framework & Styling</p>
+							<div style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around;">
+								<span>React</span>
+								<span>Tailwind CSS</span>
+							</div>
+						</div>
+	
+						<!-- Layer 4: Application Layer -->
+						<div style="background: #1a1a2e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #e74c3c;">
+							<p style="margin: 0 0 0.5rem 0;">Application & Components</p>
+							<div style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around;">
+								<span>Next.js</span>
+								<span>UI Libraries (shadcn/ui)</span>
+							</div>
+						</div>
 					</div>
-					<!-- Divider -->
-					<div style="width: 2px; height: 320px; background: #ccc; margin: 0 1rem; align-self: stretch;"></div>
-					<div style="text-align: center;">
-						<a href="https://www.totaltypescript.com/books/total-typescript-essentials">
-							<img height="300px" src="./img/total-ts.png" alt="Total typescript">
-						</a>
-						<h6>Total Typescript Course</h6>
-					</div>
-				</div>
+					<aside class="notes">
+						**Layer 1 - Core**: What the browser actually understands
+						**Layer 2 - Translation**: Tools that transform modern code into browser-compatible code
+						**Layer 3 - Framework**: High-level abstractions for building UIs
+						**Layer 4 - Application**: Meta-frameworks and pre-built components
+	
+						Each layer builds on the previous one, adding abstraction but also complexity
+					</aside>
+				</section>
+			</section>
+
+
+			<!-- React -->
+			<section>
+				<section>
+					<h2>React</h2>
+					<h3>Things You Should Know</h3>
+				</section>
+
+				<section>
+					<h4>Components & JSX</h4>
+					<p>Building blocks of React applications</p>
+					<aside class="notes">
+						- Functional components
+						- JSX syntax (HTML-like in JavaScript)
+						- Props for passing data
+						- Component composition
+					</aside>
+				</section>
+
+				<section>
+					<h4>State & Reactivity</h4>
+					<p>UI reacts to state changes</p>
+					<aside class="notes">
+						- useState hook
+						- State updates trigger re-renders
+						- Declarative UI based on state
+						- Event handlers and user interaction
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>React</h2>
+					<h3>Things You Might Not Know</h3>
+				</section>
+
+				<section>
+					<h4>Rendering & Lifecycle</h4>
+					<p>How React updates the DOM</p>
+					<aside class="notes">
+						- Virtual DOM and reconciliation
+						- Component mount, update, unmount
+						- Render phase vs commit phase
+						- When components re-render
+						- React Fiber architecture
+					</aside>
+				</section>
+
+				<section>
+					<h4>Performance Optimization</h4>
+					<p>Preventing unnecessary re-renders</p>
+					<aside class="notes">
+						- React.memo: memoize components
+						- useMemo: memoize expensive calculations
+						- useCallback: memoize functions
+						- When to use each (don't overuse!)
+						- Profiler and DevTools
+					</aside>
+				</section>
+
+				<section>
+					<h4>State in Large Apps</h4>
+					<p>Managing complexity at scale</p>
+					<aside class="notes">
+						- Context API for shared state
+						- Component composition patterns
+						- State management libraries: Redux, Zustand, Jotai
+						- Server state: TanStack Query, SWR
+						- Prop drilling vs lifting state up
+					</aside>
+				</section>
+
+				<section>
+					<h4>useEffect</h4>
+					<p>Handling side effects properly</p>
+					<aside class="notes">
+						- Data fetching, subscriptions, manual DOM manipulation
+						- Dependency array gotchas
+						- Cleanup functions
+						- Common mistakes: infinite loops, missing dependencies
+						- When NOT to use useEffect
+					</aside>
+				</section>
+
+				<section>
+					<h4>useRef</h4>
+					<p>Values outside the reactivity model</p>
+					<aside class="notes">
+						- Accessing DOM elements directly
+						- Storing mutable values that don't trigger re-renders
+						- Previous values, timers, intervals
+						- Difference from state
+						- Forward refs for component libraries
+					</aside>
+				</section>
+			</section>
+
+			<!-- Next.js -->
+			<section>
+				<section>
+					<h2>Next.js</h2>
+					<p>React meta-framework</p>
+				</section>
+				<section>
+					<h3>Server-Side Rendering</h3>
+					<p>Framework built on React</p>
+					<aside class="notes">
+						- SSR (Server-Side Rendering)
+						- SSG (Static Site Generation)
+						- ISR (Incremental Static Regeneration)
+						- Client-side rendering when needed
+					</aside>
+				</section>
+
+				<section>
+					<h4>Preconfigured Routing</h4>
+					<p>File-based routing system</p>
+					<aside class="notes">
+						- Pages directory or App Router
+						- Dynamic routes with brackets [id]
+						- Nested routes and layouts
+						- No need for React Router
+					</aside>
+				</section>
+
+				<section>
+					<h4>API Endpoints</h4>
+					<p>Light backend functionality</p>
+					<aside class="notes">
+						- API routes in /pages/api or /app/api
+						- Serverless functions
+						- Database queries, authentication
+						- Proxy for third-party APIs
+					</aside>
+				</section>
+
+				<section>
+					<h4>Optimization</h4>
+					<p>Built-in performance features</p>
+					<aside class="notes">
+						- Automatic code splitting
+						- Image optimization with next/image
+						- Font optimization
+						- Script optimization
+						- Automatic static optimization
+					</aside>
+				</section>
+
+				<section>
+					<h4>Extra Fullstack Features</h4>
+					<p>Beyond just rendering</p>
+					<aside class="notes">
+						- Middleware for request handling
+						- Server components (App Router)
+						- Server actions for mutations
+						- Environment variables
+						- TypeScript support out of the box
+					</aside>
+				</section>
+			</section>
+
+			<!-- Tailwind -->
+			<section>
+				<section>
+					<h2>Tailwind CSS</h2>
+					<p>Utility-first CSS framework</p>
+				</section>
+				<section>
+					<h3>Projects with Lots of CSS</h3>
+					<p>Traditional approach</p>
+					<aside class="notes">
+						- Separate CSS files
+						- Class naming conventions (BEM, etc.)
+						- CSS specificity battles
+						- Unused CSS piling up
+						- Context switching between files
+					</aside>
+				</section>
+
+				<section>
+					<h3>Projects with Tailwind</h3>
+					<p>Utility-first approach</p>
+					<aside class="notes">
+						- Styles in JSX/HTML
+						- No naming fatigue
+						- Consistent design system
+						- Purge unused styles automatically
+						- Everything in one place
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h3>How It Works</h3>
+				</section>
+
+				<section>
+					<h4>Utility Classes</h4>
+					<p>Small, single-purpose classes</p>
+					<aside class="notes">
+						- Each class does one thing: p-4, text-center, bg-blue-500
+						- Compose utilities to build designs
+						- Generated at build time
+						- PurgeCSS removes unused classes
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h3>How to Use It Well</h3>
+				</section>
+
+				<section>
+					<h4>Keep Components Small</h4>
+					<p>Avoid utility class overload</p>
+					<aside class="notes">
+						- If drowning in utility classes, component is too complex
+						- Break down into smaller components
+						- Extract repeated patterns
+						- Component composition over long class strings
+					</aside>
+				</section>
+
+				<section>
+					<h4>Still Use CSS When Needed</h4>
+					<p>Tailwind isn't everything</p>
+					<aside class="notes">
+						- Complex animations
+						- One-off custom styles
+						- Third-party component overrides
+						- @apply directive for repeated patterns
+						- Custom CSS modules alongside Tailwind
+					</aside>
+				</section>
+
+				<section>
+					<h4>Use Config Variables</h4>
+					<p>Avoid custom values</p>
+					<aside class="notes">
+						- Define in tailwind.config.js
+						- Use theme values, not arbitrary: bg-blue-500 not bg-[#3b82f6]
+						- Maintains consistency
+						- Easier to update globally
+						- Type-safe with TypeScript
+					</aside>
+				</section>
+
+				<section>
+					<h4>Mobile First</h4>
+					<p>Responsive design approach</p>
+					<aside class="notes">
+						- Base styles are mobile
+						- Add breakpoints for larger screens: md:, lg:, xl:
+						- Example: text-sm md:text-base lg:text-lg
+						- Easier to enhance than reduce
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h3>Good Config Design</h3>
+				</section>
+
+				<section>
+					<h4>Fundamental Values</h4>
+					<p>Core design tokens</p>
+					<aside class="notes">
+						- Colors: primary, secondary, accent shades
+						- Spacing scale: consistent rem values
+						- Font sizes and weights
+						- Border radius values
+						- Shadow definitions
+					</aside>
+				</section>
+
+				<section>
+					<h4>Semantic Variables</h4>
+					<p>Purpose-based naming</p>
+					<aside class="notes">
+						- text-error, text-success, text-warning
+						- bg-card, bg-modal, bg-sidebar
+						- text-muted, text-primary
+						- border-default, border-focus
+						- Maps to fundamental values
+						- Easier to theme/rebrand
+					</aside>
+				</section>
 			</section>
 		</div>
 	</div>
@@ -456,7 +593,8 @@ function submit(data: unknown) {
 			controls: true,
 			controlsTutorial: false,
 			progress: false,
-			transition: 'fade',
+			transition: 'slide',
+			navigationMode: 'default',
 		});
 	</script>
 </body>
