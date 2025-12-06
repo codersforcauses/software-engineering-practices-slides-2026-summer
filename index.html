@@ -206,8 +206,8 @@
 				</section>
 
 				<section>
-					<h4>Dependency Hell</h4>
-					<p>Every solution brings more dependencies</p>
+					<h4>So Many Options</h4>
+					<p>So many dependencies</p>
 					<aside class="notes">
 						- node_modules is massive
 						- Transitive dependencies you never asked for
@@ -306,6 +306,26 @@
 					</aside>
 				</section>
 
+				<section data-auto-animate>
+					<pre data-id="component-code"><code class="javascript" data-trim data-line-numbers>
+function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<pre data-id="component-code"><code class="javascript" data-trim data-line-numbers="1-3|5-7">
+function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+}
+
+function App() {
+  return &lt;Welcome name="World" /&gt;;
+}
+					</code></pre>
+				</section>
+
 				<section>
 					<h4>State & Reactivity</h4>
 					<p>UI reacts to state changes</p>
@@ -315,6 +335,37 @@
 						- Declarative UI based on state
 						- Event handlers and user interaction
 					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<pre data-id="state-code"><code class="javascript" data-trim data-line-numbers>
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<pre data-id="state-code"><code class="javascript" data-trim data-line-numbers="6-8">
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Increment
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+					</code></pre>
 				</section>
 			</section>
 
@@ -348,6 +399,81 @@
 					</aside>
 				</section>
 
+				<section data-auto-animate>
+					<h5>React.memo</h5>
+					<pre data-id="memo-code"><code class="javascript" data-trim data-line-numbers>
+const ExpensiveComponent = ({ data }) =&gt; {
+  // Expensive rendering logic
+  return &lt;div&gt;{data}&lt;/div&gt;;
+};
+					</code></pre>
+					<aside class="notes">
+						- Normally components rerender when their parents rerender
+						- React.memo prevents re-renders when props haven't changed (shallow comparison)
+						- Useful for expensive components that receive the same props frequently
+						- Best use cases: large lists, complex visualizations, components that render often
+						- Can provide custom comparison function as second argument if needed
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h5>React.memo</h5>
+					<pre data-id="memo-code"><code class="javascript" data-trim data-line-numbers="6">
+const ExpensiveComponent = ({ data }) =&gt; {
+  // Expensive rendering logic
+  return &lt;div&gt;{data}&lt;/div&gt;;
+};
+
+export default React.memo(ExpensiveComponent);
+					</code></pre>
+					<aside class="notes">
+						- Normally components rerender when their parents rerender
+						- React.memo prevents re-renders when props haven't changed (shallow comparison)
+						- Useful for expensive components that receive the same props frequently
+						- Best use cases: large lists, complex visualizations, components that render often
+						- Can provide custom comparison function as second argument if needed
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h5>useMemo</h5>
+					<pre data-id="usememo-code"><code class="javascript" data-trim data-line-numbers>
+function FilteredList({ items, filter }) {
+  const filteredItems = items.filter(item =&gt;
+    item.name.includes(filter)
+  );
+
+  return &lt;ul&gt;{filteredItems.map(...)}&lt;/ul&gt;;
+}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h5>useMemo</h5>
+					<pre data-id="usememo-code"><code class="javascript" data-trim data-line-numbers="2-4">
+function FilteredList({ items, filter }) {
+  const filteredItems = useMemo(() =&gt;
+    items.filter(item =&gt; item.name.includes(filter)),
+    [items, filter]
+  );
+
+  return &lt;ul&gt;{filteredItems.map(...)}&lt;/ul&gt;;
+}
+					</code></pre>
+				</section>
+
+				<section>
+					<h4>Premature Optimisation</h4>
+					<p>Optimise when it's a problem</p>
+					<aside class="notes">
+						- React is already fast - don't optimise until you have a problem
+						- Use React DevTools Profiler to find actual bottlenecks
+						- Premature optimization adds complexity and makes code harder to read
+						- Focus on good component structure and composition first
+						- Only add memo/useMemo/useCallback when you identify specific performance issues
+					</aside>
+				</section>
+
 				<section>
 					<h4>State in Large Apps</h4>
 					<p>Managing complexity at scale</p>
@@ -372,6 +498,45 @@
 					</aside>
 				</section>
 
+				<section data-auto-animate>
+					<pre data-id="effect-code"><code class="javascript" data-trim data-line-numbers>
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+
+  return &lt;div&gt;{user?.name}&lt;/div&gt;;
+}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<pre data-id="effect-code"><code class="javascript" data-trim data-line-numbers="4-8">
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() =&gt; {
+    fetch(`/api/users/${userId}`)
+      .then(res =&gt; res.json())
+      .then(data =&gt; setUser(data));
+  }, [userId]);
+
+  return &lt;div&gt;{user?.name}&lt;/div&gt;;
+}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h5>Cleanup Function</h5>
+					<pre data-id="cleanup-code"><code class="javascript" data-trim data-line-numbers>
+useEffect(() =&gt; {
+  const subscription = api.subscribe(userId);
+
+  return () =&gt; {
+    subscription.unsubscribe();
+  };
+}, [userId]);
+					</code></pre>
+				</section>
+
 				<section>
 					<h4>useRef</h4>
 					<p>Values outside the reactivity model</p>
@@ -380,7 +545,69 @@
 						- Storing mutable values that don't trigger re-renders
 						- Previous values, timers, intervals
 						- Difference from state
-						- Forward refs for component libraries
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h5>DOM Reference</h5>
+					<pre data-id="ref-code"><code class="javascript" data-trim data-line-numbers>
+function TextInput() {
+  const inputRef = useRef(null);
+
+  return &lt;input ref={inputRef} /&gt;;
+}
+					</code></pre>
+				</section>
+
+				<section data-auto-animate>
+					<h5>DOM Reference</h5>
+					<pre data-id="ref-code"><code class="javascript" data-trim data-line-numbers="5-7">
+function TextInput() {
+  const inputRef = useRef(null);
+
+  const focusInput = () =&gt; {
+    inputRef.current.focus();
+  };
+
+  return (
+    &lt;&gt;
+      &lt;input ref={inputRef} /&gt;
+      &lt;button onClick={focusInput}&gt;Focus&lt;/button&gt;
+    &lt;/&gt;
+  );
+}
+					</code></pre>
+					<aside class="notes">
+						- Regular variables get reset on every re-render (component function runs again)
+						- useRef creates a persistent container that survives re-renders
+						- Unlike state, updating ref.current doesn't trigger re-renders
+						- React's ref attribute automatically sets ref.current to the DOM element
+						- Perfect for: focus(), scroll(), getBoundingClientRect(), animations
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h5>Mutable Values</h5>
+					<pre data-id="ref-mutable"><code class="javascript" data-trim data-line-numbers>
+function Timer() {
+  const intervalRef = useRef(null);
+
+  useEffect(() =&gt; {
+    intervalRef.current = setInterval(() =&gt; {
+      console.log('tick');
+    }, 1000);
+
+    return () =&gt; clearInterval(intervalRef.current);
+  }, []);
+}
+					</code></pre>
+					<aside class="notes">
+						- useRef stores mutable values that persist across renders
+						- Unlike state, updating a ref doesn't trigger a re-render
+						- Perfect for storing timers, intervals, previous values
+						- Common use cases: tracking previous props/state, storing WebSocket connections
+						- Refs are mutable - you can change .current directly
+						- Don't read or write refs during rendering - use them in effects or event handlers
 					</aside>
 				</section>
 			</section>
