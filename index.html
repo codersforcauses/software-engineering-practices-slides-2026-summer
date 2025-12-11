@@ -310,6 +310,7 @@
 			<section>
 				<section>
 					<h2>The Stack</h2>
+					<small>What you'll see in a repo</small>
 				</section>
 				<section>
 					<div
@@ -319,7 +320,6 @@
 							<p style="margin: 0 0 0.5rem 0;">Core Technologies</p>
 							<div
 								style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around;">
-								<span>Browser</span>
 								<span>HTML</span>
 								<span>CSS</span>
 								<span>JavaScript</span>
@@ -332,8 +332,8 @@
 							<div
 								style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around; flex-wrap: wrap;">
 								<span>Compilers (TypeScript)</span>
-								<span>Bundlers (Webpack/Vite)</span>
-								<span>Polyfills</span>
+								<span>Bundlers <small>(Webpack)</small></span>
+								<span>Tools and config (tsconfig, PostCSS)</span>
 							</div>
 						</div>
 
@@ -353,10 +353,21 @@
 							<div
 								style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around;">
 								<span>Next.js</span>
-								<span>UI Libraries (shadcn/ui)</span>
+								<span>UI Libraries <small>(shadcn/ui)</small></span>
+							</div>
+						</div>
+						<div style="background: #1a1a2e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #d5cc2f;">
+							<p style="margin: 0 0 0.5rem 0;">Developer Experience and Deployment</p>
+							<div
+								style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around;">
+								<span>Types and annotations <small>(TypeScript)</small></span>
+								<span>Documentation <small>(readme.md)</small></span>
+								<span>Linting and errors <small>(ESLint, Prettier)</small></span>
+								<span>Scripts and automation config <small>(package.lock, precommit hooks, Github Actions, Docker)</small></span>
 							</div>
 						</div>
 					</div>
+
 					<aside class="notes">
 						**Layer 1 - Core**: What the browser actually understands
 						**Layer 2 - Translation**: Tools that transform modern code into browser-compatible code
@@ -368,6 +379,124 @@
 				</section>
 			</section>
 
+			<!-- The Process -->
+			<section data-visibility="hidden">
+				<section>
+					<h2>The Process</h2>
+					<h3>From code to browser</h3>
+				</section>
+				<section>
+					<div style="display: flex; flex-direction: row; align-items: center; gap: 0.5rem; font-size: 0.45em; max-width: 1000px; margin: 0 auto; justify-content: center;">
+						<!-- Step 1: Source Code -->
+						<div style="background: #1a1a2e; padding: 1rem; border-radius: 8px; border-top: 4px solid #e74c3c; min-width: 140px; text-align: center;">
+							<p style="margin: 0 0 0.5rem 0; font-size: 0.9em;">Source Code</p>
+							<div style="font-size: 1.1em; font-weight: bold;">
+								<div>Next.js</div>
+								<div>React + TSX</div>
+								<div>Tailwind</div>
+							</div>
+						</div>
+
+						<!-- Arrow -->
+						<div style="font-size: 2em; color: #666;">→</div>
+
+						<!-- Step 2: Compilation -->
+						<div style="background: #1a1a2e; padding: 1rem; border-radius: 8px; border-top: 4px solid #8e44ad; min-width: 140px; text-align: center;">
+							<p style="margin: 0 0 0.5rem 0; font-size: 0.9em;">Compilation</p>
+							<div style="font-size: 1.1em; font-weight: bold;">
+								<div>TypeScript → JavaScript</div>
+								<div style="margin-top: 0.3rem;">Tailwind → CSS</div>
+							</div>
+						</div>
+
+						<!-- Arrow -->
+						<div style="font-size: 2em; color: #666;">→</div>
+
+						<!-- Step 3: Bundling -->
+						<div style="background: #1a1a2e; padding: 1rem; border-radius: 8px; border-top: 4px solid #2980b9; min-width: 140px; text-align: center;">
+							<p style="margin: 0 0 0.5rem 0; font-size: 0.9em;">Bundling</p>
+							<div style="font-size: 1.1em; font-weight: bold;">
+								<div>Webpack/Vite</div>
+								<div style="margin-top: 0.3rem;">Minification</div>
+								<div>Code splitting</div>
+							</div>
+						</div>
+
+						<!-- Arrow -->
+						<div style="font-size: 2em; color: #666;">→</div>
+
+						<!-- Step 4: Build Output -->
+						<div style="background: #1a1a2e; padding: 1rem; border-radius: 8px; border-top: 4px solid #16a085; min-width: 140px; text-align: center;">
+							<p style="margin: 0 0 0.5rem 0; font-size: 0.9em;">Build Output</p>
+							<div style="font-size: 1.1em; font-weight: bold;">
+								<div>HTML</div>
+								<div>JS bundles</div>
+								<div>CSS files</div>
+								<div>Assets</div>
+							</div>
+						</div>
+
+						<!-- Arrow -->
+						<div style="font-size: 2em; color: #666;">→</div>
+
+						<!-- Step 5: Deployment -->
+						<div style="background: #1a1a2e; padding: 1rem; border-radius: 8px; border-top: 4px solid #d5cc2f; min-width: 140px; text-align: center;">
+							<p style="margin: 0 0 0.5rem 0; font-size: 0.9em;">Deployment</p>
+							<div style="font-size: 1.1em; font-weight: bold;">
+								<div>Vercel/Netlify</div>
+								<div>CDN</div>
+								<div>Static hosting</div>
+							</div>
+						</div>
+
+						<!-- Arrow -->
+						<div style="font-size: 2em; color: #666;">→</div>
+
+						<!-- Step 6: Browser -->
+						<div style="background: #1a1a2e; padding: 1rem; border-radius: 8px; border-top: 4px solid #95a5a6; min-width: 140px; text-align: center;">
+							<p style="margin: 0 0 0.5rem 0; font-size: 0.9em;">Browser</p>
+							<div style="font-size: 1.1em; font-weight: bold;">
+								<div>Download</div>
+								<div>Parse</div>
+								<div>Execute</div>
+								<div>Render</div>
+							</div>
+						</div>
+					</div>
+
+					<aside class="notes">
+						**Source Code**: Write in modern frameworks and languages (Next.js, React, TypeScript, Tailwind)
+
+						**Compilation**: Transform modern syntax into browser-compatible code
+						- TypeScript compiles to JavaScript
+						- Tailwind processes utility classes into CSS
+						- React/JSX transforms into vanilla JavaScript
+
+						**Bundling**: Optimize and package for production
+						- Webpack or Vite combines modules
+						- Minifies code to reduce file size
+						- Code splitting for lazy loading
+						- Tree shaking to remove unused code
+
+						**Build Output**: Final production-ready files
+						- Static HTML files
+						- JavaScript bundles (main, vendor, chunks)
+						- Optimized CSS
+						- Compressed assets (images, fonts)
+
+						**Deployment**: Host on CDN/static hosting
+						- Platforms like Vercel, Netlify automatically deploy
+						- Files served from CDN for global distribution
+						- Edge caching for performance
+
+						**Browser**: End user receives and runs the app
+						- Downloads HTML, then CSS and JS
+						- Parses and constructs DOM
+						- Executes JavaScript
+						- Renders the interface
+					</aside>
+				</section>
+			</section>
 
 			<!-- React -->
 			<section>
@@ -385,14 +514,6 @@
 						- Props for passing data
 						- Component composition
 					</aside>
-				</section>
-
-				<section data-auto-animate>
-					<pre data-id="component-code"><code class="javascript" data-trim data-line-numbers>
-function Welcome(props) {
-  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
-}
-					</code></pre>
 				</section>
 
 				<section data-auto-animate>
