@@ -18,6 +18,11 @@
 	<link
 		href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;700&display=swap"
 		rel="stylesheet">
+	<style>
+		.slides ul {
+			min-width: 600px;
+		}
+	</style>
 </head>
 
 <body>
@@ -27,79 +32,105 @@
 				<h1>Advanced Frontend Development</h1>
 			</section>
 
-			<section>
-				<h2>Frontend Web Development is Hard</h2>
-			</section>
-
-			<!-- Complex Stack -->
+			<!-- Frontend Web Development is Hard -->
 			<section>
 				<section>
-					<h3>Complex Stack</h3>
+					<h2>Frontend Web Development is Hard</h2>
 				</section>
 
-				<section>
+				<!-- Complex Stack -->
+				<section data-auto-animate>
+					<h3 data-id="stack-heading">Complex Stack</h3>
+				</section>
+
+				<section data-auto-animate>
+					<h3 data-id="stack-heading" style="font-size: 0.5em;">Complex Stack</h3>
 					<h4>Browser Technologies</h4>
-					<p>HTML, JavaScript, CSS</p>
+					<ul>
+						<li>HTML</li>
+						<li>JavaScript</li>
+						<li>CSS</li>
+					</ul>
 					<aside class="notes">
 						- HTML5: semantic elements, Web Components, Canvas, SVG
-						- JavaScript: ES6+, TypeScript, async/await, Promises, modules
+						- JavaScript: ES6+, async/await, Promises, modules
 						- CSS: Flexbox, Grid, CSS Variables, animations, CSS-in-JS
 					</aside>
 				</section>
 
-				<section>
+				<section data-auto-animate>
+					<h3 data-id="stack-heading" style="font-size: 0.5em;">Complex Stack</h3>
 					<h4>Ecosystem</h4>
-					<p>JS frameworks, component libraries</p>
+					<ul>
+						<li>Many Frameworks</li>
+						<li>Many Libraries</li>
+					</ul>
 					<aside class="notes">
+						- TypeScript
 						- Frameworks: React, Vue, Angular, Svelte, Solid
 						- Meta-frameworks: Next.js, Remix, Astro
-						- Component Libraries: Material-UI, Chakra UI, shadcn/ui
-						- State Management: Context API, Redux
+						- Packages and libraries: React Router, TanStack, Redux
+						- Style and UI: Tailwind, Material-UI, shadcn/ui
 					</aside>
 				</section>
 
-				<section>
+				<section data-auto-animate>
+					<h3 data-id="stack-heading" style="font-size: 0.5em;">Complex Stack</h3>
 					<h4>Build Tools</h4>
-					<p>Compilers, bundlers, polyfills</p>
+					<ul>
+						<li>Tools</li>
+						<li>Compilers</li>
+						<li>Bundlers</li>
+					</ul>
 					<aside class="notes">
-						- Bundlers: Webpack, Vite, Rollup, Parcel, esbuild, Turbopack
+						- Tools: PostCSS
 						- Compilers: Babel, SWC, TypeScript compiler
-						- Polyfills (no longer used so much): core-js, regenerator-runtime
+						- Bundlers: Webpack, Vite, Rollup, Parcel, esbuild, Turbopack
 					</aside>
 				</section>
 
-				<section>
+				<section data-auto-animate>
+					<h3 data-id="stack-heading" style="font-size: 0.5em;">Complex Stack</h3>
 					<h4>Development Environment</h4>
-					<p>Package managers, linters, IDEs</p>
+					<ul>
+						<li>Package managers</li>
+						<li>Linters</li>
+						<li>IDEs</li>
+					</ul>
 					<aside class="notes">
 						- Package Managers: npm, yarn, pnpm, bun
 						- Linters: ESLint, Prettier, Stylelint
 						- Testing: Jest, Vitest, Testing Library, Playwright, Cypress
-						- DevTools: React DevTools, browser DevTools
+						- Profiling and debugging: Devtools, Performance profiler, Lighthouse
 					</aside>
 				</section>
-			</section>
 
-			<!-- Complex Apps -->
-			<section>
-				<section>
-					<h3>Webapps Are Complicated</h3>
+				<!-- Complex Requirements -->
+				<section data-auto-animate>
+					<h3 data-id="requirements-heading">Complex Requirements</h3>
 				</section>
 
-				<section>
-					<h4>We've Pushed Browsers Too Far</h4>
-					<p>Functionality once reserved for servers now lives in the frontend</p>
+				<section data-auto-animate>
+					<h3 data-id="requirements-heading" style="font-size: 0.5em;">Complex Requirements</h3>
+					<h4>Complex functionality</h4>
+					<ul>
+						<li>Deep Interactivity</li>
+						<li>Dense Information Layouts</li>
+						<li>Games and 3D rendering</li>
+						<li>Maps and Data Visualisation</li>
+					</ul>
 					<aside class="notes">
-						- Client-side routing
-						- Data fetching/caching
-						- Form validation
-						- Authentication flows, real-time updates, offline support
+						- Complex animations and instant feedback
+						- Complex designs and large amounts of information
+						- Graphics
+						- Fully custom experiences with canvas (no traditional document structure)
 					</aside>
 				</section>
 
-				<section>
-					<h4>Reactive UI</h4>
-					<p>Responds to asynchronous, dynamic data</p>
+				<section data-auto-animate>
+					<h3 data-id="requirements-heading" style="font-size: 0.5em;">Complex Requirements</h3>
+					<h4>Declaritive Reactivity</h4>
+					<p>Responding automatically to changes in data</p>
 					<aside class="notes">
 						- Managing async state: loading, error, success
 						- Optimistic updates, race conditions, virtual scrolling
@@ -108,27 +139,51 @@
 					</aside>
 				</section>
 
-				<section>
-					<h4>Complex Functionality</h4>
-					<p>Feature expectations are high</p>
+				<section data-auto-animate>
+					<h3 data-id="requirements-heading" style="font-size: 0.5em;">Complex Requirements</h3>
+					<h4>We've pushed browsers too far</h4>
+					<ul>
+						<li>Server</li>
+						<li>Desktop</li>
+						<li>Native</li>
+						<li>Browser APIs</li>
+					</ul>
 					<aside class="notes">
-						- Rich text and design tools (replacing desktop apps)
-						- Drag and drop, file uploads with progress
-						- Document viewing and generation, data visualization
-						- Keyboard shortcuts, accessibility, undo/redo
-						- Auto-save, i18n, dark mode, responsive design
-						- PWA capabilities
+						Server features now in browser:
+						- Client-side routing and navigation
+						- State management and caching
+						- Real-time data synchronization
+						- Authentication and session handling
+						- Form validation and data processing
+
+						Desktop app features now in browser:
+						- Image/video editing (Photopea, Canva, CapCut)
+						- Document editing (Google Docs, Notion, Figma)
+						- File management and drag-and-drop uploads
+						- Offline functionality and local storage
+
+						Native app features now in browser:
+						- PWA
+						- Push notifications
+						- Geolocation and device sensors
+						- Camera and microphone access
+						- Background sync and service workers
+
+						Advanced Browser APIs:
+						- WebGL for 3D graphics
+						- WebAssembly for performance
+						- WebRTC for peer-to-peer communication
+						- Web Workers for multi-threading
 					</aside>
 				</section>
-			</section>
 
-			<!-- Performance & Compatibility -->
-			<section>
-				<section>
-					<h3>Performance & Compatibility</h3>
+				<!-- Performance & Accessibility -->
+				<section data-auto-animate>
+					<h3 data-id="perf-heading">Performance &amp; Accessibility</h3>
 				</section>
 
-				<section>
+				<section data-auto-animate>
+					<h3 data-id="perf-heading" style="font-size: 0.5em;">Performance &amp; Accessibility</h3>
 					<h4>Any device</h4>
 					<p>Features work on everything</p>
 					<aside class="notes">
@@ -139,7 +194,8 @@
 					</aside>
 				</section>
 
-				<section>
+				<section data-auto-animate>
+					<h3 data-id="perf-heading" style="font-size: 0.5em;">Performance &amp; Accessibility</h3>
 					<h4>Any connection</h4>
 					<p>Page and content loads quickly</p>
 					<aside class="notes">
@@ -150,20 +206,33 @@
 						- Tools: Lighthouse, WebPageTest, bundle analyzers
 					</aside>
 				</section>
+
+				<section data-auto-animate>
+					<h3 data-id="perf-heading" style="font-size: 0.5em;">Performance &amp; Accessibility</h3>
+					<h4>Any user</h4>
+					<p>Accessible to everyone</p>
+					<aside class="notes">
+						- Screen readers, keyboard navigation
+						- ARIA labels, semantic HTML
+						- Color contrast, focus indicators
+						- WCAG compliance
+					</aside>
+				</section>
 			</section>
 
-			<!-- Learning is Hard -->
-			<section>
-				<h2>Learning Frontend Web Development is Hard</h2>
-			</section>
-
-			<!-- Missing Fundamentals -->
+			<!-- Learning Frontend Web Development is Hard -->
 			<section>
 				<section>
-					<h3>Missing Fundamentals</h3>
+					<h2>Learning Frontend Web Development is Hard</h2>
 				</section>
 
-				<section>
+				<!-- Missing Fundamentals -->
+				<section data-auto-animate>
+					<h3 data-id="fundamentals-heading">Missing Fundamentals</h3>
+				</section>
+
+				<section data-auto-animate>
+					<h3 data-id="fundamentals-heading" style="font-size: 0.5em;">Missing Fundamentals</h3>
 					<h4>Starting Practical, Missing Core</h4>
 					<p>Jump into frameworks without understanding the basics</p>
 					<aside class="notes">
@@ -174,7 +243,8 @@
 					</aside>
 				</section>
 
-				<section>
+				<section data-auto-animate>
+					<h3 data-id="fundamentals-heading" style="font-size: 0.5em;">Missing Fundamentals</h3>
 					<h4>Hard to Differentiate</h4>
 					<p>Understanding how different parts work together</p>
 					<aside class="notes">
@@ -185,15 +255,14 @@
 						- Debugging requires understanding the entire stack
 					</aside>
 				</section>
-			</section>
 
-			<!-- Convoluted History -->
-			<section>
-				<section>
-					<h3>Convoluted History</h3>
+				<!-- Convoluted History -->
+				<section data-auto-animate>
+					<h3 data-id="history-heading">Convoluted History</h3>
 				</section>
 
-				<section>
+				<section data-auto-animate>
+					<h3 data-id="history-heading" style="font-size: 0.5em;">Convoluted History</h3>
 					<h4>Sediment of Technologies</h4>
 					<p>Layers upon layers of solutions</p>
 					<aside class="notes">
@@ -205,7 +274,8 @@
 					</aside>
 				</section>
 
-				<section>
+				<section data-auto-animate>
+					<h3 data-id="history-heading" style="font-size: 0.5em;">Convoluted History</h3>
 					<h4>So Many Options</h4>
 					<p>So many dependencies</p>
 					<aside class="notes">
@@ -216,18 +286,24 @@
 						- "Left-pad" problem and supply chain risks
 					</aside>
 				</section>
-			</section>
 
-			<section>
-				<h3>You Have to Learn JavaScript</h3>
-				<aside class="notes">
-					- Weak typing, type coercion
-					- "this" binding confusion
-					- Prototypal inheritance
-					- Async programming models
-					- Different versions: ES5, ES6+, TypeScript
-					- Browser vs Node.js differences
-				</aside>
+				<!-- You Have to Learn JavaScript -->
+				<section data-auto-animate>
+					<h3 data-id="js-heading">You Have to Learn JavaScript</h3>
+					<aside class="notes">
+						- Weak typing, type coercion
+						- "this" binding confusion
+						- Prototypal inheritance
+						- Async programming models
+						- Different versions: ES5, ES6+, TypeScript
+						- Browser vs Node.js differences
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3 data-id="js-heading" style="font-size: 0.5em;">You Have to Learn JavaScript</h3>
+					<p>jk I love Javascript</p>
+				</section>
 			</section>
 
 			<!-- The Stack -->
@@ -237,7 +313,7 @@
 				</section>
 				<section>
 					<div
-						style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.6em; max-width: 800px; margin: 0 auto;">
+						style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.5em; max-width: 800px; margin: 0 auto;">
 						<!-- Layer 1: Core Technologies -->
 						<div style="background: #1a1a2e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a085;">
 							<p style="margin: 0 0 0.5rem 0;">Core Technologies</p>
