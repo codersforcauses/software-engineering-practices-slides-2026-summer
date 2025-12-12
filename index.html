@@ -689,57 +689,6 @@ function FilteredList({ items, filter }) {
 				</section>
 
 				<section>
-					<h4>useEffect</h4>
-					<p>Handling side effects properly</p>
-					<aside class="notes">
-						- Data fetching, subscriptions, manual DOM manipulation
-						- Dependency array gotchas
-						- Cleanup functions
-						- Common mistakes: infinite loops, missing dependencies
-						- When NOT to use useEffect
-					</aside>
-				</section>
-
-				<section data-auto-animate>
-					<pre data-id="effect-code"><code class="javascript" data-trim data-line-numbers>
-function UserProfile({ userId }) {
-  const [user, setUser] = useState(null);
-
-  return &lt;div&gt;{user?.name}&lt;/div&gt;;
-}
-					</code></pre>
-				</section>
-
-				<section data-auto-animate>
-					<pre data-id="effect-code"><code class="javascript" data-trim data-line-numbers="4-8">
-function UserProfile({ userId }) {
-  const [user, setUser] = useState(null);
-
-  useEffect(() =&gt; {
-    fetch(`/api/users/${userId}`)
-      .then(res =&gt; res.json())
-      .then(data =&gt; setUser(data));
-  }, [userId]);
-
-  return &lt;div&gt;{user?.name}&lt;/div&gt;;
-}
-					</code></pre>
-				</section>
-
-				<section data-auto-animate>
-					<h5>Cleanup Function</h5>
-					<pre data-id="cleanup-code"><code class="javascript" data-trim data-line-numbers>
-useEffect(() =&gt; {
-  const subscription = api.subscribe(userId);
-
-  return () =&gt; {
-    subscription.unsubscribe();
-  };
-}, [userId]);
-					</code></pre>
-				</section>
-
-				<section>
 					<h4>useRef</h4>
 					<p>Values outside the reactivity model</p>
 					<aside class="notes">
@@ -884,7 +833,7 @@ function Timer() {
 					<h2>Tailwind CSS</h2>
 					<p>Utility-first CSS framework</p>
 				</section>
-				<section>
+				<section data-auto-animate>
 					<h3>Projects with Lots of CSS</h3>
 					<p>Traditional approach</p>
 					<aside class="notes">
@@ -893,6 +842,87 @@ function Timer() {
 						- CSS specificity battles
 						- Unused CSS piling up
 						- Context switching between files
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3 style="font-size: 0.5em;">Projects with Lots of CSS</h3>
+					<pre><code class="language-css" data-trim data-noescape>
+.dog-gallery {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.dog-card {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.dog-card:hover {
+  transform: translateY(-4px);
+}
+
+.dog-card__image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.dog-card__content {
+  padding: 1rem;
+}
+
+.dog-card__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+}
+
+.dog-card__breed {
+  color: #718096;
+  font-size: 0.875rem;
+}
+					</code></pre>
+					<aside class="notes">
+						- Traditional CSS with BEM naming
+						- Separate stylesheet needed
+						- Class names must be unique across project
+						- Hard to know if styles are actually used
+						- Need to context switch between CSS and HTML
+					</aside>
+				</section>
+
+				<section data-auto-animate>
+					<h3 style="font-size: 0.5em;">Projects with Lots of CSS</h3>
+					<pre><code class="language-html" data-trim data-noescape>
+&lt;div class="dog-gallery"&gt;
+  &lt;div class="dog-card"&gt;
+    &lt;img
+      src="/dog.jpg"
+      class="dog-card__image"
+      alt="Dog"
+    /&gt;
+    &lt;div class="dog-card__content"&gt;
+      &lt;h3 class="dog-card__title"&gt;
+        Good Boy
+      &lt;/h3&gt;
+      &lt;p class="dog-card__breed"&gt;
+        Golden Retriever
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+					</code></pre>
+					<aside class="notes">
+						- HTML references CSS classes
+						- Need to jump between files to understand styles
+						- Class names follow BEM convention
+						- Markup is clean but styles are elsewhere
 					</aside>
 				</section>
 
@@ -905,6 +935,40 @@ function Timer() {
 						- Consistent design system
 						- Purge unused styles automatically
 						- Everything in one place
+					</aside>
+				</section>
+
+				<section>
+					<h3>Tailwind</h3>
+					<pre><code class="language-html" data-trim data-noescape>
+&lt;div class="max-w-screen-xl mx-auto p-8"&gt;
+  &lt;div class="bg-white rounded-lg shadow-md
+              overflow-hidden transition-transform
+              hover:-translate-y-1"&gt;
+    &lt;img
+      src="/dog.jpg"
+      class="w-full h-48 object-cover"
+      alt="Dog"
+    /&gt;
+    &lt;div class="p-4"&gt;
+      &lt;h3 class="text-xl font-semibold
+                 text-gray-900 mb-2"&gt;
+        Good Boy
+      &lt;/h3&gt;
+      &lt;p class="text-gray-600 text-sm"&gt;
+        Golden Retriever
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+					</code></pre>
+					<aside class="notes">
+						- Same result, no separate CSS file
+						- No class naming needed
+						- Can see all styles inline
+						- Unused utilities automatically purged
+						- Responsive modifiers: md:text-2xl, lg:p-8
+						- State modifiers: hover:, focus:, active:
 					</aside>
 				</section>
 			</section>
@@ -922,6 +986,159 @@ function Timer() {
 						- Compose utilities to build designs
 						- Generated at build time
 						- PurgeCSS removes unused classes
+					</aside>
+				</section>
+
+				<section>
+					<h4>CSS Equivalent Classes</h4>
+					<div style="display: flex; gap: 1rem; font-size: 1em; justify-content: center;">
+						<div style="flex: 1; text-align: left;">
+							<p style="font-weight: bold; margin-bottom: 1rem; text-align: center;">Tailwind</p>
+							<pre><code class="language-html" data-trim data-noescape>
+&lt;div class="flex
+            justify-center
+            items-center
+            gap-4"&gt;
+&lt;/div&gt;
+							</code></pre>
+						</div>
+						<div style="flex: 1; text-align: left;">
+							<p style="font-weight: bold; margin-bottom: 1rem; text-align: center;">CSS</p>
+							<pre><code class="language-css" data-trim data-noescape>
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+							</code></pre>
+						</div>
+					</div>
+					<aside class="notes">
+						- Direct CSS property mappings
+						- Each utility class maps to a single CSS property
+						- Spacing scale: 4 = 1rem, 8 = 2rem, etc.
+						- Can compose multiple utilities for complex layouts
+					</aside>
+				</section>
+
+				<section>
+					<h4>CSS Equivalent Classes</h4>
+					<div style="display: flex; gap: 2rem; font-size: 1em; justify-content: center;">
+						<div style="flex: 1; text-align: left;">
+							<p style="font-weight: bold; margin-bottom: 1rem; text-align: center;">Tailwind</p>
+							<pre><code class="language-html" data-trim data-noescape>
+&lt;button class="bg-blue-500
+               text-white
+               px-4
+               py-2
+               rounded"&gt;
+  Click me
+&lt;/button&gt;
+							</code></pre>
+						</div>
+						<div style="flex: 1; text-align: left;">
+							<p style="font-weight: bold; margin-bottom: 1rem; text-align: center;">CSS</p>
+							<pre><code class="language-css" data-trim data-noescape>
+button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+							</code></pre>
+						</div>
+					</div>
+					<aside class="notes">
+						- Color scale: 500 is base, 600 is darker
+						- px-4 = padding-left + padding-right (1rem each)
+						- py-2 = padding-top + padding-bottom (0.5rem each)
+						- Much more concise than equivalent CSS
+					</aside>
+				</section>
+
+				<section>
+					<h4>Interaction</h4>
+					<pre><code class="language-html" data-trim data-noescape data-line-numbers="1-5|7-9|11-16">
+&lt;!-- Hover states --&gt;
+&lt;button class="bg-blue-500 hover:bg-blue-600
+               hover:scale-105 transition"&gt;
+  Click me
+&lt;/button&gt;
+
+&lt;!-- Focus states --&gt;
+&lt;input class="border focus:border-blue-500
+              focus:ring-2 focus:ring-blue-200" /&gt;
+
+&lt;!-- Active & Disabled --&gt;
+&lt;button class="active:scale-95
+               disabled:opacity-50
+               disabled:cursor-not-allowed"&gt;
+  Submit
+&lt;/button&gt;
+					</code></pre>
+					<aside class="notes">
+						- State modifiers prefix utilities: hover:, focus:, active:
+						- Can combine: hover:focus:bg-red-500
+						- Group interactions: group-hover:
+						- Peer interactions: peer-checked:
+						- Transition classes for smooth animations
+					</aside>
+				</section>
+
+				<section>
+					<h4>Responsive</h4>
+					<pre><code class="language-html" data-trim data-noescape data-line-numbers="1-4|6-10|12-14">
+&lt;!-- Mobile-first approach --&gt;
+&lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"&gt;
+  &lt;!-- 1 column mobile, 2 tablet, 4 desktop --&gt;
+&lt;/div&gt;
+
+&lt;!-- Responsive text & spacing --&gt;
+&lt;h1 class="text-2xl md:text-4xl lg:text-6xl
+           p-4 md:p-8 lg:p-12"&gt;
+  Responsive Heading
+&lt;/h1&gt;
+
+&lt;!-- Show/hide at breakpoints --&gt;
+&lt;nav class="hidden md:block"&gt;Desktop Nav&lt;/nav&gt;
+&lt;nav class="block md:hidden"&gt;Mobile Nav&lt;/nav&gt;
+					</code></pre>
+					<aside class="notes">
+						- Breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px), 2xl (1536px)
+						- Mobile-first: base styles, then override at larger screens
+						- Any utility can be responsive: md:flex, lg:hidden
+						- Can combine with other modifiers: md:hover:bg-blue-500
+					</aside>
+				</section>
+
+				<section>
+					<h4>More features</h4>
+					<pre><code class="language-html" data-trim data-noescape data-line-numbers="|2|5-7|10-11|14-17">
+&lt;!-- Arbitrary values --&gt;
+&lt;div class="w-[347px] top-[117px]"&gt;
+  &lt;!-- Exact values when needed --&gt;
+&lt;/div&gt;
+
+&lt;!-- Dark mode --&gt;
+&lt;div class="bg-white dark:bg-gray-900
+            text-black dark:text-white"&gt;
+  Auto dark mode
+&lt;/div&gt;
+
+&lt;!-- Peer & Group modifiers --&gt;
+&lt;label class="group"&gt;
+  &lt;input class="peer" type="checkbox" /&gt;
+  &lt;span class="peer-checked:text-blue-500"&gt;Check me&lt;/span&gt;
+&lt;/label&gt;
+					</code></pre>
+					<aside class="notes">
+						- Arbitrary values: [347px] for exact measurements
+						- Dark mode: automatic with dark: prefix
+						- Peer: style element based on sibling state
+						- Group: style children based on parent state
+						- Print styles: print:hidden
+						- Motion preferences: motion-reduce:
 					</aside>
 				</section>
 			</section>
@@ -980,31 +1197,97 @@ function Timer() {
 
 			<section>
 				<section>
-					<h3>Good Config Design</h3>
-				</section>
-
-				<section>
-					<h4>Fundamental Values</h4>
-					<p>Core design tokens</p>
+					<h3>How Tailwind Scans Your Code</h3>
+					<p>Plain text scanning, not parsing</p>
 					<aside class="notes">
-						- Colors: primary, secondary, accent shades
-						- Spacing scale: consistent rem values
-						- Font sizes and weights
-						- Border radius values
-						- Shadow definitions
+						- Tailwind treats all source files as plain text
+						- Doesn't parse your code as JavaScript/JSX/etc.
+						- Looks for any tokens that could be class names
+						- Tries to generate CSS for all tokens found
+						- Throws away tokens that don't map to known utilities
+						- This keeps CSS small and enables arbitrary values
 					</aside>
 				</section>
 
 				<section>
-					<h4>Semantic Variables</h4>
-					<p>Purpose-based naming</p>
+					<h4>Example: What Tailwind Sees</h4>
+					<pre><code class="language-jsx" data-trim data-noescape data-line-numbers="|3-6|8-10">
+function Button({ color, children }) {
+  const colors = {
+    black: "bg-black text-white",
+    blue: "bg-blue-500 text-white",
+    white: "bg-white text-black",
+  };
+  return (
+    &lt;button className={`${colors[color]} rounded-full px-2 py-1.5`}&gt;
+      {children}
+    &lt;/button&gt;
+  );
+}
+					</code></pre>
 					<aside class="notes">
-						- text-error, text-success, text-warning
-						- bg-card, bg-modal, bg-sidebar
-						- text-muted, text-primary
-						- border-default, border-focus
-						- Maps to fundamental values
-						- Easier to theme/rebrand
+						- Tailwind finds: bg-black, text-white, bg-blue-500, bg-white, text-black, rounded-full, px-2, py-1.5
+						- All complete class names as strings are detected
+						- Generates CSS for all these utilities
+						- Variable name "colors" and "color" don't matter
+						- Template literal concatenation works because full strings exist
+					</aside>
+				</section>
+
+				<section>
+					<h4>Don't Construct Class Names</h4>
+					<p>String interpolation breaks detection</p>
+					<aside class="notes">
+						- Tailwind has no way to understand string concatenation
+						- No understanding of template literals or interpolation
+						- Can't evaluate your programming language logic
+						- Only sees plain text tokens
+					</aside>
+				</section>
+
+				<section>
+					<h4>Wrong: String Interpolation</h4>
+					<pre><code class="language-html" data-trim data-noescape>
+&lt;div class="text-{{ error ? 'red' : 'green' }}-600"&gt;&lt;/div&gt;
+					</code></pre>
+					<pre><code class="language-jsx" data-trim data-noescape>
+function Button({ color, children }) {
+  return &lt;button className={`bg-${color}-600 hover:bg-${color}-500`}&gt;
+    {children}
+  &lt;/button&gt;;
+}
+					</code></pre>
+					<aside class="notes">
+						- text-red-600 and text-green-600 don't exist as complete strings
+						- bg-blue-600 or bg-red-600 aren't written out in full
+						- Tailwind can't predict what values variables will have
+						- These classes won't be generated
+					</aside>
+				</section>
+
+				<section>
+					<h4>Right: Complete Class Names</h4>
+					<pre><code class="language-html" data-trim data-noescape>
+&lt;div class="{{ error ? 'text-red-600' : 'text-green-600' }}"&gt;&lt;/div&gt;
+					</code></pre>
+					<pre><code class="language-jsx" data-trim data-noescape>
+function Button({ color, children }) {
+  const colorVariants = {
+    blue: "bg-blue-600 hover:bg-blue-500",
+    red: "bg-red-600 hover:bg-red-500",
+  };
+  return (
+    &lt;button className={`${colorVariants[color]} ...`}&gt;
+      {children}
+    &lt;/button&gt;
+  );
+}
+					</code></pre>
+					<aside class="notes">
+						- text-red-600 and text-green-600 exist as complete strings
+						- All color variants written out in full
+						- Tailwind can detect these complete class names
+						- Will generate CSS for all variants
 					</aside>
 				</section>
 			</section>
