@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>Advanced Frontend - CFC</title>
+	<title>Practical Software Engineering - CFC</title>
 
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
@@ -29,1265 +29,358 @@
 	<div class="reveal">
 		<div class="slides">
 			<section>
-				<h1>Advanced Frontend Development</h1>
+				<h1>Practical Software Engineering</h1>
 			</section>
 
-			<!-- Frontend Web Development is Hard -->
+			<!-- Working in Teams -->
 			<section>
 				<section>
-					<h2>Frontend Web Development is Hard</h2>
+					<h2>Working in Teams</h2>
+					<p>vs</p>
+					<h2>Working Alone</h2>
+					<aside class="notes">
+						- Solo: full context, instant decisions
+						- Teams: shared experience, more output
+						- Teamwork is the only way to scale — but it has real costs
+					</aside>
 				</section>
 
-				<!-- Complex Stack -->
 				<section data-auto-animate>
-					<h3 data-id="stack-heading">Complex Stack</h3>
+					<h3 data-id="faster-heading">Teams Can Go Faster</h3>
 				</section>
 
 				<section data-auto-animate>
-					<h3 data-id="stack-heading" style="font-size: 0.5em;">Complex Stack</h3>
-					<h4>Browser Technologies</h4>
+					<h3 data-id="faster-heading" style="font-size: 0.5em;">Teams Can Go Faster</h3>
 					<ul>
-						<li>HTML</li>
-						<li>JavaScript</li>
-						<li>CSS</li>
+						<li>Less context switching</li>
+						<li>Allows for specialisation</li>
+						<li>Higher maximum output</li>
 					</ul>
 					<aside class="notes">
-						- HTML5: semantic elements, Web Components, Canvas, SVG
-						- JavaScript: ES6+, async/await, Promises, modules
-						- CSS: Flexbox, Grid, CSS Variables, animations, CSS-in-JS
+						- Large projects: too much context for one person
+						- Each person can go deeper on their area
+						- AI is changing the solo ceiling, but teams still scale further
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<h3 data-id="stack-heading" style="font-size: 0.5em;">Complex Stack</h3>
-					<h4>Ecosystem</h4>
+					<h3 data-id="slower-heading">Teams Can Go Slower</h3>
+				</section>
+
+				<section data-auto-animate>
+					<h3 data-id="slower-heading" style="font-size: 0.5em;">Teams Can Go Slower</h3>
 					<ul>
-						<li>Many Frameworks</li>
-						<li>Many Libraries</li>
+						<li>Differences in experience levels</li>
+						<li>Misaligned understanding of the problem</li>
+						<li>Delegation overhead</li>
+						<li>Less individual responsibility</li>
+						<li>Integrating each other's code</li>
 					</ul>
 					<aside class="notes">
-						- TypeScript
-						- Frameworks: React, Vue, Angular, Svelte, Solid
-						- Meta-frameworks: Next.js, Remix, Astro
-						- Packages and libraries: React Router, TanStack, Redux
-						- Style and UI: Tailwind, Material-UI, shadcn/ui
+						- Teaching takes time; people can build the wrong thing
+						- Defining and reviewing work has a cost
+						- Code integration causes conflicts
+						- Go slow to go fast
 					</aside>
+				</section>
+			</section>
+
+			<!-- Planning the Work -->
+			<section>
+				<section>
+					<h2>Planning the Work</h2>
+					<small>How to delegate effectively</small>
 				</section>
 
 				<section data-auto-animate>
-					<h3 data-id="stack-heading" style="font-size: 0.5em;">Complex Stack</h3>
-					<h4>Build Tools</h4>
+					<h3 data-id="card-heading">The Card</h3>
+					<p>Issue · Task · Ticket</p>
+				</section>
+
+				<section data-auto-animate>
+					<h3 data-id="card-heading" style="font-size: 0.5em;">The Card</h3>
+					<h4>Basic unit of work</h4>
 					<ul>
-						<li>Tools</li>
-						<li>Compilers</li>
-						<li>Bundlers</li>
+						<li>Enough context to understand the work</li>
+						<li>A definition of done</li>
 					</ul>
 					<aside class="notes">
-						- Tools: PostCSS
-						- Compilers: Babel, SWC, TypeScript compiler
-						- Bundlers: Webpack, Vite, Rollup, Parcel, esbuild, Turbopack
+						- Atomic unit one person can pick up
+						- Context: what are we solving and how should it work?
+						- Definition of done: prevents scope creep
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<h3 data-id="stack-heading" style="font-size: 0.5em;">Complex Stack</h3>
-					<h4>Development Environment</h4>
+					<h3 data-id="card-heading" style="font-size: 0.5em;">The Card</h3>
+					<h4>Commonly includes</h4>
 					<ul>
-						<li>Package managers</li>
-						<li>Linters</li>
-						<li>IDEs</li>
+						<li>Problem or feature description</li>
+						<li>Suggested implementation</li>
+						<li>Acceptance criteria</li>
+						<li>Complexity estimate</li>
+						<li>Associated code (once started)</li>
 					</ul>
 					<aside class="notes">
-						- Package Managers: npm, yarn, pnpm, bun
-						- Linters: ESLint, Prettier, Stylelint
-						- Testing: Jest, Vitest, Testing Library, Playwright, Cypress
-						- Profiling and debugging: Devtools, Performance profiler, Lighthouse
+						- Acceptance criteria: testable conditions e.g. "GET /list returns 200 with items array"
+						- Estimate: story points, t-shirt sizes, or hours
+						- Code: PR/branch link added once work begins
 					</aside>
 				</section>
 
-				<!-- Complex Requirements -->
 				<section data-auto-animate>
-					<h3 data-id="requirements-heading">Complex Requirements</h3>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="requirements-heading" style="font-size: 0.5em;">Complex Requirements</h3>
-					<h4>Complex functionality</h4>
+					<h3 data-id="card-heading" style="font-size: 0.5em;">The Card</h3>
+					<h4>Tips for writing good cards</h4>
 					<ul>
-						<li>Deep Interactivity</li>
-						<li>Dense Information Layouts</li>
-						<li>Games and 3D rendering</li>
-						<li>Maps and Data Visualisation</li>
+						<li>Small and specific</li>
+						<li>Anyone can pick it up without prior context</li>
+						<li>Anyone can tell when the work is correct</li>
 					</ul>
 					<aside class="notes">
-						- Complex animations and instant feedback
-						- Complex designs and large amounts of information
-						- Graphics
-						- Fully custom experiences with canvas (no traditional document structure)
+						- Small: if it takes more than a few days, break it down further
+						- No prior context: the card itself has everything needed to start
+						- Verifiable: the acceptance criteria should leave no ambiguity about done
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<h3 data-id="requirements-heading" style="font-size: 0.5em;">Complex Requirements</h3>
-					<h4>Declaritive Reactivity</h4>
-					<p>Responding automatically to changes in data</p>
-					<aside class="notes">
-						- Managing async state: loading, error, success
-						- Optimistic updates, race conditions, virtual scrolling
-						- Real-time data synchronization
-						- Examples: live dashboards, collaborative editors, real-time chat
-					</aside>
+					<h3 data-id="board-heading">The Board</h3>
+					<p>Kanban · Project · Sprint board</p>
 				</section>
 
 				<section data-auto-animate>
-					<h3 data-id="requirements-heading" style="font-size: 0.5em;">Complex Requirements</h3>
-					<h4>We've pushed browsers too far</h4>
+					<h3 data-id="board-heading" style="font-size: 0.5em;">The Board</h3>
+					<h4>Shared view of work in progress</h4>
 					<ul>
-						<li>Server</li>
-						<li>Desktop</li>
-						<li>Native</li>
-						<li>Browser APIs</li>
+						<li>Columns: Todo -> In Progress -> Verifying -> Done</li>
+						<li>Sprint: 2–4 weeks of planned work</li>
+						<li>Standup: Regular sync on blockers and progress</li>
 					</ul>
 					<aside class="notes">
-						Server features now in browser:
-						- Client-side routing and navigation
-						- State management and caching
-						- Real-time data synchronization
-						- Authentication and session handling
-						- Form validation and data processing
-
-						Desktop app features now in browser:
-						- Image/video editing (Photopea, Canva, CapCut)
-						- Document editing (Google Docs, Notion, Figma)
-						- File management and drag-and-drop uploads
-						- Offline functionality and local storage
-
-						Native app features now in browser:
-						- PWA
-						- Push notifications
-						- Geolocation and device sensors
-						- Camera and microphone access
-						- Background sync and service workers
-
-						Advanced Browser APIs:
-						- WebGL for 3D graphics
-						- WebAssembly for performance
-						- WebRTC for peer-to-peer communication
-						- Web Workers for multi-threading
+						- Makes work visible — no "what are you working on?"
+						- One card in progress per person at a time
+						- Standup: what did you do, what will you do, are you blocked?
+						- Tools: GitHub Projects, Jira
 					</aside>
 				</section>
 
-				<!-- Performance & Accessibility -->
-				<section data-auto-animate>
-					<h3 data-id="perf-heading">Performance &amp; Accessibility</h3>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="perf-heading" style="font-size: 0.5em;">Performance &amp; Accessibility</h3>
-					<h4>Any device</h4>
-					<p>Features work on everything</p>
+				<section>
+					<h4>Takes time</h4>
+					<p>That could have been spent coding</p>
 					<aside class="notes">
-						- Multiple browsers: Chrome, Firefox, Safari, Edge
-						- Mobile browsers: iOS Safari quirks, Android Chrome
-						- Polyfilling for older browsers
-						- Testing across devices and screen sizes
-					</aside>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="perf-heading" style="font-size: 0.5em;">Performance &amp; Accessibility</h3>
-					<h4>Any connection</h4>
-					<p>Page and content loads quickly</p>
-					<aside class="notes">
-						- Code splitting, lazy loading, image optimization
-						- Core Web Vitals: LCP, FID, CLS
-						- SSR vs SSG, edge computing, CDNs, caching strategies
-						- Works on slow 3G and fast fiber
-						- Tools: Lighthouse, WebPageTest, bundle analyzers
-					</aside>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="perf-heading" style="font-size: 0.5em;">Performance &amp; Accessibility</h3>
-					<h4>Any user</h4>
-					<p>Accessible to everyone</p>
-					<aside class="notes">
-						- Screen readers, keyboard navigation
-						- ARIA labels, semantic HTML
-						- Color contrast, focus indicators
-						- WCAG compliance
+						- Feels slow at first, but prevents rework and misalignment
+						- Misalignment discovered late costs more than planning upfront
+						- If the process feels heavy, it's too much process
 					</aside>
 				</section>
 			</section>
 
-			<!-- Learning Frontend Web Development is Hard -->
+			<!-- Git -->
 			<section>
 				<section>
-					<h2>Learning Frontend Web Development is Hard</h2>
-				</section>
-
-				<!-- Missing Fundamentals -->
-				<section data-auto-animate>
-					<h3 data-id="fundamentals-heading">Missing Fundamentals</h3>
+					<h2>Git</h2>
+					<small>How to integrate your work</small>
 				</section>
 
 				<section data-auto-animate>
-					<h3 data-id="fundamentals-heading" style="font-size: 0.5em;">Missing Fundamentals</h3>
-					<h4>Starting Practical, Missing Core</h4>
-					<p>Jump into frameworks without understanding the basics</p>
+					<h3 data-id="why-git-heading">Without Git</h3>
+				</section>
+
+				<section data-auto-animate>
+					<h3 data-id="why-git-heading" style="font-size: 0.5em;">Without Git</h3>
+					<ul>
+						<li>How do I share my changes?</li>
+						<li>How do we combine changes to the same file?</li>
+						<li>How do I undo something?</li>
+						<li>Who changed this, and why?</li>
+					</ul>
 					<aside class="notes">
-						- Learn React before understanding JavaScript fundamentals
-						- Use CSS frameworks before understanding CSS layout
-						- Copy-paste solutions without understanding browser APIs
-						- Gaps between core browser tech and high-level frameworks
-					</aside>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="fundamentals-heading" style="font-size: 0.5em;">Missing Fundamentals</h3>
-					<h4>Hard to Differentiate</h4>
-					<p>Understanding how different parts work together</p>
-					<aside class="notes">
-						- What's JavaScript vs what's React?
-						- What's CSS vs what's Tailwind?
-						- What's native browser vs what's a polyfill?
-						- Which layer is causing the bug?
-						- Debugging requires understanding the entire stack
-					</aside>
-				</section>
-
-				<!-- Convoluted History -->
-				<section data-auto-animate>
-					<h3 data-id="history-heading">Convoluted History</h3>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="history-heading" style="font-size: 0.5em;">Convoluted History</h3>
-					<h4>Sediment of Technologies</h4>
-					<p>Layers upon layers of solutions</p>
-					<aside class="notes">
-						- Problem → Library → Framework → New Problem → Repeat
-						- jQuery (DOM manipulation) → React (component model) → Next.js (SSR)
-						- CSS → Sass → CSS Modules → CSS-in-JS → Tailwind
-						- Callbacks → Promises → async/await → React Suspense
-						- Each layer solves problems created by the previous one
+						- Before git: email zips, shared drives, manual merging
+						- "final_final_v3_ACTUALLY_FINAL.zip"
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<h3 data-id="history-heading" style="font-size: 0.5em;">Convoluted History</h3>
-					<h4>So Many Options</h4>
-					<p>So many dependencies</p>
-					<aside class="notes">
-						- node_modules is massive
-						- Transitive dependencies you never asked for
-						- Version conflicts and breaking changes
-						- Security vulnerabilities in nested dependencies
-						- "Left-pad" problem and supply chain risks
-					</aside>
+					<h3 data-id="git-concepts-heading">Core Concepts</h3>
 				</section>
 
-				<!-- You Have to Learn JavaScript -->
 				<section data-auto-animate>
-					<h3 data-id="js-heading">You Have to Learn JavaScript</h3>
+					<h3 data-id="git-concepts-heading" style="font-size: 0.5em;">Core Concepts</h3>
+					<ul>
+						<li><strong>Commit</strong> - a saved snapshot of changes</li>
+						<li><strong>Branch</strong> - a separate timeline of changes</li>
+						<li><strong>Merge</strong> - combining two branches</li>
+					</ul>
 					<aside class="notes">
-						- Weak typing, type coercion
-						- "this" binding confusion
-						- Prototypal inheritance
-						- Async programming models
-						- Different versions: ES5, ES6+, TypeScript
-						- Browser vs Node.js differences
+						- main is the primary branch — the source of truth
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<h3 data-id="js-heading" style="font-size: 0.5em;">You Have to Learn JavaScript</h3>
-					<p>jk I love Javascript</p>
+					<h3 data-id="commit-heading">Commit</h3>
+					<p>Bundle and save related changes</p>
 				</section>
-			</section>
 
-			<!-- The Stack -->
-			<section>
-				<section>
-					<h2>The Stack</h2>
-					<small>What you'll see in a repo</small>
-				</section>
-				<section>
-					<div
-						style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.5em; max-width: 800px; margin: 0 auto;">
-						<!-- Layer 1: Core Technologies -->
-						<div style="background: #1a1a2e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #16a085;">
-							<p style="margin: 0 0 0.5rem 0;">Core Technologies</p>
-							<div
-								style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around;">
-								<span>HTML</span>
-								<span>CSS</span>
-								<span>JavaScript</span>
-							</div>
-						</div>
-
-						<!-- Layer 2: Translation Layer -->
-						<div style="background: #1a1a2e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2980b9;">
-							<p style="margin: 0 0 0.5rem 0;">Translation & Compilation</p>
-							<div
-								style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around; flex-wrap: wrap;">
-								<span>Compilers (TypeScript)</span>
-								<span>Bundlers <small>(Webpack)</small></span>
-								<span>Tools and config (tsconfig, PostCSS)</span>
-							</div>
-						</div>
-
-						<!-- Layer 3: Framework Layer -->
-						<div style="background: #1a1a2e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #8e44ad;">
-							<p style="margin: 0 0 0.5rem 0;">Framework & Styling</p>
-							<div
-								style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around;">
-								<span>React</span>
-								<span>Tailwind CSS</span>
-							</div>
-						</div>
-
-						<!-- Layer 4: Application Layer -->
-						<div style="background: #1a1a2e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #e74c3c;">
-							<p style="margin: 0 0 0.5rem 0;">Application & Components</p>
-							<div
-								style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around;">
-								<span>Next.js</span>
-								<span>UI Libraries <small>(shadcn/ui)</small></span>
-							</div>
-						</div>
-						<div style="background: #1a1a2e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #d5cc2f;">
-							<p style="margin: 0 0 0.5rem 0;">Developer Experience and Deployment</p>
-							<div
-								style="display: flex; font-size: 1.2em; font-weight: bold; gap: 1rem; justify-content: space-around;">
-								<span>Types and annotations <small>(TypeScript)</small></span>
-								<span>Documentation <small>(readme.md)</small></span>
-								<span>Linting and errors <small>(ESLint, Prettier)</small></span>
-								<span>Scripts and automation config <small>(package.lock, precommit hooks, Github Actions, Docker)</small></span>
-							</div>
-						</div>
-					</div>
-
+				<section data-auto-animate>
+					<h3 data-id="commit-heading" style="font-size: 0.5em;">Commit</h3>
+					<h4>Stage your changes first</h4>
+					<pre><code class="bash" data-trim data-line-numbers>
+git add style.css index.html
+					</code></pre>
 					<aside class="notes">
-						**Layer 1 - Core**: What the browser actually understands
-						**Layer 2 - Translation**: Tools that transform modern code into browser-compatible code
-						**Layer 3 - Framework**: High-level abstractions for building UIs
-						**Layer 4 - Application**: Meta-frameworks and pre-built components
-
-						Each layer builds on the previous one, adding abstraction but also complexity
-					</aside>
-				</section>
-			</section>
-
-			<!-- The Process -->
-			<section data-visibility="hidden">
-				<section>
-					<h2>The Process</h2>
-					<h3>From code to browser</h3>
-				</section>
-				<section>
-					<div style="display: flex; flex-direction: row; align-items: center; gap: 0.5rem; font-size: 0.45em; max-width: 1000px; margin: 0 auto; justify-content: center;">
-						<!-- Step 1: Source Code -->
-						<div style="background: #1a1a2e; padding: 1rem; border-radius: 8px; border-top: 4px solid #e74c3c; min-width: 140px; text-align: center;">
-							<p style="margin: 0 0 0.5rem 0; font-size: 0.9em;">Source Code</p>
-							<div style="font-size: 1.1em; font-weight: bold;">
-								<div>Next.js</div>
-								<div>React + TSX</div>
-								<div>Tailwind</div>
-							</div>
-						</div>
-
-						<!-- Arrow -->
-						<div style="font-size: 2em; color: #666;">→</div>
-
-						<!-- Step 2: Compilation -->
-						<div style="background: #1a1a2e; padding: 1rem; border-radius: 8px; border-top: 4px solid #8e44ad; min-width: 140px; text-align: center;">
-							<p style="margin: 0 0 0.5rem 0; font-size: 0.9em;">Compilation</p>
-							<div style="font-size: 1.1em; font-weight: bold;">
-								<div>TypeScript → JavaScript</div>
-								<div style="margin-top: 0.3rem;">Tailwind → CSS</div>
-							</div>
-						</div>
-
-						<!-- Arrow -->
-						<div style="font-size: 2em; color: #666;">→</div>
-
-						<!-- Step 3: Bundling -->
-						<div style="background: #1a1a2e; padding: 1rem; border-radius: 8px; border-top: 4px solid #2980b9; min-width: 140px; text-align: center;">
-							<p style="margin: 0 0 0.5rem 0; font-size: 0.9em;">Bundling</p>
-							<div style="font-size: 1.1em; font-weight: bold;">
-								<div>Webpack/Vite</div>
-								<div style="margin-top: 0.3rem;">Minification</div>
-								<div>Code splitting</div>
-							</div>
-						</div>
-
-						<!-- Arrow -->
-						<div style="font-size: 2em; color: #666;">→</div>
-
-						<!-- Step 4: Build Output -->
-						<div style="background: #1a1a2e; padding: 1rem; border-radius: 8px; border-top: 4px solid #16a085; min-width: 140px; text-align: center;">
-							<p style="margin: 0 0 0.5rem 0; font-size: 0.9em;">Build Output</p>
-							<div style="font-size: 1.1em; font-weight: bold;">
-								<div>HTML</div>
-								<div>JS bundles</div>
-								<div>CSS files</div>
-								<div>Assets</div>
-							</div>
-						</div>
-
-						<!-- Arrow -->
-						<div style="font-size: 2em; color: #666;">→</div>
-
-						<!-- Step 5: Deployment -->
-						<div style="background: #1a1a2e; padding: 1rem; border-radius: 8px; border-top: 4px solid #d5cc2f; min-width: 140px; text-align: center;">
-							<p style="margin: 0 0 0.5rem 0; font-size: 0.9em;">Deployment</p>
-							<div style="font-size: 1.1em; font-weight: bold;">
-								<div>Vercel/Netlify</div>
-								<div>CDN</div>
-								<div>Static hosting</div>
-							</div>
-						</div>
-
-						<!-- Arrow -->
-						<div style="font-size: 2em; color: #666;">→</div>
-
-						<!-- Step 6: Browser -->
-						<div style="background: #1a1a2e; padding: 1rem; border-radius: 8px; border-top: 4px solid #95a5a6; min-width: 140px; text-align: center;">
-							<p style="margin: 0 0 0.5rem 0; font-size: 0.9em;">Browser</p>
-							<div style="font-size: 1.1em; font-weight: bold;">
-								<div>Download</div>
-								<div>Parse</div>
-								<div>Execute</div>
-								<div>Render</div>
-							</div>
-						</div>
-					</div>
-
-					<aside class="notes">
-						**Source Code**: Write in modern frameworks and languages (Next.js, React, TypeScript, Tailwind)
-
-						**Compilation**: Transform modern syntax into browser-compatible code
-						- TypeScript compiles to JavaScript
-						- Tailwind processes utility classes into CSS
-						- React/JSX transforms into vanilla JavaScript
-
-						**Bundling**: Optimize and package for production
-						- Webpack or Vite combines modules
-						- Minifies code to reduce file size
-						- Code splitting for lazy loading
-						- Tree shaking to remove unused code
-
-						**Build Output**: Final production-ready files
-						- Static HTML files
-						- JavaScript bundles (main, vendor, chunks)
-						- Optimized CSS
-						- Compressed assets (images, fonts)
-
-						**Deployment**: Host on CDN/static hosting
-						- Platforms like Vercel, Netlify automatically deploy
-						- Files served from CDN for global distribution
-						- Edge caching for performance
-
-						**Browser**: End user receives and runs the app
-						- Downloads HTML, then CSS and JS
-						- Parses and constructs DOM
-						- Executes JavaScript
-						- Renders the interface
-					</aside>
-				</section>
-			</section>
-
-			<!-- React -->
-			<section>
-				<section>
-					<h2>React</h2>
-					<h3>Things You Should Know</h3>
-				</section>
-
-				<section>
-					<h4>Components & JSX</h4>
-					<p>Building blocks of React applications</p>
-					<aside class="notes">
-						- Functional components
-						- JSX syntax (HTML-like in JavaScript)
-						- Props for passing data
-						- Component composition
+						- Working directory: files you've changed but not yet committed
+						- Staging area: files you've marked to include in the next commit
+						- git add lets you choose which changes to bundle together
+						- You might change 5 files but only want to commit 2 of them
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<pre data-id="component-code"><code class="javascript" data-trim data-line-numbers="1-3|5-7">
-function Welcome(props) {
-  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
-}
-
-function App() {
-  return &lt;Welcome name="World" /&gt;;
-}
+					<h3 data-id="commit-heading" style="font-size: 0.5em;">Commit</h3>
+					<h4>Then commit with a message</h4>
+					<pre><code class="bash" data-trim data-line-numbers>
+git commit -m "update header styles"
 					</code></pre>
-				</section>
-
-				<section>
-					<h4>State & Reactivity</h4>
-					<p>UI reacts to state changes</p>
 					<aside class="notes">
-						- useState hook
-						- State updates trigger re-renders
-						- Declarative UI based on state
-						- Event handlers and user interaction
+						- Message is for your team and future you
+						- Logical unit — not "saved work" but "fixed login bug"
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<pre data-id="state-code"><code class="javascript" data-trim data-line-numbers>
-function Counter() {
-  const [count, setCount] = useState(0);
-
-  return (
-    &lt;div&gt;
-      &lt;p&gt;Count: {count}&lt;/p&gt;
-    &lt;/div&gt;
-  );
-}
-					</code></pre>
+					<h3 data-id="branch-heading">Branch</h3>
+					<p>A separate timeline of changes</p>
 				</section>
 
 				<section data-auto-animate>
-					<pre data-id="state-code"><code class="javascript" data-trim data-line-numbers="6-8">
-function Counter() {
-  const [count, setCount] = useState(0);
-
-  return (
-    &lt;div&gt;
-      &lt;p&gt;Count: {count}&lt;/p&gt;
-      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
-        Increment
-      &lt;/button&gt;
-    &lt;/div&gt;
-  );
-}
+					<h3 data-id="branch-heading" style="font-size: 0.5em;">Branch</h3>
+					<pre><code class="bash" data-trim data-line-numbers="1|2|3|4|5|6">
+git branch feature/new-header
+git checkout feature/new-header
+# make changes to your files
+git add index.html
+git commit -m "try a new header"
+git checkout main
 					</code></pre>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h2>React</h2>
-					<h3>Things You Might Not Know</h3>
-				</section>
-
-				<section>
-					<h4>Rendering & Lifecycle</h4>
-					<p>How React updates the DOM</p>
+					<p style="font-size: 0.6em;">Changes stay on <code>feature/new-header</code></p>
 					<aside class="notes">
-						- Virtual DOM and reconciliation
-						- Component mount, update, unmount
-						- Render phase vs commit phase
-						- When components re-render
-						- React Fiber architecture
-					</aside>
-				</section>
-
-				<section>
-					<h4>Performance Optimization</h4>
-					<p>Preventing unnecessary re-renders</p>
-					<aside class="notes">
-						- React.memo: memoize components
-						- useMemo: memoize expensive calculations
-						- useCallback: memoize functions
-						- When to use each (don't overuse!)
-						- Profiler and DevTools
+						- checkout -b: create and switch in one step
+						- main is untouched while you work on the branch
+						- Naming: feature/, fix/, chore/ prefixes
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<h5>React.memo</h5>
-					<pre data-id="memo-code"><code class="javascript" data-trim data-line-numbers>
-const ExpensiveComponent = ({ data }) =&gt; {
-  // Expensive rendering logic
-  return &lt;div&gt;{data}&lt;/div&gt;;
-};
+					<h3 data-id="merge-heading">Merge</h3>
+					<p>Bring work back together</p>
+				</section>
+
+				<section data-auto-animate>
+					<h3 data-id="merge-heading" style="font-size: 0.5em;">Merge</h3>
+					<pre><code class="bash" data-trim data-line-numbers="1|2|3">
+git checkout main
+git merge feature/new-header
+git log
 					</code></pre>
 					<aside class="notes">
-						- Normally components rerender when their parents rerender
-						- React.memo prevents re-renders when props haven't changed (shallow comparison)
-						- Useful for expensive components that receive the same props frequently
-						- Best use cases: large lists, complex visualizations, components that render often
-						- Can provide custom comparison function as second argument if needed
+						- Merge INTO main (switch to it first)
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<h5>React.memo</h5>
-					<pre data-id="memo-code"><code class="javascript" data-trim data-line-numbers="6">
-const ExpensiveComponent = ({ data }) =&gt; {
-  // Expensive rendering logic
-  return &lt;div&gt;{data}&lt;/div&gt;;
-};
+					<h3 data-id="conflict-heading">Merge Conflicts</h3>
+					<p>When two branches change the same line</p>
+				</section>
 
-export default React.memo(ExpensiveComponent);
+				<section data-auto-animate>
+					<h3 data-id="conflict-heading" style="font-size: 0.5em;">Merge Conflicts</h3>
+					<pre><code class="diff" data-trim data-line-numbers="1|2-3|4|5-6|7">
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+background: blue;
+=======
+background: red;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/new-header
 					</code></pre>
 					<aside class="notes">
-						- Normally components rerender when their parents rerender
-						- React.memo prevents re-renders when props haven't changed (shallow comparison)
-						- Useful for expensive components that receive the same props frequently
-						- Best use cases: large lists, complex visualizations, components that render often
-						- Can provide custom comparison function as second argument if needed
+						- Git marks both versions in the file and stops the merge
+						- HEAD = your current branch, below the === is the incoming branch
+						- Pick one, delete the markers, then save
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<h5>useMemo</h5>
-					<pre data-id="usememo-code"><code class="javascript" data-trim data-line-numbers>
-function FilteredList({ items, filter }) {
-  const filteredItems = items.filter(item =&gt;
-    item.name.includes(filter)
-  );
-
-  return &lt;ul&gt;{filteredItems.map(...)}&lt;/ul&gt;;
-}
+					<h3 data-id="conflict-heading" style="font-size: 0.5em;">Merge Conflicts</h3>
+					<h4>Resolve and complete the merge</h4>
+					<pre><code class="bash" data-trim data-line-numbers="1|2|3">
+# edit the file to resolve the conflict
+git add style.css
+git commit -m "merge feature/new-header"
 					</code></pre>
-				</section>
-
-				<section data-auto-animate>
-					<h5>useMemo</h5>
-					<pre data-id="usememo-code"><code class="javascript" data-trim data-line-numbers="2-4">
-function FilteredList({ items, filter }) {
-  const filteredItems = useMemo(() =&gt;
-    items.filter(item =&gt; item.name.includes(filter)),
-    [items, filter]
-  );
-
-  return &lt;ul&gt;{filteredItems.map(...)}&lt;/ul&gt;;
-}
-					</code></pre>
-				</section>
-
-				<section>
-					<h4>Premature Optimisation</h4>
-					<p>Optimise when it's a problem</p>
 					<aside class="notes">
-						- React is already fast - don't optimise until you have a problem
-						- Use React DevTools Profiler to find actual bottlenecks
-						- Premature optimization adds complexity and makes code harder to read
-						- Focus on good component structure and composition first
-						- Only add memo/useMemo/useCallback when you identify specific performance issues
-					</aside>
-				</section>
-
-				<section>
-					<h4>State in Large Apps</h4>
-					<p>Managing complexity at scale</p>
-					<aside class="notes">
-						- Context API for shared state
-						- Component composition patterns
-						- State management libraries: Redux, Zustand, Jotai
-						- Server state: TanStack Query, SWR
-						- Prop drilling vs lifting state up
-					</aside>
-				</section>
-
-				<section>
-					<h4>useRef</h4>
-					<p>Values outside the reactivity model</p>
-					<aside class="notes">
-						- Accessing DOM elements directly
-						- Storing mutable values that don't trigger re-renders
-						- Previous values, timers, intervals
-						- Difference from state
+						- After resolving, stage the file and commit as normal
+						- Most editors (VS Code) have a UI to accept current/incoming/both
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<h5>DOM Reference</h5>
-					<pre data-id="ref-code"><code class="javascript" data-trim data-line-numbers>
-function TextInput() {
-  const inputRef = useRef(null);
-
-  return &lt;input ref={inputRef} /&gt;;
-}
-					</code></pre>
-				</section>
-
-				<section data-auto-animate>
-					<h5>DOM Reference</h5>
-					<pre data-id="ref-code"><code class="javascript" data-trim data-line-numbers="5-7">
-function TextInput() {
-  const inputRef = useRef(null);
-
-  const focusInput = () =&gt; {
-    inputRef.current.focus();
-  };
-
-  return (
-    &lt;&gt;
-      &lt;input ref={inputRef} /&gt;
-      &lt;button onClick={focusInput}&gt;Focus&lt;/button&gt;
-    &lt;/&gt;
-  );
-}
-					</code></pre>
+					<h3 data-id="remote-heading">Remote</h3>
+					<p>A shared copy of the repo everyone syncs to</p>
 					<aside class="notes">
-						- Regular variables get reset on every re-render (component function runs again)
-						- useRef creates a persistent container that survives re-renders
-						- Unlike state, updating ref.current doesn't trigger re-renders
-						- React's ref attribute automatically sets ref.current to the DOM element
-						- Perfect for: focus(), scroll(), getBoundingClientRect(), animations
+						- Everything so far is local
+						- Remote is hosted on GitHub — the team's source of truth
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<h5>Mutable Values</h5>
-					<pre data-id="ref-mutable"><code class="javascript" data-trim data-line-numbers>
-function Timer() {
-  const intervalRef = useRef(null);
-
-  useEffect(() =&gt; {
-    intervalRef.current = setInterval(() =&gt; {
-      console.log('tick');
-    }, 1000);
-
-    return () =&gt; clearInterval(intervalRef.current);
-  }, []);
-}
+					<h3 data-id="remote-heading" style="font-size: 0.5em;">Remote</h3>
+					<h4>Clone the repo</h4>
+					<pre style="font-size: 0.4em;"><code class="bash" data-trim data-line-numbers>
+git clone https://github.com/codersforcauses/software-engineering-practices-demo-2026-winter
 					</code></pre>
 					<aside class="notes">
-						- useRef stores mutable values that persist across renders
-						- Unlike state, updating a ref doesn't trigger a re-render
-						- Perfect for storing timers, intervals, previous values
-						- Common use cases: tracking previous props/state, storing WebSocket connections
-						- Refs are mutable - you can change .current directly
-						- Don't read or write refs during rendering - use them in effects or event handlers
-					</aside>
-				</section>
-			</section>
-
-			<!-- Next.js -->
-			<section>
-				<section>
-					<h2>Next.js</h2>
-					<p>React meta-framework</p>
-				</section>
-				<section>
-					<h3>Server-Side Rendering</h3>
-					<p>Framework built on React</p>
-					<aside class="notes">
-						- SSR (Server-Side Rendering)
-						- SSG (Static Site Generation)
-						- ISR (Incremental Static Regeneration)
-						- Client-side rendering when needed
-					</aside>
-				</section>
-
-				<section>
-					<h4>Preconfigured Routing</h4>
-					<p>File-based routing system</p>
-					<aside class="notes">
-						- Pages directory or App Router
-						- Dynamic routes with brackets [id]
-						- Nested routes and layouts
-						- No need for React Router
-					</aside>
-				</section>
-
-				<section>
-					<h4>API Endpoints</h4>
-					<p>Light backend functionality</p>
-					<aside class="notes">
-						- API routes in /pages/api or /app/api
-						- Serverless functions
-						- Database queries, authentication
-						- Proxy for third-party APIs
-					</aside>
-				</section>
-
-				<section>
-					<h4>Optimization</h4>
-					<p>Built-in performance features</p>
-					<aside class="notes">
-						- Automatic code splitting
-						- Image optimization with next/image
-						- Font optimization
-						- Script optimization
-						- Automatic static optimization
-					</aside>
-				</section>
-
-				<section>
-					<h4>Extra Fullstack Features</h4>
-					<p>Beyond just rendering</p>
-					<aside class="notes">
-						- Middleware for request handling
-						- Server components (App Router)
-						- Server actions for mutations
-						- Environment variables
-						- TypeScript support out of the box
-					</aside>
-				</section>
-			</section>
-
-			<!-- Tailwind -->
-			<section>
-				<section>
-					<h2>Tailwind CSS</h2>
-					<p>Utility-first CSS framework</p>
-				</section>
-				<section data-auto-animate>
-					<h3>Projects with Lots of CSS</h3>
-					<p>Traditional approach</p>
-					<aside class="notes">
-						- Separate CSS files
-						- Class naming conventions (BEM, etc.)
-						- CSS specificity battles
-						- Unused CSS piling up
-						- Context switching between files
+						- Downloads the full repo history once
+						- Sets up "origin" pointing back to GitHub automatically
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<h3 style="font-size: 0.5em;">Projects with Lots of CSS</h3>
-					<pre><code class="language-css" data-trim data-noescape>
-.dog-gallery {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.dog-card {
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.2s;
-}
-
-.dog-card:hover {
-  transform: translateY(-4px);
-}
-
-.dog-card__image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.dog-card__content {
-  padding: 1rem;
-}
-
-.dog-card__title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #1a202c;
-  margin-bottom: 0.5rem;
-}
-
-.dog-card__breed {
-  color: #718096;
-  font-size: 0.875rem;
-}
+					<h3 data-id="remote-heading" style="font-size: 0.5em;">Remote</h3>
+					<h4>Push your branch to the remote</h4>
+					<pre><code class="bash" data-trim data-line-numbers="1|2|3|4">
+git checkout -b your-name/update-my-file
+git add changed-file
+git commit -m "update my file"
+git push origin your-name/update-my-file
 					</code></pre>
 					<aside class="notes">
-						- Traditional CSS with BEM naming
-						- Separate stylesheet needed
-						- Class names must be unique across project
-						- Hard to know if styles are actually used
-						- Need to context switch between CSS and HTML
+						- push sends your branch up to GitHub
+						- Branch is now visible to the whole team
 					</aside>
 				</section>
 
 				<section data-auto-animate>
-					<h3 style="font-size: 0.5em;">Projects with Lots of CSS</h3>
-					<pre><code class="language-html" data-trim data-noescape>
-&lt;div class="dog-gallery"&gt;
-  &lt;div class="dog-card"&gt;
-    &lt;img
-      src="/dog.jpg"
-      class="dog-card__image"
-      alt="Dog"
-    /&gt;
-    &lt;div class="dog-card__content"&gt;
-      &lt;h3 class="dog-card__title"&gt;
-        Good Boy
-      &lt;/h3&gt;
-      &lt;p class="dog-card__breed"&gt;
-        Golden Retriever
-      &lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-					</code></pre>
+					<h3 data-id="remote-heading" style="font-size: 0.5em;">Remote</h3>
+					<h4>Pull Request</h4>
 					<aside class="notes">
-						- HTML references CSS classes
-						- Need to jump between files to understand styles
-						- Class names follow BEM convention
-						- Markup is clean but styles are elsewhere
+						- PR = request to merge your branch into main
+						- Teammates review, comment, request changes
+						- Nothing merges without review
+						- GitHub → "Compare & pull request" after pushing
 					</aside>
 				</section>
 
 				<section>
-					<h3>Projects with Tailwind</h3>
-					<p>Utility-first approach</p>
+					<h4>Your turn</h4>
+					<ol>
+						<li>Clone the repo</li>
+						<li>Create a branch with your name</li>
+						<li>Modify an existing file</li>
+						<li>Stage and commit the change</li>
+						<li>Push and open a pull request</li>
+					</ol>
 					<aside class="notes">
-						- Styles in JSX/HTML
-						- No naming fatigue
-						- Consistent design system
-						- Purge unused styles automatically
-						- Everything in one place
-					</aside>
-				</section>
-
-				<section>
-					<h3>Tailwind</h3>
-					<pre><code class="language-html" data-trim data-noescape>
-&lt;div class="max-w-screen-xl mx-auto p-8"&gt;
-  &lt;div class="bg-white rounded-lg shadow-md
-              overflow-hidden transition-transform
-              hover:-translate-y-1"&gt;
-    &lt;img
-      src="/dog.jpg"
-      class="w-full h-48 object-cover"
-      alt="Dog"
-    /&gt;
-    &lt;div class="p-4"&gt;
-      &lt;h3 class="text-xl font-semibold
-                 text-gray-900 mb-2"&gt;
-        Good Boy
-      &lt;/h3&gt;
-      &lt;p class="text-gray-600 text-sm"&gt;
-        Golden Retriever
-      &lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-					</code></pre>
-					<aside class="notes">
-						- Same result, no separate CSS file
-						- No class naming needed
-						- Can see all styles inline
-						- Unused utilities automatically purged
-						- Responsive modifiers: md:text-2xl, lg:p-8
-						- State modifiers: hover:, focus:, active:
-					</aside>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h3>How It Works</h3>
-				</section>
-
-				<section>
-					<h4>Utility Classes</h4>
-					<p>Small, single-purpose classes</p>
-					<aside class="notes">
-						- Each class does one thing: p-4, text-center, bg-blue-500
-						- Compose utilities to build designs
-						- Generated at build time
-						- PurgeCSS removes unused classes
-					</aside>
-				</section>
-
-				<section>
-					<h4>CSS Equivalent Classes</h4>
-					<div style="display: flex; gap: 1rem; font-size: 1em; justify-content: center;">
-						<div style="flex: 1; text-align: left;">
-							<p style="font-weight: bold; margin-bottom: 1rem; text-align: center;">Tailwind</p>
-							<pre><code class="language-html" data-trim data-noescape>
-&lt;div class="flex
-            justify-center
-            items-center
-            gap-4"&gt;
-&lt;/div&gt;
-							</code></pre>
-						</div>
-						<div style="flex: 1; text-align: left;">
-							<p style="font-weight: bold; margin-bottom: 1rem; text-align: center;">CSS</p>
-							<pre><code class="language-css" data-trim data-noescape>
-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-							</code></pre>
-						</div>
-					</div>
-					<aside class="notes">
-						- Direct CSS property mappings
-						- Each utility class maps to a single CSS property
-						- Spacing scale: 4 = 1rem, 8 = 2rem, etc.
-						- Can compose multiple utilities for complex layouts
-					</aside>
-				</section>
-
-				<section>
-					<h4>CSS Equivalent Classes</h4>
-					<div style="display: flex; gap: 2rem; font-size: 1em; justify-content: center;">
-						<div style="flex: 1; text-align: left;">
-							<p style="font-weight: bold; margin-bottom: 1rem; text-align: center;">Tailwind</p>
-							<pre><code class="language-html" data-trim data-noescape>
-&lt;button class="bg-blue-500
-               text-white
-               px-4
-               py-2
-               rounded"&gt;
-  Click me
-&lt;/button&gt;
-							</code></pre>
-						</div>
-						<div style="flex: 1; text-align: left;">
-							<p style="font-weight: bold; margin-bottom: 1rem; text-align: center;">CSS</p>
-							<pre><code class="language-css" data-trim data-noescape>
-button {
-  background-color: #3b82f6;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-}
-							</code></pre>
-						</div>
-					</div>
-					<aside class="notes">
-						- Color scale: 500 is base, 600 is darker
-						- px-4 = padding-left + padding-right (1rem each)
-						- py-2 = padding-top + padding-bottom (0.5rem each)
-						- Much more concise than equivalent CSS
-					</aside>
-				</section>
-
-				<section>
-					<h4>Interaction</h4>
-					<pre><code class="language-html" data-trim data-noescape data-line-numbers="1-5|7-9|11-16">
-&lt;!-- Hover states --&gt;
-&lt;button class="bg-blue-500 hover:bg-blue-600
-               hover:scale-105 transition"&gt;
-  Click me
-&lt;/button&gt;
-
-&lt;!-- Focus states --&gt;
-&lt;input class="border focus:border-blue-500
-              focus:ring-2 focus:ring-blue-200" /&gt;
-
-&lt;!-- Active & Disabled --&gt;
-&lt;button class="active:scale-95
-               disabled:opacity-50
-               disabled:cursor-not-allowed"&gt;
-  Submit
-&lt;/button&gt;
-					</code></pre>
-					<aside class="notes">
-						- State modifiers prefix utilities: hover:, focus:, active:
-						- Can combine: hover:focus:bg-red-500
-						- Group interactions: group-hover:
-						- Peer interactions: peer-checked:
-						- Transition classes for smooth animations
-					</aside>
-				</section>
-
-				<section>
-					<h4>Responsive</h4>
-					<pre><code class="language-html" data-trim data-noescape data-line-numbers="1-4|6-10|12-14">
-&lt;!-- Mobile-first approach --&gt;
-&lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"&gt;
-  &lt;!-- 1 column mobile, 2 tablet, 4 desktop --&gt;
-&lt;/div&gt;
-
-&lt;!-- Responsive text & spacing --&gt;
-&lt;h1 class="text-2xl md:text-4xl lg:text-6xl
-           p-4 md:p-8 lg:p-12"&gt;
-  Responsive Heading
-&lt;/h1&gt;
-
-&lt;!-- Show/hide at breakpoints --&gt;
-&lt;nav class="hidden md:block"&gt;Desktop Nav&lt;/nav&gt;
-&lt;nav class="block md:hidden"&gt;Mobile Nav&lt;/nav&gt;
-					</code></pre>
-					<aside class="notes">
-						- Breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px), 2xl (1536px)
-						- Mobile-first: base styles, then override at larger screens
-						- Any utility can be responsive: md:flex, lg:hidden
-						- Can combine with other modifiers: md:hover:bg-blue-500
-					</aside>
-				</section>
-
-				<section>
-					<h4>More features</h4>
-					<pre><code class="language-html" data-trim data-noescape data-line-numbers="|2|5-7|10-11|14-17">
-&lt;!-- Arbitrary values --&gt;
-&lt;div class="w-[347px] top-[117px]"&gt;
-  &lt;!-- Exact values when needed --&gt;
-&lt;/div&gt;
-
-&lt;!-- Dark mode --&gt;
-&lt;div class="bg-white dark:bg-gray-900
-            text-black dark:text-white"&gt;
-  Auto dark mode
-&lt;/div&gt;
-
-&lt;!-- Peer & Group modifiers --&gt;
-&lt;label class="group"&gt;
-  &lt;input class="peer" type="checkbox" /&gt;
-  &lt;span class="peer-checked:text-blue-500"&gt;Check me&lt;/span&gt;
-&lt;/label&gt;
-					</code></pre>
-					<aside class="notes">
-						- Arbitrary values: [347px] for exact measurements
-						- Dark mode: automatic with dark: prefix
-						- Peer: style element based on sibling state
-						- Group: style children based on parent state
-						- Print styles: print:hidden
-						- Motion preferences: motion-reduce:
-					</aside>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h3>How to Use It Well</h3>
-				</section>
-
-				<section>
-					<h4>Keep Components Small</h4>
-					<p>Avoid utility class overload</p>
-					<aside class="notes">
-						- If drowning in utility classes, component is too complex
-						- Break down into smaller components
-						- Extract repeated patterns
-						- Component composition over long class strings
-					</aside>
-				</section>
-
-				<section>
-					<h4>Still Use CSS When Needed</h4>
-					<p>Tailwind isn't everything</p>
-					<aside class="notes">
-						- Complex animations
-						- One-off custom styles
-						- Third-party component overrides
-						- @apply directive for repeated patterns
-						- Custom CSS modules alongside Tailwind
-					</aside>
-				</section>
-
-				<section>
-					<h4>Use Config Variables</h4>
-					<p>Avoid custom values</p>
-					<aside class="notes">
-						- Define in tailwind.config.js
-						- Use theme values, not arbitrary: bg-blue-500 not bg-[#3b82f6]
-						- Maintains consistency
-						- Easier to update globally
-						- Type-safe with TypeScript
-					</aside>
-				</section>
-
-				<section>
-					<h4>Mobile First</h4>
-					<p>Responsive design approach</p>
-					<aside class="notes">
-						- Base styles are mobile
-						- Add breakpoints for larger screens: md:, lg:, xl:
-						- Example: text-sm md:text-base lg:text-lg
-						- Easier to enhance than reduce
-					</aside>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h3>How Tailwind Scans Your Code</h3>
-					<p>Plain text scanning, not parsing</p>
-					<aside class="notes">
-						- Tailwind treats all source files as plain text
-						- Doesn't parse your code as JavaScript/JSX/etc.
-						- Looks for any tokens that could be class names
-						- Tries to generate CSS for all tokens found
-						- Throws away tokens that don't map to known utilities
-						- This keeps CSS small and enables arbitrary values
-					</aside>
-				</section>
-
-				<section>
-					<h4>Example: What Tailwind Sees</h4>
-					<pre><code class="language-jsx" data-trim data-noescape data-line-numbers="|3-6|8-10">
-function Button({ color, children }) {
-  const colors = {
-    black: "bg-black text-white",
-    blue: "bg-blue-500 text-white",
-    white: "bg-white text-black",
-  };
-  return (
-    &lt;button className={`${colors[color]} rounded-full px-2 py-1.5`}&gt;
-      {children}
-    &lt;/button&gt;
-  );
-}
-					</code></pre>
-					<aside class="notes">
-						- Tailwind finds: bg-black, text-white, bg-blue-500, bg-white, text-black, rounded-full, px-2, py-1.5
-						- All complete class names as strings are detected
-						- Generates CSS for all these utilities
-						- Variable name "colors" and "color" don't matter
-						- Template literal concatenation works because full strings exist
-					</aside>
-				</section>
-
-				<section>
-					<h4>Don't Construct Class Names</h4>
-					<p>String interpolation breaks detection</p>
-					<aside class="notes">
-						- Tailwind has no way to understand string concatenation
-						- No understanding of template literals or interpolation
-						- Can't evaluate your programming language logic
-						- Only sees plain text tokens
-					</aside>
-				</section>
-
-				<section>
-					<h4>Wrong: String Interpolation</h4>
-					<pre><code class="language-html" data-trim data-noescape>
-&lt;div class="text-{{ error ? 'red' : 'green' }}-600"&gt;&lt;/div&gt;
-					</code></pre>
-					<pre><code class="language-jsx" data-trim data-noescape>
-function Button({ color, children }) {
-  return &lt;button className={`bg-${color}-600 hover:bg-${color}-500`}&gt;
-    {children}
-  &lt;/button&gt;;
-}
-					</code></pre>
-					<aside class="notes">
-						- text-red-600 and text-green-600 don't exist as complete strings
-						- bg-blue-600 or bg-red-600 aren't written out in full
-						- Tailwind can't predict what values variables will have
-						- These classes won't be generated
-					</aside>
-				</section>
-
-				<section>
-					<h4>Right: Complete Class Names</h4>
-					<pre><code class="language-html" data-trim data-noescape>
-&lt;div class="{{ error ? 'text-red-600' : 'text-green-600' }}"&gt;&lt;/div&gt;
-					</code></pre>
-					<pre><code class="language-jsx" data-trim data-noescape>
-function Button({ color, children }) {
-  const colorVariants = {
-    blue: "bg-blue-600 hover:bg-blue-500",
-    red: "bg-red-600 hover:bg-red-500",
-  };
-  return (
-    &lt;button className={`${colorVariants[color]} ...`}&gt;
-      {children}
-    &lt;/button&gt;
-  );
-}
-					</code></pre>
-					<aside class="notes">
-						- text-red-600 and text-green-600 exist as complete strings
-						- All color variants written out in full
-						- Tailwind can detect these complete class names
-						- Will generate CSS for all variants
+						- Common issues: not being inside the repo folder, auth on first push
+						- GitHub will prompt to authenticate via browser
 					</aside>
 				</section>
 			</section>

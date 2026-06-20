@@ -1,12 +1,9 @@
 {
-  "name": "frontend-workshop-slides",
+  "name": "practical-engineering-workshop-slides",
   "version": "5.1.0",
-  "description": "The HTML Presentation Framework",
-  "homepage": "https://revealjs.com",
-  "subdomain": "revealjs",
+  "description": "Guide to working as a team and with git",
   "main": "dist/reveal.js",
   "module": "dist/reveal.esm.js",
-  "license": "MIT",
   "scripts": {
     "test": "gulp test",
     "start": "gulp serve",
@@ -14,10 +11,6 @@
   },
   "author": {
     "name": "Drew Alexander"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Drewbi/frontend-workshop-slides.git"
   },
   "engines": {
     "node": ">=18.0.0"
