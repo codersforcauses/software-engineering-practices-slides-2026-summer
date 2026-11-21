@@ -5,9 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>Practical Software Engineering - CFC</title>
+	<title>Software Engineering Practices - CFC</title>
 
-	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
 	<link rel="stylesheet" href="dist/theme/cfc.css">
 
@@ -16,11 +15,448 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link
-		href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;700&display=swap"
+		href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400&display=swap"
 		rel="stylesheet">
 	<style>
+		:root {
+			--r-code-font: 'IBM Plex Mono', monospace;
+			--muted: #9a9a9a;
+			--rule: #2b2b2b;
+			--panel: #0d0d0d;
+			--red: #ff5b4f;
+			--green: #4ade80;
+		}
+
 		.slides ul {
 			min-width: 600px;
+		}
+
+		.reveal h1,
+		.reveal h2,
+		.reveal h3,
+		.reveal h4 {
+			text-wrap: balance;
+		}
+
+		/* The small heading a title auto-animates down to */
+		.reveal .slides .shrunk {
+			font-size: 0.5em;
+		}
+
+		.reveal .kicker {
+			margin: 0 0 0.75em;
+			font-family: var(--r-heading-font);
+			font-size: 0.6em;
+			letter-spacing: 0.25em;
+			text-transform: uppercase;
+			color: var(--muted);
+		}
+
+		/* Long sentences read better in the body font than in uppercase mono */
+		.reveal .statement {
+			max-width: 840px;
+			margin: 0 auto;
+			font-size: 1.2em;
+			line-height: 1.35;
+			text-wrap: balance;
+		}
+
+		.reveal .statement strong {
+			font-family: var(--r-heading-font);
+			text-transform: uppercase;
+		}
+
+		/* Code */
+		.reveal pre {
+			overflow: hidden;
+			border: 1px solid var(--rule);
+			border-radius: 8px;
+			box-shadow: none;
+		}
+
+		.reveal pre.terminal {
+			width: 720px;
+			font-size: 0.5em;
+			background: var(--panel);
+		}
+
+		.reveal pre.terminal code {
+			padding: 18px 22px;
+			max-height: none;
+		}
+
+		.reveal .t-pass {
+			color: var(--green);
+		}
+
+		.reveal .t-dim {
+			color: #8a8a8a;
+		}
+
+		.reveal pre.minified {
+			width: 820px;
+			font-size: 0.46em;
+		}
+
+		.reveal pre.minified code {
+			max-height: none;
+			white-space: pre-wrap;
+			word-break: break-all;
+		}
+
+		.reveal .code-pair {
+			display: flex;
+			justify-content: center;
+			align-items: flex-start;
+			gap: 24px;
+		}
+
+		.reveal .code-pair figure {
+			width: 420px;
+			margin: 0;
+			text-align: left;
+		}
+
+		.reveal .code-pair figcaption {
+			margin: 0 0 8px 4px;
+			font-family: var(--r-heading-font);
+			font-size: 0.45em;
+			color: var(--muted);
+		}
+
+		.reveal .code-pair pre {
+			width: 100%;
+			margin: 0;
+			font-size: 0.46em;
+		}
+
+		.reveal .code-pair pre code {
+			max-height: none;
+		}
+
+		/* Images: fixed boxes so a placeholder and the real file take the same space */
+		.reveal img.asset {
+			display: block;
+			margin: 0 auto;
+			max-width: none;
+			max-height: none;
+			object-fit: contain;
+		}
+
+		.reveal .pair {
+			display: flex;
+			justify-content: center;
+			gap: 32px;
+		}
+
+		.reveal .pair img.asset {
+			margin: 0;
+		}
+
+		/* Free-positioned layouts (logos, floating quotes) */
+		.reveal .stage {
+			position: relative;
+			width: 960px;
+			height: 600px;
+			margin: 0 auto;
+			overflow: hidden;
+		}
+
+		.reveal .stage>*,
+		.reveal .stage>img.asset {
+			position: absolute;
+			margin: 0;
+		}
+
+		/* 2025 sparkles */
+		.reveal .sparkly {
+			position: relative;
+			display: inline-block;
+		}
+
+		.reveal .sparkle {
+			position: absolute;
+			left: var(--x);
+			top: var(--y);
+			font-size: var(--s);
+			line-height: 1;
+			animation: twinkle 2.6s ease-in-out var(--d, 0s) infinite;
+		}
+
+		@keyframes twinkle {
+
+			0%,
+			100% {
+				opacity: 0.35;
+				transform: scale(0.75) rotate(-8deg);
+			}
+
+			50% {
+				opacity: 1;
+				transform: scale(1.1) rotate(8deg);
+			}
+		}
+
+		/* Strike-through that draws across. Each child span is struck separately,
+		   so text that wraps gets one line per span. */
+		.reveal .cross>span {
+			position: relative;
+			display: inline-block;
+		}
+
+		.reveal .cross>span::after {
+			content: "";
+			position: absolute;
+			left: -0.06em;
+			right: -0.06em;
+			top: 52%;
+			height: 0.1em;
+			margin-top: -0.05em;
+			border-radius: 0.05em;
+			background: var(--red);
+			transform: scaleX(0);
+			transform-origin: left center;
+			transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1) var(--delay, 0s);
+		}
+
+		.reveal .cross.visible>span::after,
+		.reveal .slides section.present:not(.stack) .cross.on-arrival>span::after,
+		.reveal.overview .cross>span::after {
+			transform: scaleX(1);
+		}
+
+		/* Floating quotes */
+		.reveal .float-quote {
+			max-width: 600px;
+			padding: 0.4em 0.75em;
+			font-size: 1.05em;
+			font-style: italic;
+			line-height: 1.3;
+			text-align: left;
+			border-left: 3px solid #fff;
+			background: rgba(255, 255, 255, 0.05);
+			transform: rotate(var(--r));
+			animation: drift var(--t, 7s) ease-in-out var(--d, 0s) infinite;
+		}
+
+		@keyframes drift {
+
+			0%,
+			100% {
+				transform: translateY(0) rotate(var(--r));
+			}
+
+			50% {
+				transform: translateY(-16px) rotate(calc(var(--r) * -0.5));
+			}
+		}
+
+		/* Questions that build up */
+		.reveal .ask {
+			margin: 0.35em auto;
+			font-size: 1.25em;
+			font-style: italic;
+		}
+
+		.reveal .ask.dim {
+			opacity: 0.3;
+		}
+
+		.reveal .emoji-figure {
+			margin: 0 0 0.2em;
+			font-size: 4.5em;
+			line-height: 1;
+		}
+
+		.reveal .caption {
+			font-size: 1.1em;
+		}
+
+		.reveal .caption strong {
+			font-family: var(--r-heading-font);
+		}
+
+		/* Developer + Designer + Business Analyst */
+		.reveal .roles {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			gap: 0.5em 0.6em;
+			font-family: var(--r-heading-font);
+			font-size: 1.05em;
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+
+		.reveal .roles span {
+			padding: 0.45em 0.8em;
+			border: 2px solid #fff;
+			border-radius: 6px;
+		}
+
+		.reveal .roles b {
+			color: var(--muted);
+		}
+
+		/* Tiles: team makeup, where the work goes */
+		.reveal .tiles {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 20px;
+		}
+
+		.reveal .tile {
+			width: 190px;
+			padding: 22px 12px;
+			border: 1px solid var(--rule);
+			border-radius: 10px;
+			background: var(--panel);
+		}
+
+		.reveal .tile .num {
+			display: block;
+			font-family: var(--r-heading-font);
+			font-size: 2.2em;
+			font-weight: 700;
+			line-height: 1;
+		}
+
+		.reveal .tile .label {
+			display: block;
+			margin-top: 10px;
+			font-size: 0.7em;
+			color: var(--muted);
+		}
+
+		.reveal .tiles.qualities .tile {
+			width: 260px;
+			padding: 28px 12px;
+		}
+
+		.reveal .tile .term {
+			display: block;
+			font-family: var(--r-heading-font);
+			font-size: 0.85em;
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+
+		.reveal .tiles.qualities+h2 {
+			margin-top: 1.1em;
+		}
+
+		.reveal .tiles.words .tile {
+			width: 260px;
+			padding: 34px 12px;
+			font-family: var(--r-heading-font);
+			font-size: 0.9em;
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+
+		/* Numbered steps; set --start to continue numbering across slides */
+		.reveal ol.steps {
+			display: block;
+			width: 800px;
+			margin: 0 auto;
+			padding: 0;
+			list-style: none;
+			text-align: left;
+			counter-reset: step var(--start, 0);
+		}
+
+		.reveal ol.steps>li {
+			position: relative;
+			margin: 0 0 0.7em;
+			padding-left: 2.6em;
+			font-size: 0.85em;
+			line-height: 1.35;
+			counter-increment: step;
+		}
+
+		.reveal ol.steps>li::before {
+			content: counter(step);
+			position: absolute;
+			left: 0;
+			top: -0.05em;
+			display: grid;
+			place-items: center;
+			width: 1.75em;
+			height: 1.75em;
+			border: 1px solid var(--muted);
+			border-radius: 50%;
+			font-family: var(--r-heading-font);
+			font-size: 0.8em;
+			color: var(--muted);
+		}
+
+		.reveal blockquote.pull {
+			width: 780px;
+			padding: 0.6em 1em;
+			text-align: left;
+			background: none;
+			box-shadow: none;
+			border-left: 4px solid #fff;
+		}
+
+		.reveal blockquote.pull p {
+			display: block;
+			margin: 0;
+			font-size: 1.15em;
+			line-height: 1.35;
+		}
+
+		.reveal blockquote.pull cite {
+			display: block;
+			margin-top: 0.8em;
+			font-family: var(--r-heading-font);
+			font-size: 0.6em;
+			font-style: normal;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--muted);
+		}
+
+		.reveal .footnote {
+			font-size: 0.7em;
+			font-style: italic;
+			color: var(--muted);
+		}
+
+		.reveal .caret {
+			display: inline-block;
+			width: 0.09em;
+			height: 1.05em;
+			margin-left: 0.12em;
+			vertical-align: -0.15em;
+			background: currentColor;
+			animation: blink 1.1s steps(1) infinite;
+		}
+
+		@keyframes blink {
+			50% {
+				opacity: 0;
+			}
+		}
+
+		/* Untyped letters keep their space so centred text doesn't shift while typing */
+		.reveal .typewriter .char.untyped {
+			visibility: hidden;
+		}
+
+		.reveal .typewriter.typing .caret {
+			animation: none;
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+
+			.reveal .sparkle,
+			.reveal .float-quote,
+			.reveal .caret {
+				animation: none;
+			}
 		}
 	</style>
 </head>
@@ -29,360 +465,871 @@
 	<div class="reveal">
 		<div class="slides">
 			<section>
-				<h1>Practical Software Engineering</h1>
+				<h1>Software Engineering Practices</h1>
 			</section>
 
-			<!-- Working in Teams -->
+			<!-- Intro -->
 			<section>
 				<section>
-					<h2>Working in Teams</h2>
-					<p>vs</p>
-					<h2>Working Alone</h2>
+					<h1 class="sparkly">2025<span class="sparkle" style="--x: -50%; --y: -40%; --s: 0.6em;"
+							aria-hidden="true">✨</span><span class="sparkle"
+							style="--x: 110%; --y: -35%; --s: 0.45em; --d: 0.8s;" aria-hidden="true">✨</span><span
+							class="sparkle" style="--x: 102%; --y: 62%; --s: 0.7em; --d: 1.6s;"
+							aria-hidden="true">✨</span><span class="sparkle"
+							style="--x: -40%; --y: 70%; --s: 0.4em; --d: 1.1s;" aria-hidden="true">✨</span><span
+							class="sparkle" style="--x: 38%; --y: -95%; --s: 0.3em; --d: 0.4s;"
+							aria-hidden="true">✨</span></h1>
 					<aside class="notes">
-						- Solo: full context, instant decisions
-						- Teams: shared experience, more output
-						- Teamwork is the only way to scale — but it has real costs
+						- This talk has changed since I gave it last year
+						- Arguably simpler times
 					</aside>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="faster-heading">Teams Can Go Faster</h3>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="faster-heading" style="font-size: 0.5em;">Teams Can Go Faster</h3>
-					<ul>
-						<li>Less context switching</li>
-						<li>Allows for specialisation</li>
-						<li>Higher maximum output</li>
-					</ul>
+				<section>
+					<img class="asset" data-asset="img/all-in" alt="Pushing chips all in, AI company logos on the chips"
+						style="width: 860px; height: 520px;">
 					<aside class="notes">
-						- Large projects: too much context for one person
-						- Each person can go deeper on their area
-						- AI is changing the solo ceiling, but teams still scale further
+						- Many companies are going all in on automating software development
 					</aside>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="slower-heading">Teams Can Go Slower</h3>
+				<!-- Bankwest -> CBA -> big tech -->
+				<section data-auto-animate data-auto-animate-id="logos">
+					<div class="stage">
+						<img class="asset" data-id="bankwest" data-asset="img/logos/bankwest" alt="Bankwest logo"
+							style="left: 230px; top: 215px; width: 500px; height: 170px;">
+						<img class="asset" data-id="cba" data-asset="img/logos/cba" alt="CBA logo"
+							style="left: 300px; top: -260px; width: 360px; height: 160px; opacity: 0;">
+					</div>
+					<aside class="notes">
+						- Many things about the way I work at Bankwest have changed since last year
+					</aside>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="slower-heading" style="font-size: 0.5em;">Teams Can Go Slower</h3>
+				<section data-auto-animate data-auto-animate-id="logos">
+					<div class="stage">
+						<img class="asset" data-id="bankwest" data-asset="img/logos/bankwest" alt="Bankwest logo"
+							style="left: 330px; top: 360px; width: 300px; height: 100px;">
+						<img class="asset" data-id="cba" data-asset="img/logos/cba" alt="CBA logo"
+							style="left: 300px; top: 140px; width: 360px; height: 160px;">
+						<!-- Off stage until the next slide -->
+						<img class="asset" data-id="atlassian" data-asset="img/logos/atlassian" alt="Atlassian logo"
+							style="left: 395px; top: -224px; width: 170px; height: 80px; opacity: 0;">
+						<img class="asset" data-id="google" data-asset="img/logos/google" alt="Google logo"
+							style="left: 1044px; top: 18px; width: 170px; height: 80px; opacity: 0;">
+						<img class="asset" data-id="microsoft" data-asset="img/logos/microsoft" alt="Microsoft logo"
+							style="left: 1044px; top: 502px; width: 170px; height: 80px; opacity: 0;">
+						<img class="asset" data-id="amazon" data-asset="img/logos/amazon" alt="Amazon logo"
+							style="left: 395px; top: 744px; width: 170px; height: 80px; opacity: 0;">
+						<img class="asset" data-id="meta" data-asset="img/logos/meta" alt="Meta logo"
+							style="left: -254px; top: 502px; width: 170px; height: 80px; opacity: 0;">
+						<img class="asset" data-id="canva" data-asset="img/logos/canva" alt="Canva logo"
+							style="left: -254px; top: 18px; width: 170px; height: 80px; opacity: 0;">
+					</div>
+					<aside class="notes">
+						- Bankwest is going all in too, along with the rest of CBA
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="logos">
+					<div class="stage">
+						<img class="asset" data-id="bankwest" data-asset="img/logos/bankwest" alt="Bankwest logo"
+							style="left: 405px; top: 335px; width: 150px; height: 50px;">
+						<img class="asset" data-id="cba" data-asset="img/logos/cba" alt="CBA logo"
+							style="left: 365px; top: 225px; width: 230px; height: 100px;">
+						<img class="asset" data-id="atlassian" data-asset="img/logos/atlassian" alt="Atlassian logo"
+							data-auto-animate-delay="0.15" style="left: 395px; top: 40px; width: 170px; height: 80px;">
+						<img class="asset" data-id="google" data-asset="img/logos/google" alt="Google logo"
+							data-auto-animate-delay="0.23" style="left: 690px; top: 150px; width: 170px; height: 80px;">
+						<img class="asset" data-id="microsoft" data-asset="img/logos/microsoft" alt="Microsoft logo"
+							data-auto-animate-delay="0.31" style="left: 690px; top: 370px; width: 170px; height: 80px;">
+						<img class="asset" data-id="amazon" data-asset="img/logos/amazon" alt="Amazon logo"
+							data-auto-animate-delay="0.39" style="left: 395px; top: 480px; width: 170px; height: 80px;">
+						<img class="asset" data-id="meta" data-asset="img/logos/meta" alt="Meta logo"
+							data-auto-animate-delay="0.47" style="left: 100px; top: 370px; width: 170px; height: 80px;">
+						<img class="asset" data-id="canva" data-asset="img/logos/canva" alt="Canva logo"
+							data-auto-animate-delay="0.55" style="left: 100px; top: 150px; width: 170px; height: 80px;">
+					</div>
+					<aside class="notes">
+						- Many devs at big tech companies I’ve talked to haven’t written code by hand in a year or more
+						- Not just tech demos
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="crafted">
+					<h2><span data-id="crafted-kind" style="display: inline-block;">Handcrafted</span> <span
+							data-id="crafted-software" style="display: inline-block;">software</span></h2>
+					<aside class="notes">
+						- Have had AI coding tools for a while
+						- But it was always a background thing, never particularly instrumental
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="crafted">
+					<h2><span data-id="generated-kind" style="display: inline-block;">Generated</span> <span
+							data-id="crafted-software" style="display: inline-block;">software</span></h2>
+				</section>
+
+				<section>
+					<h2 class="cross on-arrival"><span style="--delay: 0.5s;">Everything’s changed</span></h2>
+					<aside class="notes">
+						- Easy to get swept away by the assumption that everything is different
+						- And that none of the principles of software are relevant anymore
+					</aside>
+				</section>
+
+				<section>
+					<div class="stage">
+						<p class="float-quote" style="left: 70px; top: 70px; --r: -4deg; --t: 7s;">“Programming is dead”</p>
+						<p class="float-quote" style="left: 330px; top: 235px; --r: 3deg; --t: 8.5s; --d: -2s;">“You don’t
+							need to read the code”</p>
+						<p class="float-quote" style="left: 90px; top: 400px; --r: -2deg; --t: 7.8s; --d: -4s;">“Natural
+							language is the new abstraction layer”</p>
+					</div>
+				</section>
+
+				<section>
+					<div class="pair">
+						<img class="asset" data-asset="img/utopia" alt="Classic utopia"
+							style="width: 440px; height: 330px;">
+						<img class="asset" data-asset="img/dystopia" alt="Classic dystopia"
+							style="width: 440px; height: 330px;">
+					</div>
+					<aside class="notes">
+						- Won’t try and predict too far into the future
+						- Automation is coming for us all
+					</aside>
+				</section>
+
+				<section>
+					<h2>Software fundamentals are still valid</h2>
+					<aside class="notes">
+						- Learning a domain deeply is valuable
+						- Software will touch everything
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="talk">
+					<h3 data-id="talk-heading">What is this talk?</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="talk">
+					<h3 data-id="talk-heading" class="shrunk">What is this talk?</h3>
 					<ul>
-						<li>Differences in experience levels</li>
-						<li>Misaligned understanding of the problem</li>
-						<li>Delegation overhead</li>
-						<li>Less individual responsibility</li>
-						<li>Integrating each other's code</li>
+						<li>My experience working in software recently</li>
+						<li>Opinions on how our industry is changing and how to stay relevant</li>
+						<li>A few fundamentals you can use in your work</li>
 					</ul>
 					<aside class="notes">
-						- Teaching takes time; people can build the wrong thing
-						- Defining and reviewing work has a cost
-						- Code integration causes conflicts
-						- Go slow to go fast
+						- Hybrid talk
+						- Basics of git and teamwork
+						- Plus opinions on the foundations and principles of software engineering
 					</aside>
 				</section>
 			</section>
 
-			<!-- Planning the Work -->
+			<!-- Part 1: Role of a software engineer -->
 			<section>
 				<section>
-					<h2>Planning the Work</h2>
-					<small>How to delegate effectively</small>
+					<p class="kicker">Part 1</p>
+					<h2>Role of a software engineer</h2>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="card-heading">The Card</h3>
-					<p>Issue · Task · Ticket</p>
+				<section data-auto-animate data-auto-animate-id="good">
+					<h2 data-id="good-heading">Role: Make good software ✅</h2>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="card-heading" style="font-size: 0.5em;">The Card</h3>
-					<h4>Basic unit of work</h4>
+				<section data-auto-animate data-auto-animate-id="good">
+					<h2 data-id="good-heading" class="shrunk">Role: Make good software ✅</h2>
 					<ul>
-						<li>Enough context to understand the work</li>
-						<li>A definition of done</li>
+						<li>Correct</li>
+						<li>Understandable</li>
+						<li>Extensible</li>
 					</ul>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="correct">
+					<h3 data-id="correct-heading">Correct</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="correct">
+					<h3 data-id="correct-heading" class="shrunk">Correct</h3>
+					<pre class="terminal"><code class="nohighlight" data-trim data-noescape>
+<span class="t-dim">$</span> npm test
+
+ <span class="t-pass">✓</span> src/cart.test.ts <span class="t-dim">(6 tests) 14ms</span>
+   <span class="t-pass">✓</span> adds a hoodie to an empty cart
+   <span class="t-pass">✓</span> increases quantity when the same size is added again
+   <span class="t-pass">✓</span> removes the item when quantity reaches zero
+   <span class="t-pass">✓</span> applies a 10% member discount
+   <span class="t-pass">✓</span> rejects an expired discount code
+   <span class="t-pass">✓</span> includes GST in the order total
+
+ <span class="t-dim">Test Files</span>  <span class="t-pass">1 passed</span> <span class="t-dim">(1)</span>
+      <span class="t-dim">Tests</span>  <span class="t-pass">6 passed</span> <span class="t-dim">(6)</span>
+					</code></pre>
 					<aside class="notes">
-						- Atomic unit one person can pick up
-						- Context: what are we solving and how should it work?
-						- Definition of done: prevents scope creep
+						- Does what it’s meant to, no bugs
 					</aside>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="card-heading" style="font-size: 0.5em;">The Card</h3>
-					<h4>Commonly includes</h4>
-					<ul>
-						<li>Problem or feature description</li>
-						<li>Suggested implementation</li>
-						<li>Acceptance criteria</li>
-						<li>Complexity estimate</li>
-						<li>Associated code (once started)</li>
-					</ul>
+				<section data-auto-animate data-auto-animate-id="understandable">
+					<h3 data-id="understandable-heading">Understandable</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="understandable">
+					<h3 data-id="understandable-heading" class="shrunk">Understandable</h3>
+					<pre class="minified"><code class="javascript" data-trim><script type="text/template">
+"use strict";var e=Object.defineProperty,t=(t,n,r)=>n in t?e(t,n,{enumerable:!0,configurable:!0,writable:!0,value:r}):t[n]=r,n=(e,n,r)=>t(e,"symbol"!=typeof n?n+"":n,r);const r=.1,o=e=>Math.round(100*e)/100;class s{constructor(e=[]){n(this,"items");this.items=e}add(e,t){const n=this.items.findIndex(n=>n.id===e.id&&n.size===t);return n<0?new s([...this.items,{...e,size:t,qty:1}]):new s(this.items.map((e,t)=>t===n?{...e,qty:e.qty+1}:e))}remove(e,t){return new s(this.items.map(n=>n.id===e&&n.size===t?{...n,qty:n.qty-1}:n).filter(e=>e.qty>0))}subtotal(){return this.items.reduce((e,{price:t,qty:n})=>e+t*n,0)}total(e){let t=this.subtotal();return e&&(e.expires>Date.now()?t*=1-e.pct:(()=>{throw new Error("expired")})()),o(t*(1+r))}}const i=e=>e.reduce((e,t)=>({...e,[t.id]:t}),{}),a=(e,t)=>fetch(`/api/products/${e}`).then(e=>e.ok?e.json():Promise.reject(e.status)).then(t);export{s as Cart,i as indexProducts,a as loadProduct};
+					</script></code></pre>
 					<aside class="notes">
-						- Acceptance criteria: testable conditions e.g. "GET /list returns 200 with items array"
-						- Estimate: story points, t-shirt sizes, or hours
-						- Code: PR/branch link added once work begins
+						- Behaviour can be reasoned about
 					</aside>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="card-heading" style="font-size: 0.5em;">The Card</h3>
-					<h4>Tips for writing good cards</h4>
-					<ul>
-						<li>Small and specific</li>
-						<li>Anyone can pick it up without prior context</li>
-						<li>Anyone can tell when the work is correct</li>
-					</ul>
-					<aside class="notes">
-						- Small: if it takes more than a few days, break it down further
-						- No prior context: the card itself has everything needed to start
-						- Verifiable: the acceptance criteria should leave no ambiguity about done
-					</aside>
+				<section data-auto-animate data-auto-animate-id="extensible">
+					<h3 data-id="extensible-heading">Extensible</h3>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="board-heading">The Board</h3>
-					<p>Kanban · Project · Sprint board</p>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="board-heading" style="font-size: 0.5em;">The Board</h3>
-					<h4>Shared view of work in progress</h4>
-					<ul>
-						<li>Columns: Todo -> In Progress -> Verifying -> Done</li>
-						<li>Sprint: 2–4 weeks of planned work</li>
-						<li>Standup: Regular sync on blockers and progress</li>
-					</ul>
+				<section data-auto-animate data-auto-animate-id="extensible">
+					<h3 data-id="extensible-heading" class="shrunk">Extensible</h3>
+					<div class="code-pair">
+						<figure>
+							<figcaption>products.json</figcaption>
+							<pre><code class="json" data-trim>
+{
+  "id": "cfc-hoodie",
+  "name": "CFC Hoodie",
+  "price": 45.00,
+  "currency": "AUD",
+  "sizes": ["S", "M", "L", "XL"],
+  "inStock": true
+}
+							</code></pre>
+						</figure>
+						<figure>
+							<figcaption>ProductPage.jsx</figcaption>
+							<pre><code class="javascript" data-trim><script type="text/template">
+export function ProductPage() {
+  return (
+    <main>
+      <h1>CFC Hoodie</h1>
+      <p>$45.00 AUD</p>
+      <select>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL</option>
+      </select>
+      <button>Add to cart</button>
+    </main>
+  );
+}
+							</script></code></pre>
+						</figure>
+					</div>
 					<aside class="notes">
-						- Makes work visible — no "what are you working on?"
-						- One card in progress per person at a time
-						- Standup: what did you do, what will you do, are you blocked?
-						- Tools: GitHub Projects, Jira
+						- New functionality can be added without significant changes to the system
+						- Here the product lives in config, but the page hard codes every value anyway
 					</aside>
 				</section>
 
 				<section>
-					<h4>Takes time</h4>
-					<p>That could have been spent coding</p>
+					<h2>Everyone loves clean code</h2>
 					<aside class="notes">
-						- Feels slow at first, but prevents rework and misalignment
-						- Misalignment discovered late costs more than planning upfront
-						- If the process feels heavy, it's too much process
+						- Correct, understandable and extensible is roughly what people mean by “clean” code
+					</aside>
+				</section>
+
+				<section>
+					<h2>Role: Investigate and gain context 🔎</h2>
+					<aside class="notes">
+						- Learning to code is only the beginning
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="tech-context">
+					<h3 data-id="tech-context-heading">Technical context</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="tech-context">
+					<h3 data-id="tech-context-heading" class="shrunk">Technical context</h3>
+					<ul>
+						<li>Tech stack</li>
+						<li>Code base</li>
+						<li>System Landscape</li>
+					</ul>
+					<aside class="notes">
+						- Need to learn about the code base you’re working on
+						- The technology you’re using
+						- The systems you’re interacting with
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="business-context">
+					<h3 data-id="business-context-heading">Business context</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="business-context">
+					<h3 data-id="business-context-heading" class="shrunk">Business context</h3>
+					<ul>
+						<li>Problem you’re solving</li>
+						<li>How the software will be used</li>
+					</ul>
+					<aside class="notes">
+						- Understand the problem your system is trying to solve (the business problem)
+						- And who will be using it (user/customer)
+					</aside>
+				</section>
+
+				<section>
+					<div class="roles">
+						<span>Developer</span><b>+</b><span>Designer</span><b>+</b><span>Business Analyst</span>
+					</div>
+					<aside class="notes">
+						- Everyone’s a business person/designer!
+					</aside>
+				</section>
+
+				<section>
+					<h2>Role: Have opinions</h2>
+				</section>
+
+				<section>
+					<div class="tiles qualities">
+						<div class="tile"><span class="term">Functionality</span><span class="label">Correct</span></div>
+						<div class="tile"><span class="term">Clarity</span><span class="label">Understandable</span></div>
+						<div class="tile"><span class="term">Architecture</span><span class="label">Extensible</span></div>
+					</div>
+					<h2 class="fragment">are subjective</h2>
+				</section>
+
+				<section>
+					<h3>Requirements are not concrete</h3>
+					<aside class="notes">
+						- Requirements are vague, only code is concrete (kinda)
+					</aside>
+				</section>
+
+				<section>
+					<h3>People understand things differently</h3>
+				</section>
+
+				<section>
+					<h3>How will a system evolve?</h3>
+					<aside class="notes">
+						- Hard to predict how a system will evolve
+						- Or what functionality it might need to have in future
+					</aside>
+				</section>
+
+				<section>
+					<h3>Vibes driven development (VDD)</h3>
+					<aside class="notes">
+						- It was vibe coding all along
+					</aside>
+				</section>
+
+				<section>
+					<h2>Role: Take accountability 🤝</h2>
+					<aside class="notes">
+						- You can make guarantees around correctness and how difficult a requirement is
+					</aside>
+				</section>
+
+				<section>
+					<div class="emoji-figure" aria-hidden="true">🧑‍💼</div>
+					<p class="caption"><strong>CEO:</strong> Claude, did you make no mistakes</p>
+					<aside class="notes">
+						- I don’t think an exec is going to want to ask Claude about how their enterprise systems work
+						- (oh god, maybe they would)
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="asks">
+					<p class="ask" data-id="ask-1">“How long will this take to deliver”</p>
+					<aside class="notes">
+						- Who will answer for failures and delays? Not AI
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="asks">
+					<p class="ask dim" data-id="ask-1">“How long will this take to deliver”</p>
+					<p class="ask" data-id="ask-2">“Why is this feature so difficult”</p>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="asks">
+					<p class="ask dim" data-id="ask-1">“How long will this take to deliver”</p>
+					<p class="ask dim" data-id="ask-2">“Why is this feature so difficult”</p>
+					<p class="ask" data-id="ask-3">“Is this code going to work in production”</p>
+				</section>
+
+				<section>
+					<h2>Go ask AI ❌</h2>
+					<aside class="notes">
+						- By contributing to a code base you take responsibility for the outcome of your code, not AI
 					</aside>
 				</section>
 			</section>
 
-			<!-- Git -->
+			<!-- Part 2: How to break down problems -->
 			<section>
 				<section>
+					<p class="kicker">Part 2</p>
+					<h2>How to break down problems</h2>
+				</section>
+
+				<section>
+					<h3>Step 1: <span class="cross fragment custom"><span>copy problem statement</span> <span
+								style="--delay: 0.35s;">into AI of choice</span></span></h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="challenge">
+					<h3 data-id="challenge-heading">Step 1: challenge requirements</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="challenge">
+					<h3 data-id="challenge-heading" class="shrunk">Step 1: challenge requirements</h3>
+					<ul>
+						<li>Necessary?</li>
+						<li>Specific?</li>
+						<li>Correct?</li>
+					</ul>
+					<aside class="notes">
+						- Interpret the requirements and gain context: ask a lot of questions
+						- Some requirements have huge implications
+						- They might need to be pushed back on, or escalated into bigger projects
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="implementation">
+					<h3 data-id="implementation-heading">Step 2: think about implementation</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="implementation">
+					<h3 data-id="implementation-heading" class="shrunk">Step 2: think about implementation</h3>
+					<ul>
+						<li>How does the system work right now?</li>
+						<li>Is the system structured to make implementation possible?</li>
+						<li>Do I need to consult my team/wider project around the implementation?</li>
+					</ul>
+					<aside class="notes">
+						- Deciding on the implementation
+					</aside>
+				</section>
+
+				<section>
+					<h2>Spike it</h2>
+					<aside class="notes">
+						- Look at different options
+						- Get feedback
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="task-it-up">
+					<h3 data-id="task-it-up-heading">Step 3: Task it up</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="task-it-up">
+					<h3 data-id="task-it-up-heading" class="shrunk">Step 3: Task it up</h3>
+					<ul>
+						<li>Jira - Card</li>
+						<li>GitHub - Issue</li>
+					</ul>
+					<aside class="notes">
+						- Create issues
+					</aside>
+				</section>
+
+				<section>
+					<h2>What’s the point?</h2>
+					<aside class="notes">
+						- The issue with issues
+					</aside>
+				</section>
+
+				<section>
+					<h3>Do what works for your project</h3>
+				</section>
+
+				<section>
+					<h3>Don’t try and plan out the whole project</h3>
+				</section>
+			</section>
+
+			<!-- Part 3: How to implement -->
+			<section>
+				<section>
+					<p class="kicker">Part 3</p>
+					<h2>How to implement</h2>
+				</section>
+
+				<section>
+					<h3>Step 1: Solve the problem</h3>
+				</section>
+
+				<section>
+					<p class="statement"><strong>Step 2:</strong> Integrate your solution into a fast moving codebase
+						with developers who don’t have much time or attention to give you, without causing any issues</p>
+				</section>
+
+				<section>
+					<p class="statement"><strong>Actual step 1:</strong> solve the problem incrementally so the changes
+						are small and easy to review</p>
+					<aside class="notes">
+						- Small changes are understandable and easy to test
+					</aside>
+				</section>
+
+				<section>
+					<h3>Don’t try and 1 shot the problem with AI</h3>
+					<aside class="notes">
+						- Don’t try and one-shot a whole feature if you want to understand the decisions being made
+					</aside>
+				</section>
+
+				<section>
+					<h2>Write the code</h2>
+				</section>
+
+				<section>
+					<h2>Run the code</h2>
+				</section>
+
+				<section>
+					<h2>Test the code</h2>
+				</section>
+
+				<section>
+					<p class="statement"><strong>Step 2:</strong> Integrate parts of your solution until you complete
+						the requirement</p>
+					<aside class="notes">
+						- KEEP PRs SMALL
+						- 1 issue != 1 PR
+						- Easy review, easy integration, easy fixes
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="projects">
+					<h3 data-id="projects-heading">Volunteer projects vs Enterprise projects</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="projects">
+					<h3 data-id="projects-heading" class="shrunk">Volunteer projects vs Enterprise projects</h3>
+					<ul>
+						<li class="fragment">Limited time for reviews/testing ✅</li>
+						<li class="fragment">Vague, changing requirements ✅</li>
+						<li class="fragment">Varying levels of ability ✅</li>
+						<li class="fragment">Excessive amounts of reliance on AI ✅</li>
+					</ul>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="approach">
+					<h3 data-id="approach-heading">My suggested approach</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="approach">
+					<h3 data-id="approach-heading" class="shrunk">My suggested approach</h3>
+					<ol class="steps">
+						<li>Issues contain functional requirements and some technical context</li>
+						<li class="fragment">PRs contain non-breaking, tested code that contributes to meeting those
+							requirements</li>
+						<li class="fragment">Once functional requirements are met, dev adds evidence to the issue, someone
+							else verifies</li>
+					</ol>
+				</section>
+			</section>
+
+			<!-- Interlude: Git -->
+			<section>
+				<section>
+					<p class="kicker">Interlude</p>
 					<h2>Git</h2>
-					<small>How to integrate your work</small>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="why-git-heading">Without Git</h3>
+				<section data-auto-animate data-auto-animate-id="git-basics">
+					<h3 data-id="git-basics-heading">Git Basics</h3>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="why-git-heading" style="font-size: 0.5em;">Without Git</h3>
-					<ul>
-						<li>How do I share my changes?</li>
-						<li>How do we combine changes to the same file?</li>
-						<li>How do I undo something?</li>
-						<li>Who changed this, and why?</li>
-					</ul>
-					<aside class="notes">
-						- Before git: email zips, shared drives, manual merging
-						- "final_final_v3_ACTUALLY_FINAL.zip"
-					</aside>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="git-concepts-heading">Core Concepts</h3>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="git-concepts-heading" style="font-size: 0.5em;">Core Concepts</h3>
-					<ul>
-						<li><strong>Commit</strong> - a saved snapshot of changes</li>
-						<li><strong>Branch</strong> - a separate timeline of changes</li>
-						<li><strong>Merge</strong> - combining two branches</li>
-					</ul>
-					<aside class="notes">
-						- main is the primary branch — the source of truth
-					</aside>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="commit-heading">Commit</h3>
-					<p>Bundle and save related changes</p>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="commit-heading" style="font-size: 0.5em;">Commit</h3>
-					<h4>Stage your changes first</h4>
-					<pre><code class="bash" data-trim data-line-numbers>
-git add style.css index.html
-					</code></pre>
-					<aside class="notes">
-						- Working directory: files you've changed but not yet committed
-						- Staging area: files you've marked to include in the next commit
-						- git add lets you choose which changes to bundle together
-						- You might change 5 files but only want to commit 2 of them
-					</aside>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="commit-heading" style="font-size: 0.5em;">Commit</h3>
-					<h4>Then commit with a message</h4>
-					<pre><code class="bash" data-trim data-line-numbers>
-git commit -m "update header styles"
-					</code></pre>
-					<aside class="notes">
-						- Message is for your team and future you
-						- Logical unit — not "saved work" but "fixed login bug"
-					</aside>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="branch-heading">Branch</h3>
-					<p>A separate timeline of changes</p>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="branch-heading" style="font-size: 0.5em;">Branch</h3>
-					<pre><code class="bash" data-trim data-line-numbers="1|2|3|4|5|6">
+				<section data-auto-animate data-auto-animate-id="git-basics">
+					<h3 data-id="git-basics-heading" class="shrunk">Git Basics</h3>
+					<pre><code class="bash" data-trim data-line-numbers="1-3|5-7|9-11">
+# create a branch and switch to it
 git branch feature/new-header
 git checkout feature/new-header
-# make changes to your files
-git add index.html
-git commit -m "try a new header"
-git checkout main
-					</code></pre>
-					<p style="font-size: 0.6em;">Changes stay on <code>feature/new-header</code></p>
-					<aside class="notes">
-						- checkout -b: create and switch in one step
-						- main is untouched while you work on the branch
-						- Naming: feature/, fix/, chore/ prefixes
-					</aside>
-				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="merge-heading">Merge</h3>
-					<p>Bring work back together</p>
-				</section>
+# stage and commit your changes
+git add index.html style.css
+git commit -m "update header styles"
 
-				<section data-auto-animate>
-					<h3 data-id="merge-heading" style="font-size: 0.5em;">Merge</h3>
-					<pre><code class="bash" data-trim data-line-numbers="1|2|3">
+# merge your branch back into main
 git checkout main
 git merge feature/new-header
-git log
 					</code></pre>
 					<aside class="notes">
-						- Merge INTO main (switch to it first)
+						- Commit: a saved snapshot of related changes
+						- Branch: a separate timeline of changes
+						- Merge: combining two branches
 					</aside>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="conflict-heading">Merge Conflicts</h3>
-					<p>When two branches change the same line</p>
+				<section data-auto-animate data-auto-animate-id="git-remote">
+					<h3 data-id="git-remote-heading">Git Remote</h3>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="conflict-heading" style="font-size: 0.5em;">Merge Conflicts</h3>
-					<pre><code class="diff" data-trim data-line-numbers="1|2-3|4|5-6|7">
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-background: blue;
-=======
-background: red;
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/new-header
+				<section data-auto-animate data-auto-animate-id="git-remote">
+					<h3 data-id="git-remote-heading" class="shrunk">Git Remote</h3>
+					<pre><code class="bash" data-trim data-line-numbers="1-3|5-6">
+# get the latest main from the remote
+git checkout main
+git pull origin main
+
+# share your branch with the team
+git push origin feature/new-header
 					</code></pre>
 					<aside class="notes">
-						- Git marks both versions in the file and stops the merge
-						- HEAD = your current branch, below the === is the incoming branch
-						- Pick one, delete the markers, then save
+						- Remote: the shared copy of the repo on GitHub
+						- pull brings your team’s changes down, push sends yours up
+						- Then open a pull request so the branch can be reviewed and merged
+					</aside>
+				</section>
+			</section>
+
+			<!-- Part 4: Avoiding slop -->
+			<section>
+				<section>
+					<p class="kicker">Part 4</p>
+					<h2>Avoiding slop</h2>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="what-is-slop">
+					<h2 data-id="what-is-slop-heading">What is slop?</h2>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="what-is-slop">
+					<h2 data-id="what-is-slop-heading" class="shrunk">What is slop?</h2>
+					<blockquote class="pull">
+						<p>“Any product of AI, devoid of cognitive rigour”</p>
+						<cite>— Drew Alexander</cite>
+					</blockquote>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="slop-where">
+					<h3 data-id="slop-where-heading">Where slop can occur</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="slop-where">
+					<h3 data-id="slop-where-heading" class="shrunk">Where slop can occur</h3>
+					<ul>
+						<li>code</li>
+						<li>gh issue descriptions</li>
+						<li>pull request descriptions</li>
+						<li>messages between team members</li>
+						<li>ai output</li>
+					</ul>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="deslop">
+					<h3 data-id="deslop-heading">Deslopping is exhausting</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="deslop">
+					<h3 data-id="deslop-heading" class="shrunk">Deslopping is exhausting</h3>
+					<ul>
+						<li>reviewing someone’s massive AI generated PR</li>
+						<li>responding to someone’s AI generated review/messages</li>
+					</ul>
+					<aside class="notes">
+						- Wading through slop is exhausting
 					</aside>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="conflict-heading" style="font-size: 0.5em;">Merge Conflicts</h3>
-					<h4>Resolve and complete the merge</h4>
-					<pre><code class="bash" data-trim data-line-numbers="1|2|3">
-# edit the file to resolve the conflict
-git add style.css
-git commit -m "merge feature/new-header"
-					</code></pre>
-					<aside class="notes">
-						- After resolving, stage the file and commit as normal
-						- Most editors (VS Code) have a UI to accept current/incoming/both
-					</aside>
+				<section data-auto-animate data-auto-animate-id="deslop">
+					<h3 data-id="deslop-heading" class="shrunk">Deslopping is exhausting</h3>
+					<h4>Requires:</h4>
+					<ul>
+						<li>Reading and understanding what it’s saying/trying to say</li>
+						<li>Thinking through the context and whether it is actually correct</li>
+						<li>Thinking through alternatives and whether something else is more correct</li>
+					</ul>
 				</section>
 
-				<section data-auto-animate>
-					<h3 data-id="remote-heading">Remote</h3>
-					<p>A shared copy of the repo everyone syncs to</p>
+				<section>
+					<h3>AI writing code doesn’t mean you can do less work</h3>
 					<aside class="notes">
-						- Everything so far is local
-						- Remote is hosted on GitHub — the team's source of truth
-					</aside>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="remote-heading" style="font-size: 0.5em;">Remote</h3>
-					<h4>Clone the repo</h4>
-					<pre style="font-size: 0.4em;"><code class="bash" data-trim data-line-numbers>
-git clone https://github.com/codersforcauses/software-engineering-practices-demo-2026-winter
-					</code></pre>
-					<aside class="notes">
-						- Downloads the full repo history once
-						- Sets up "origin" pointing back to GitHub automatically
-					</aside>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="remote-heading" style="font-size: 0.5em;">Remote</h3>
-					<h4>Push your branch to the remote</h4>
-					<pre><code class="bash" data-trim data-line-numbers="1|2|3|4">
-git checkout -b your-name/update-my-file
-git add changed-file
-git commit -m "update my file"
-git push origin your-name/update-my-file
-					</code></pre>
-					<aside class="notes">
-						- push sends your branch up to GitHub
-						- Branch is now visible to the whole team
-					</aside>
-				</section>
-
-				<section data-auto-animate>
-					<h3 data-id="remote-heading" style="font-size: 0.5em;">Remote</h3>
-					<h4>Pull Request</h4>
-					<aside class="notes">
-						- PR = request to merge your branch into main
-						- Teammates review, comment, request changes
-						- Nothing merges without review
-						- GitHub → "Compare & pull request" after pushing
+						- You aren’t avoiding work by getting AI to code for you
 					</aside>
 				</section>
 
 				<section>
-					<h4>Your turn</h4>
-					<ol>
-						<li>Clone the repo</li>
-						<li>Create a branch with your name</li>
-						<li>Modify an existing file</li>
-						<li>Stage and commit the change</li>
-						<li>Push and open a pull request</li>
-					</ol>
+					<h3>It moves the work somewhere else</h3>
+					<div class="tiles words">
+						<div class="tile fragment">You but later</div>
+						<div class="tile fragment">Someone else</div>
+						<div class="tile fragment">Nobody</div>
+					</div>
 					<aside class="notes">
-						- Common issues: not being inside the repo folder, auth on first push
-						- GitHub will prompt to authenticate via browser
+						- You but later: intensely scrutinise the output until you understand it and why it is correct
+						- Someone else: they scrutinise the output until they tell you what is wrong with it
+						- Nobody: no one puts in the cognitive effort, and you just hope the AI is aligned to your needs and makes no mistakes™
 					</aside>
 				</section>
+
+				<section>
+					<h2>Don’t be sloppy</h2>
+				</section>
+			</section>
+
+			<!-- Part 5: Why learning software is hard -->
+			<section>
+				<section>
+					<p class="kicker">Part 5</p>
+					<h2>Why learning software is hard</h2>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="understand">
+					<h3 data-id="understand-heading">Understand the software</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="understand">
+					<h3 data-id="understand-heading" class="shrunk">Understand the software</h3>
+					<ul>
+						<li>Reason about how it works</li>
+						<li>Make changes to it</li>
+					</ul>
+					<aside class="notes">
+						- Learning how a system/technology works well enough to reason about its behaviour and make changes to it
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="mental-models">
+					<h3 data-id="mental-models-heading">Mental models</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="mental-models">
+					<h3 data-id="mental-models-heading" class="shrunk">Mental models</h3>
+					<ul>
+						<li>Doesn’t need to incorporate every part of the tech stack</li>
+						<li>Needs to be solid enough to predict behaviour</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Writing code = understanding code*</h3>
+					<p class="footnote">*somewhat</p>
+					<aside class="notes">
+						- Writing the code meant you had to understand it, to some degree
+					</aside>
+				</section>
+
+				<section>
+					<h3>Reading code != understanding code*</h3>
+					<p class="footnote">*mostly</p>
+					<aside class="notes">
+						- That’s no longer the case: you can get code without writing it
+					</aside>
+				</section>
+
+				<section>
+					<p class="statement">Knowing what you want is no longer required to get an output</p>
+					<aside class="notes">
+						- Getting an output (code) and understanding the output are now disconnected
+					</aside>
+				</section>
+
+				<section>
+					<blockquote class="pull">
+						<p>“The most important single aspect of software development is to be clear about what you are
+							trying to build.”</p>
+						<cite>— Bjarne Stroustrup</cite>
+					</blockquote>
+				</section>
+
+				<section>
+					<h3 class="typewriter">Consider starting from a blank file<span class="caret" aria-hidden="true"></span></h3>
+				</section>
+			</section>
+
+			<!-- Part 6: How I work -->
+			<section>
+				<section>
+					<p class="kicker">Part 6</p>
+					<h2>How I work</h2>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="team">
+					<h3 data-id="team-heading">My team</h3>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="team">
+					<h3 data-id="team-heading" class="shrunk">My team</h3>
+					<div class="tiles">
+						<div class="tile"><span class="num">6</span><span class="label">Devs</span></div>
+						<div class="tile"><span class="num">1</span><span class="label">Product owner</span></div>
+						<div class="tile"><span class="num">1</span><span class="label">Engineering manager</span></div>
+						<div class="tile"><span class="num">1</span><span class="label">Designer</span></div>
+					</div>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="planning">
+					<h3 data-id="planning-heading">Planning the work (2FA example)</h3>
+					<aside class="notes">
+						- Example: 2FA integration
+					</aside>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="planning">
+					<h3 data-id="planning-heading" class="shrunk">Planning the work (2FA example)</h3>
+					<ol class="steps">
+						<li>Requirement comes down to PO or EM</li>
+						<li>Designer and PO work out customer experience</li>
+						<li>Epics → Stories → Tasks</li>
+						<li>Requirement playback → Solution design → Sprint planning</li>
+					</ol>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="planning">
+					<h3 data-id="planning-heading" class="shrunk">Planning the work (2FA example)</h3>
+					<ol class="steps" style="--start: 4;">
+						<li>Stories assigned to a dev</li>
+						<li>Tasks created from the story for a specific code change</li>
+						<li>Complete dev work using pi agent framework and Claude opus 5.5 (currently)</li>
+						<li>PRs raised against tasks, reviewed and tested THEN merged</li>
+					</ol>
+				</section>
+
+				<section data-auto-animate data-auto-animate-id="planning">
+					<h3 data-id="planning-heading" class="shrunk">Planning the work (2FA example)</h3>
+					<ol class="steps" style="--start: 8;">
+						<li>Tasks get released weekly</li>
+						<li>Story is confirmed as done by dev and PO</li>
+						<li>Eventually Epic gets completed</li>
+					</ol>
+				</section>
+
+				<section>
+					<h3>Sometimes projects can grow</h3>
+					<aside class="notes">
+						- e.g. ACE development, the design system
+						- These kinds of projects require escalation, business endorsement, potentially organisational restructuring
+					</aside>
+				</section>
+
+				<section>
+					<h3>Is it worth automating fully?</h3>
+					<aside class="notes">
+						- Is this kind of rare, complex and delicate process worth automating?
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<p class="kicker">Takeaway</p>
+				<h2>Software engineering isn’t dead 🤞</h2>
+			</section>
+
+			<section>
+				<h1>Thank you</h1>
 			</section>
 		</div>
 	</div>
@@ -392,6 +1339,116 @@ git push origin your-name/update-my-file
 	<script src="plugin/markdown/markdown.js"></script>
 	<script src="plugin/highlight/highlight.js"></script>
 	<script>
+		// Slide images are referenced without an extension (data-asset="img/utopia").
+		// Drop in img/utopia.svg/.png/.jpg/.jpeg/.webp/.gif and it gets picked up;
+		// until then a labelled placeholder fills the same box.
+		(function () {
+			const EXTENSIONS = ['svg', 'png', 'jpg', 'jpeg', 'webp', 'gif'];
+			const lookups = new Map();
+
+			function findImage(base) {
+				if (!lookups.has(base)) {
+					lookups.set(base, EXTENSIONS.reduce((found, ext) => found.then(url => url || new Promise(resolve => {
+						const probe = new Image();
+						probe.onload = () => resolve(`${base}.${ext}`);
+						probe.onerror = () => resolve(null);
+						probe.src = `${base}.${ext}`;
+					})), Promise.resolve(null)));
+				}
+				return lookups.get(base);
+			}
+
+			function escapeXml(text) {
+				return text.replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' })[c]);
+			}
+
+			function placeholder(img) {
+				const w = parseFloat(img.style.width) || 400;
+				const h = parseFloat(img.style.height) || 300;
+				const label = img.alt || img.dataset.asset;
+				const hint = `${img.dataset.asset}.*`;
+				const size = Math.max(10, Math.min(h * 0.16, (w * 0.9) / (label.length * 0.6)));
+				const hintSize = Math.min(size * 0.55, (w * 0.9) / (hint.length * 0.6));
+				const showHint = h >= 80;
+				const labelY = showHint ? h / 2 - hintSize * 0.3 : h / 2 + size * 0.35;
+				const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">`
+					+ `<rect x="1.5" y="1.5" width="${w - 3}" height="${h - 3}" rx="10" fill="#0d0d0d" stroke="#555" stroke-width="2" stroke-dasharray="10 7"/>`
+					+ `<text x="50%" y="${labelY}" fill="#cfcfcf" font-family="sans-serif" font-size="${size}" text-anchor="middle">${escapeXml(label)}</text>`
+					+ (showHint ? `<text x="50%" y="${h / 2 + hintSize * 1.5}" fill="#777" font-family="monospace" font-size="${hintSize}" text-anchor="middle">${escapeXml(hint)}</text>` : '')
+					+ `</svg>`;
+				return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+			}
+
+			document.querySelectorAll('img[data-asset]').forEach(img => {
+				findImage(img.dataset.asset).then(url => { img.src = url || placeholder(img); });
+			});
+		})();
+
+		// .typewriter headings type themselves out each time their slide is shown.
+		// The full text stays in the HTML, so overview and print views are unaffected.
+		function startTypewriters() {
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			const headings = document.querySelectorAll('.reveal .typewriter');
+			const timers = new Map();
+
+			headings.forEach(el => {
+				const caret = el.querySelector('.caret');
+				const text = el.textContent;
+				el.textContent = '';
+				el.setAttribute('aria-label', text);
+				for (const ch of text) {
+					const span = document.createElement('span');
+					span.className = 'char';
+					span.setAttribute('aria-hidden', 'true');
+					span.textContent = ch;
+					el.appendChild(span);
+				}
+				if (caret) el.appendChild(caret);
+			});
+
+			function show(el, count) {
+				const chars = el.querySelectorAll('.char');
+				chars.forEach((c, i) => c.classList.toggle('untyped', i >= count));
+				const caret = el.querySelector('.caret');
+				if (caret) count > 0 ? chars[count - 1].after(caret) : el.prepend(caret);
+			}
+
+			function stop(el) {
+				clearTimeout(timers.get(el));
+				timers.delete(el);
+				el.classList.remove('typing');
+			}
+
+			function type(el) {
+				stop(el);
+				const total = el.querySelectorAll('.char').length;
+				if (reduceMotion) return show(el, total);
+				show(el, 0);
+				el.classList.add('typing');
+				let count = 0;
+				const step = () => {
+					show(el, ++count);
+					if (count < total) timers.set(el, setTimeout(step, 25 + Math.random() * 35));
+					else el.classList.remove('typing');
+				};
+				timers.set(el, setTimeout(step, 300));
+			}
+
+			function onSlide(slide) {
+				headings.forEach(el => {
+					if (slide.contains(el)) {
+						type(el);
+					} else {
+						stop(el);
+						show(el, el.querySelectorAll('.char').length);
+					}
+				});
+			}
+
+			onSlide(Reveal.getCurrentSlide());
+			Reveal.on('slidechanged', event => onSlide(event.currentSlide));
+		}
+
 		Reveal.initialize({
 			hash: true,
 			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
@@ -400,7 +1457,7 @@ git push origin your-name/update-my-file
 			progress: false,
 			transition: 'slide',
 			navigationMode: 'default',
-		});
+		}).then(startTypewriters);
 	</script>
 </body>
 

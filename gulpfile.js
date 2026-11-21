@@ -3,7 +3,6 @@ const pkg = require('./package.json')
 const glob = require('glob')
 const yargs = require('yargs')
 const through = require('through2');
-const qunit = require('node-qunit-puppeteer')
 
 const {rollup} = require('rollup')
 const terser = require('@rollup/plugin-terser')
@@ -199,6 +198,10 @@ gulp.task('css-core', () => gulp.src(['css/reveal.scss'])
 gulp.task('css', gulp.parallel('css-themes', 'css-core'))
 
 gulp.task('qunit', () => {
+
+    // Loaded here rather than at the top: its puppeteer dependency fails to
+    // load on newer Node versions, which would otherwise break every task.
+    const qunit = require('node-qunit-puppeteer')
 
     let serverConfig = {
         root,
